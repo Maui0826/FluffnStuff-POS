@@ -28,6 +28,16 @@ import dailyInventoryCron from './cron/dailyInventoryCron.js';
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
 
 const app = express();
+
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(mongoSanitize);
+dailyInventoryCron(); // start the cron
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -43,16 +53,6 @@ app.use(
     credentials: true,
   })
 );
-
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(mongoSanitize);
-dailyInventoryCron(); // start the cron
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
 app.use(express.static(join(__dirname, 'public')));
 
 app.use(appRouter);
