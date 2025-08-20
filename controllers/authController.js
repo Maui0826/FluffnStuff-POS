@@ -36,8 +36,8 @@ const login = catchAsync(async (req, res, next) => {
   if (req.body.session) {
     res.cookie('authToken', token, {
       maxAge: process.env.LOGIN_EXP * 60 * 60 * 24 * 90,
-      httpOnly: process.env.NODE_ENV === 'development',
-      secure: process.env.NODE_ENV === 'development',
+      httpOnly: process.env.NODE_ENV === 'production',
+      secure: process.env.NODE_ENV === 'production',
       sameSite: 'none',
       path: '/',
     });
