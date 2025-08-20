@@ -1,3 +1,5 @@
+const API_BASE = 'https://fluffnstuff-pos.onrender.com/api/v1/inventory';
+
 // Fetch categories with pagination and sorting
 export async function getCategoriesAPI({
   page = 1,
@@ -6,7 +8,7 @@ export async function getCategoriesAPI({
 } = {}) {
   try {
     const params = new URLSearchParams({ page, limit, sort });
-    const res = await fetch(`/api/v1/inventory/category?${params.toString()}`, {
+    const res = await fetch(`${API_BASE}/category?${params.toString()}`, {
       method: 'GET',
     });
 
@@ -26,7 +28,7 @@ export async function getCategoriesAPI({
 
 // addCategoryAPI
 export const addCategoryAPI = async ({ name, description }) => {
-  const res = await fetch('/api/v1/inventory/category', {
+  const res = await fetch(`${API_BASE}/category`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, description }), // make sure both are top-level
@@ -38,7 +40,7 @@ export const addCategoryAPI = async ({ name, description }) => {
 // Update category by ID
 export async function updateCategoryAPI(id, { name, description }) {
   try {
-    const res = await fetch(`/api/v1/inventory/category/${id}/update`, {
+    const res = await fetch(`${API_BASE}/category/${id}/update`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, description }), // send both fields
@@ -54,7 +56,7 @@ export async function updateCategoryAPI(id, { name, description }) {
 
 export async function loadCategoriesAPI() {
   try {
-    const res = await fetch('/api/v1/inventory/load-category', {
+    const res = await fetch(`${API_BASE}/load-category`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -76,7 +78,7 @@ export async function loadCategoriesAPI() {
 // Delete category by ID
 export async function deleteCategoryAPI(id) {
   try {
-    const res = await fetch(`/api/v1/inventory/category/${id}/delete`, {
+    const res = await fetch(`${API_BASE}/category/${id}/delete`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     });

@@ -1,4 +1,4 @@
-const BASE_URL = '/api/v1/reports';
+const BASE_URL = 'https://fluffnstuff-pos.onrender.com/api/v1/reports';
 
 export const fetchReportData = async (type, fromDate, toDate, specificDate) => {
   const params = new URLSearchParams();

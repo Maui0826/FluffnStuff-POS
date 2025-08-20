@@ -1,5 +1,5 @@
 // scripts/api/orderAPI.js
-const API_BASE = '/api/v1/supplies'; // adjust if your endpoint is different
+const API_BASE = 'https://fluffnstuff-pos.onrender.com/api/v1/supplies'; // adjust if your endpoint is different
 
 const orderAPI = {
   // Fetch all stock orders with optional filters

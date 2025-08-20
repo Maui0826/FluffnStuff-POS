@@ -1,6 +1,6 @@
 // scripts/api/posAPI.js
 
-const BASE_URL = '/api/v1'; // change to your backend URL
+const BASE_URL = 'https://fluffnstuff-pos.onrender.com/api/v1'; // change to your backend URL
 
 /**
  * Search products by SKU or name

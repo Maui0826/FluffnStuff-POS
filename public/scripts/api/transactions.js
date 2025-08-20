@@ -1,4 +1,4 @@
-const BASE_URL = '/api/v1/refunds';
+const BASE_URL = 'https://fluffnstuff-pos.onrender.com/api/v1/refunds';
 
 export const searchReceipt = async receiptNum => {
   const res = await fetch(`${BASE_URL}/${receiptNum}/search`, {
@@ -40,11 +40,13 @@ export const refundProduct = async payload => {
 
 // api/transactionAPI.js
 
+const API_URL = 'https://fluffnstuff-pos.onrender.com/api/v1';
+
 export const fetchTransactionHistory = async (filters = {}) => {
   try {
     const params = new URLSearchParams(filters);
     const res = await fetch(
-      `/api/v1/transactions/history?${params.toString()}`
+      `${API_URL}/transactions/history?${params.toString()}`
     );
     if (!res.ok) throw new Error('Failed to fetch transactions');
     const data = await res.json();
@@ -58,7 +60,9 @@ export const fetchTransactionHistory = async (filters = {}) => {
 export const fetchUserHistory = async (filters = {}) => {
   try {
     const params = new URLSearchParams(filters);
-    const res = await fetch(`/api/v1/transactions/user?${params.toString()}`);
+    const res = await fetch(
+      `${API_URL}/transactions/user?${params.toString()}`
+    );
     if (!res.ok) throw new Error('Failed to fetch transactions');
     const data = await res.json();
     return data.data || [];
@@ -70,7 +74,9 @@ export const fetchUserHistory = async (filters = {}) => {
 
 export const deleteTransaction = async id => {
   try {
-    const res = await fetch(`/api/v1/transactions/${id}`, { method: 'DELETE' });
+    const res = await fetch(`${API_URL}/transactions/${id}`, {
+      method: 'DELETE',
+    });
     if (!res.ok) throw new Error('Failed to delete transaction');
     return true;
   } catch (err) {

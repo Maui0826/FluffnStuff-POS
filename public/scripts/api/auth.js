@@ -1,4 +1,4 @@
-const AUTH_API_BASE = '/api/v1/auth';
+const AUTH_API_BASE = 'https://fluffnstuff-pos.onrender.com/api/v1/auth';
 
 // Get authenticated user's personal details
 export async function getMe() {

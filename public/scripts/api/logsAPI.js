@@ -1,4 +1,7 @@
 // api/logsAPI.js
+
+const API_BASE = 'https://fluffnstuff-pos.onrender.com/api/v1';
+
 export const getAllLogs = async (filters = {}, page = 1, limit = 10) => {
   const params = new URLSearchParams();
 
@@ -14,7 +17,7 @@ export const getAllLogs = async (filters = {}, page = 1, limit = 10) => {
   params.append('page', page);
   params.append('limit', limit);
 
-  const res = await fetch(`/api/v1/user-actions?${params.toString()}`);
+  const res = await fetch(`${API_BASE}/user-actions?${params.toString()}`);
   if (!res.ok) throw new Error('Failed to fetch logs');
 
   const data = await res.json();
@@ -27,7 +30,7 @@ export const getAllLogs = async (filters = {}, page = 1, limit = 10) => {
 };
 
 export const getAllActions = async () => {
-  const res = await fetch('/api/v1/user-actions/actions');
+  const res = await fetch(`${API_BASE}/user-actions/actions`);
   if (!res.ok) throw new Error('Failed to fetch actions');
   const data = await res.json();
   return data; // { status, data: [...] }

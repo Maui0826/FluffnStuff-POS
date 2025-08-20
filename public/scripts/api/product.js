@@ -1,4 +1,4 @@
-const API_BASE = '/api/v1/inventory';
+const API_BASE = 'https://fluffnstuff-pos.onrender.com/api/v1/inventory';
 async function getAllProductsAPI(params = {}) {
   try {
     const query = new URLSearchParams(params).toString();
