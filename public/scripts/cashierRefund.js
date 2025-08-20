@@ -3,7 +3,7 @@ const loginModal = document.getElementById('loginModal');
 const closeModal = document.querySelector('.close');
 const loginForm = document.getElementById('loginForm');
 const loginError = document.getElementById('loginError');
-const API_BASE = '/api/v1';
+const API_BASE = import.meta.env.ALLOWED_ORIGINS + '/api/v1';
 
 // Show login modal when refund is clicked
 refundBtn.addEventListener('click', () => {

@@ -1,3 +1,5 @@
+const API_BASE = import.meta.env.ALLOWED_ORIGINS + '/api/v1';
+
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.querySelector('#loginForm');
 
@@ -11,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //     ?.checked || false; // optional remember-me checkbox
 
     try {
-      const response = await fetch('/api/v1/auth/login', {
+      const response = await fetch(`${API_BASE}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
