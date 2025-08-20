@@ -1,33 +1,29 @@
-import axios from 'https://cdn.jsdelivr.net/npm/axios@1.6.8/+esm';
+import axios from 'https://cdn.jsdelivr.net/npm/axios@1.6.8/dist/axios.min.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('login-form');
+document.getElementById('login-form').addEventListener('submit', async e => {
+  e.preventDefault();
 
-  if (form) {
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
 
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value.trim();
-
-      try {
-        const res = await axios.post('/api/auth/login', {
-          email,
-          password,
-        });
-
-        if (res.data.success) {
-          alert('Login successful!');
-          window.location.href = '/dashboard.html'; // redirect after login
-        } else {
-          alert(res.data.message || 'Invalid login credentials.');
-        }
-      } catch (err) {
-        console.error(err);
-        alert(
-          err.response?.data?.message || 'Something went wrong. Try again.'
-        );
+  try {
+    const response = await axios.post(
+      'https://fluffnstuff-pos.onrender.com/api/auth/login',
+      {
+        email,
+        password,
+      },
+      {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true, // so cookies are stored
       }
-    });
+    );
+
+    console.log('Login success:', response.data);
+    alert('Login successful!');
+    window.location.href = '/dashboard.html';
+  } catch (err) {
+    console.error('Login error:', err.response?.data || err.message);
+    alert(err.response?.data?.message || 'Login failed');
   }
 });
