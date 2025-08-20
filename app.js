@@ -53,6 +53,10 @@ app.use(
     credentials: true,
   })
 );
+
+app.use('/scripts', express.static(join(__dirname, 'public', 'scripts')));
+app.use('/styles', express.static(join(__dirname, 'public', 'styles')));
+app.use('/assets', express.static(join(__dirname, 'public', 'assets')));
 app.use(express.static(join(__dirname, 'public')));
 
 app.use(appRouter);
