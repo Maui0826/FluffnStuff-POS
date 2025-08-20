@@ -1,39 +1,33 @@
-const API_BASE = '/api/v1';
+import axios from 'https://cdn.jsdelivr.net/npm/axios@1.6.8/+esm';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const loginForm = document.querySelector('#loginForm');
+  const form = document.getElementById('login-form');
 
-  loginForm.addEventListener('submit', async e => {
-    e.preventDefault();
+  if (form) {
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
 
-    const email = document.querySelector('#username').value.trim();
-    const password = document.querySelector('#password').value.trim();
-    // const session =
-    //   document.querySelector('#session')
-    //     ?.checked || false; // optional remember-me checkbox
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
 
-    try {
-      const response = await fetch(`${API_BASE}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
+      try {
+        const res = await axios.post('/api/auth/login', {
           email,
           password,
-        }),
-      });
+        });
 
-      if (response.redirected) {
-        window.location.href = response.url;
-      } else {
-        const data = await response.json();
-        alert(data.message || 'Login failed. Please try again.');
+        if (res.data.success) {
+          alert('Login successful!');
+          window.location.href = '/dashboard.html'; // redirect after login
+        } else {
+          alert(res.data.message || 'Invalid login credentials.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert(
+          err.response?.data?.message || 'Something went wrong. Try again.'
+        );
       }
-    } catch (err) {
-      console.error(err);
-      alert('Something went wrong. Please try again later.');
-    }
-  });
+    });
+  }
 });
