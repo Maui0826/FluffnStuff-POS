@@ -1,4 +1,5 @@
-const API_BASE = import.meta.env.ALLOWED_ORIGINS + '/api/v1';
+// const API_BASE = import.meta.env.ALLOWED_ORIGINS + '/api/v1';
+const API_BASE = 'https://fluffnstuff-pos.onrender.com/api/v1';
 
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.querySelector('#loginForm');
