@@ -54,9 +54,6 @@ app.use(
   })
 );
 
-app.use('/scripts', express.static(join(__dirname, 'public', 'scripts')));
-app.use('/styles', express.static(join(__dirname, 'public', 'styles')));
-app.use('/assets', express.static(join(__dirname, 'public', 'assets')));
 app.use(express.static(join(__dirname, 'public')));
 
 app.use(appRouter);
@@ -65,21 +62,6 @@ app.use('/api/v1/auth', authRouter);
 app.use(protect);
 
 app.use('/Images', express.static('Images'));
-
-import { existsSync } from 'fs';
-
-app.get('/scripts/index.js', (req, res) => {
-  const filePath = join(__dirname, 'public', 'scripts', 'index.js');
-  console.log('[DEBUG] Requested:', filePath);
-
-  if (existsSync(filePath)) {
-    console.log('[DEBUG] File exists ✅');
-    res.sendFile(filePath);
-  } else {
-    console.log('[DEBUG] File does not exist ❌');
-    res.status(404).send('index.js not found on server');
-  }
-});
 
 app.use('/api/v1/dashboard', dashboard);
 app.use('/api/v1/point-of-sale', posRoute);
