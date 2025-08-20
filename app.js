@@ -25,6 +25,8 @@ import report from './routes/report-route.js';
 
 import dailyInventoryCron from './cron/dailyInventoryCron.js';
 
+import { sanitizeBody } from './middlewares/sanitizer.js';
+
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
 
 const app = express();
@@ -41,6 +43,7 @@ app.use(
 
 app.use(express.urlencoded({ extended: false }));
 app.use(mongoSanitize);
+app.use(sanitizeBody);
 dailyInventoryCron(); // start the cron
 
 const __filename = fileURLToPath(import.meta.url);

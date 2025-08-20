@@ -17,7 +17,12 @@ import catService from '../services/categoryService.js';
 const router = express.Router();
 
 router.get('/', getAllProducts);
-router.post('/new-product', upload.single('image'), createProduct);
+router.post(
+  '/new-product',
+
+  upload.single('image'),
+  createProduct
+);
 router.patch('/:id/update', upload.single('image'), updateProduct);
 router.delete('/:id/delete', deleteProduct);
 router.post('/order/:productId', orderStock);
