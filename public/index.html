@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="/styles/style.css" />
     <link rel="stylesheet" href="/styles/index.css" />
-    <script type="module" src="/scripts/index.js" defer></script>
+    <!-- <script type="module" src="/scripts/index.js" defer></script> -->
   </head>
   <body>
     <main>
@@ -42,8 +42,8 @@
       </div>
     </main>
 
-    <script>
-      const API_BASE = '/api/v1';
+    <script type="module">
+      import axios from 'https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js';
 
       document.addEventListener('DOMContentLoaded', () => {
         const loginForm = document.querySelector('#loginForm');
@@ -53,32 +53,25 @@
 
           const email = document.querySelector('#username').value.trim();
           const password = document.querySelector('#password').value.trim();
-          // const session =
-          //   document.querySelector('#session')
-          //     ?.checked || false; // optional remember-me checkbox
 
           try {
-            const response = await fetch(`${API_BASE}/auth/login`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              credentials: 'include',
-              body: JSON.stringify({
+            const res = await axios.post(
+              '/api/auth/login',
+              {
                 email,
                 password,
-              }),
-            });
+              },
+              { withCredentials: true }
+            );
 
-            if (response.redirected) {
-              window.location.href = response.url;
+            if (res.data.redirectUrl) {
+              window.location.href = res.data.redirectUrl;
             } else {
-              const data = await response.json();
-              alert(data.message || 'Login failed. Please try again.');
+              alert(res.data.message || 'Login failed.');
             }
           } catch (err) {
             console.error(err);
-            alert('Something went wrong. Please try again later.');
+            alert('Something went wrong.');
           }
         });
       });
