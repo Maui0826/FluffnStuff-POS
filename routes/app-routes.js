@@ -8,7 +8,12 @@ const __dirname = dirname(__filename);
 
 const router = express.Router();
 
-router.route('/').get(checkIfLoggedIn, async (req, res, next) => {
+// router.route('/').get(checkIfLoggedIn, async (req, res, next) => {
+//   res.sendFile(join(__dirname, '..', 'public', 'index.html'));
+// });
+
+// Public/Login page
+router.get('/', checkIfLoggedIn, (req, res) => {
   res.sendFile(join(__dirname, '..', 'public', 'index.html'));
 });
 
