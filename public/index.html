@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - DA Constance Fluff N Stuff</title>
+
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/index.css" />
+    <script type="module" src="./scripts/index.js"></script>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <img src="./assets/logo.png" alt="Logo" />
+        <h1>Welcome to Fluff N Stuff POS & Inventory System</h1>
+        <p class="tagline">
+          "We are your partner in providing purrfect accessories for your
+          PAWshionista woofers and nekos."
+        </p>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="username">Username: </label>
+            <input type="text" id="username" placeholder="Username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password: </label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+
+        <p>System by Jeff Dumbrique</p>
+        <a href="/terms">Terms & Conditions</a> |
+        <a href="/login/about-us">About Us</a> |
+        <a href="/features">Features</a>
+      </div>
+    </main>
+  </body>
+</html>

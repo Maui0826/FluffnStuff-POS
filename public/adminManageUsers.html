@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage User</title>
+    <script
+      src="https://kit.fontawesome.com/c90dcd5d26.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="styles/adminManageUsers.css" />
+    <script src="./scripts/components/sidebar.js" defer></script>
+    <script type="module" src="./scripts/components/header.js" defer></script>
+    <script type="module" src="/scripts/adminManageUser.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo-container">
+        <img id="logo" src="./assets/logo.png" alt="Logo" class="logo" />
+        <p>DA Constance Fluff 'N Stuff Pet Supplies Store</p>
+      </div>
+
+      <ul class="header-icons">
+        <li class="user-info">
+          <span id="header-name"></span>
+          <span id="header-role"></span>
+        </li>
+        <li class="profile">
+          <i class="fa-regular fa-user"></i>
+        </li>
+        <li class="about-us">
+          <a href="/about-us">
+            <span class="nav-label">About Us</span>
+          </a>
+        </li>
+      </ul>
+    </header>
+
+    <nav class="sidebar">
+      <ul class="nav-icons">
+        <li>
+          <a href="/dashboard" class="dashboard">
+            <i class="fa-solid fa-gauge-high"></i>
+            <i data-lucide="gauge" class="lucide-icon"></i>
+            <span class="nav-label hidden">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="/point-of-sale" class="pos-system">
+            <i class="fa-solid fa-dollar-sign"></i>
+            <i data-lucide="dollar-sign" class="lucide-icon"></i>
+            <span class="nav-label hidden">POS</span>
+          </a>
+        </li>
+        <li>
+          <a href="/inventory" class="inventory">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <i data-lucide="boxes" class="lucide-icon"></i>
+            <span class="nav-label hidden">Inventory</span>
+          </a>
+        </li>
+        <li>
+          <a href="/supplies" class="order">
+            <i class="fa-solid fa-truck"></i>
+            <i data-lucide="truck" class="lucide-icon"></i>
+            <span class="nav-label hidden">Manage Order</span>
+          </a>
+        </li>
+        <li>
+          <a href="/manage-users" class="manage-user">
+            <i class="fa-solid fa-users-gear"></i>
+            <i data-lucide="users" class="lucide-icon"></i>
+            <span class="nav-label hidden">Users</span>
+          </a>
+        </li>
+        <li>
+          <a href="/reports" class="reports">
+            <i class="fa-solid fa-chart-line"></i>
+            <i data-lucide="line-chart" class="lucide-icon"></i>
+            <span class="nav-label hidden">Reports</span>
+          </a>
+        </li>
+        <li>
+          <a href="/transactions" class="transaction">
+            <i class="fa-solid fa-receipt"></i>
+            <i data-lucide="receipt" class="lucide-icon"></i>
+            <span class="nav-label hidden">Transaction History</span>
+          </a>
+        </li>
+        <li>
+          <a href="/user-actions" class="logs">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <i data-lucide="clipboard-list" class="lucide-icon"></i>
+            <span class="nav-label hidden">Action Logs</span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="control-icons">
+        <li class="expand">
+          <i class="fa-solid fa-left-right"></i>
+          <i data-lucide="arrow-left-right" class="lucide-icon"></i>
+          <span class="nav-label hidden">Expand</span>
+        </li>
+        <li class="log-out">
+          <a href="/logout">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <i data-lucide="log-out" class="lucide-icon"></i>
+            <span class="nav-label hidden">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <div class="container">
+        <h1>Manage Users</h1>
+
+        <div class="table-header">
+          <!-- Search -->
+          <div class="search-container">
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search here..."
+              aria-label="Search users"
+            />
+            <button class="search-btn" aria-label="Search">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242 0a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Role Filter -->
+          <select class="dropdown" aria-label="Filter by role">
+            <option value="all" selected>All Roles</option>
+            <option value="cashier">Cashier</option>
+            <option value="inventory">Inventory Checker</option>
+            <option value="admin">Admin</option>
+          </select>
+
+          <!-- Add User -->
+          <button id="add-user-btn" class="btn btn-primary">+ Add User</button>
+        </div>
+
+        <!-- Table -->
+        <!-- Table -->
+        <div class="grid-table">
+          <div class="grid-header-row">
+            <div class="grid-header">
+              Name
+              <button
+                id="sort-name-btn"
+                class="sort-btn"
+                aria-label="Sort by name"
+              >
+                <i class="fa-solid fa-arrow-up"></i>
+              </button>
+            </div>
+            <div class="grid-header">Role</div>
+            <div class="grid-header">Status</div>
+            <div class="grid-header">Suspend</div>
+            <div class="grid-header">Ban/Unban</div>
+            <div class="grid-header">Info</div>
+          </div>
+          <div class="grid-data" id="grid-data">
+            <!-- JS will inject rows here -->
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container">
+          <button id="prev-page" class="btn btn-secondary" disabled>
+            &laquo; Prev
+          </button>
+          <div id="pagination-numbers" class="pagination-numbers"></div>
+          <button id="next-page" class="btn btn-secondary">Next &raquo;</button>
+        </div>
+      </div>
+    </main>
+    <!-- Update User Modal -->
+    <div id="update-user-modal" class="modal">
+      <div class="modal-content">
+        <span class="modal-close" id="update-user-close">&times;</span>
+        <h2>Update User</h2>
+        <form id="update-user-form">
+          <input type="hidden" name="userId" />
+
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            required
+          />
+          <input type="text" name="middleName" placeholder="Middle Name" />
+          <input type="text" name="lastName" placeholder="Last Name" required />
+          <input type="text" name="extName" placeholder="Extension Name" />
+          <input type="email" name="email" placeholder="Email" required />
+
+          <select name="role" required>
+            <option value="cashier">Cashier</option>
+            <option value="inventory">Inventory Checker</option>
+            <option value="admin">Admin</option>
+            <option value="owner">Owner</option>
+          </select>
+
+          <!-- New password (optional) -->
+          <label for="update-password">Password:</label>
+          <div class="password-container">
+            <input
+              type="password"
+              id="update-password"
+              placeholder="Enter new password (optional)"
+            />
+            <button
+              type="button"
+              class="view-password-btn"
+              id="toggleUpdatePassword"
+            >
+              👁
+            </button>
+          </div>
+
+          <button type="submit" class="btn btn-success">Update User</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- User Info Modal -->
+    <div id="user-info-modal" class="modal">
+      <div class="modal-content">
+        <span id="modal-close" class="modal-close">&times;</span>
+        <h2>User Information</h2>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="add-user-modal" class="modal">
+      <div class="modal-content">
+        <span class="modal-close" id="add-user-close">&times;</span>
+        <h2>Add New User</h2>
+        <form id="add-user-form">
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            required
+          />
+          <input type="text" name="middleName" placeholder="Middle Name" />
+          <input type="text" name="lastName" placeholder="Last Name" required />
+          <input type="text" name="extName" placeholder="Extension Name" />
+          <input type="email" name="email" placeholder="Email" required />
+          <select name="role" required>
+            <option value="cashier">Cashier</option>
+            <option value="inventory">Inventory Checker</option>
+            <option value="admin">Admin</option>
+          </select>
+          <button type="submit" class="btn btn-success">Create User</button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <h2 class="footer-brand">DA Constance Fluff 'N Stuff</h2>
+          <p class="footer-subtitle">Pet Supplies Store</p>
+          <p>Established 2023</p>
+        </div>
+        <div class="footer-right">
+          <ul>
+            <li>
+              <i class="fa-brands fa-instagram"></i>
+              <a
+                href="https://www.instagram.com/fluffnstuffbydaconstance/"
+                target="_blank"
+                >@fluffnstuffbydaconstance</a
+              >
+            </li>
+            <li>
+              <i class="fa-regular fa-envelope"></i>
+              <a href="mailto:srjdee@gmail.com">srjdee@gmail.com</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-dog"></i> Pedigree Profile:
+              <em>IAGD Record</em>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2023 DA Constance Fluff 'N Stuff Pet Supplies Store. All rights
+          reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

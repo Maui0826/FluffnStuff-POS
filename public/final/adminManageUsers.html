@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/c90dcd5d26.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="styles/adminManageUsers.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./scripts/components/sidebar.js" defer></script>
+    <script src="./scripts/adminManageUser.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo-container">
+        <img src="./assets/logo.png" alt="Logo" class="logo" />
+        <p>Fluff N Stuff</p>
+      </div>
+      <ul class="header-icons">
+        <li class="profile">
+          <i class="fa-regular fa-user"></i>
+        </li>
+      </ul>
+    </header>
+
+    <nav class="sidebar">
+      <ul class="nav-icons">
+        <li class="dashboard">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span class="nav-label hidden">Dashboard</span>
+        </li>
+        <li class="manage-user">
+          <i class="fa-solid fa-users-gear"></i>
+          <span class="nav-label hidden">Users</span>
+        </li>
+        <li class="inventory">
+          <i class="fa-solid fa-boxes-stacked"></i>
+          <span class="nav-label hidden">Inventory</span>
+        </li>
+        <li class="pos-system">
+          <i class="fa-solid fa-cash-register"></i>
+          <span class="nav-label hidden">POS</span>
+        </li>
+        <li class="reports">
+          <i class="fa-solid fa-chart-line"></i>
+          <span class="nav-label hidden">Reports</span>
+        </li>
+        <li class="logs">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <span class="nav-label hidden">Action Logs</span>
+        </li>
+             <li class="logs">
+          <i class="fa-solid fa-receipt"></i>
+          <span class="nav-label hidden">Transaction History</span>
+        </li>
+      </ul>
+      <ul class="control-icons">
+        <li class="log-out">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span class="nav-label hidden">Logout</span>
+        </li>
+        <li class="expand">
+          <i class="fa-solid fa-left-right"></i>
+          <span class="nav-label hidden">Expand</span>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <div class="container">  <div class="table-header">
+        <div class="search-container">
+          <input
+            type="text"
+            placeholder="Search here..."
+            class="search-input"
+          />
+          <button class="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+        <div class="role-filter">
+          <select class="dropdown">
+            <option value="cashier">Cashier</option>
+            <option value="inventory checker">Inventory Checker</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-table">
+        <div class="grid-header">Name</div>
+        <div class="grid-header">Status</div>
+        <div class="grid-header">Roles</div>
+        <div class="grid-header"></div>
+        <div class="grid-header"></div>
+      </div>
+    </main>
+    <div id="user-info-modal" class="modal" style="display: none">
+      <div class="modal-content">
+        <span id="modal-close" class="modal-close">&times;</span>
+        <h2>User Information</h2>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+  </body>
+</html>

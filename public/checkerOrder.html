@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supplier Order</title>
+    <script
+      src="https://kit.fontawesome.com/c90dcd5d26.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="./styles/checkerOrder.css" />
+    <script src="./scripts/components/sidebar.js" defer></script>
+    <script type="module" src="./scripts/components/header.js" defer></script>
+    <script type="module" src="./scripts/checkerOrder.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo-container">
+        <img id="logo" src="./assets/logo.png" alt="Logo" class="logo" />
+        <p>DA Constance Fluff 'N Stuff Pet Supplies Store</p>
+      </div>
+
+      <ul class="header-icons">
+        <li class="user-info">
+          <span id="header-name"></span>
+          <span id="header-role"></span>
+        </li>
+        <li class="profile">
+          <i class="fa-regular fa-user"></i>
+        </li>
+        <li class="about-us">
+          <a href="/about-us">
+            <span class="nav-label">About Us</span>
+          </a>
+        </li>
+      </ul>
+    </header>
+
+    <nav class="sidebar">
+      <ul class="nav-icons">
+        <li>
+          <a href="/inventory" class="inventory"
+            ><i class="fa-solid fa-boxes-stacked"></i
+            ><span class="nav-label hidden">Inventory</span></a
+          >
+        </li>
+        <li>
+          <a href="/supplies" class="order"
+            ><i class="fa-solid fa-truck"></i
+            ><span class="nav-label hidden">Manage Order</span></a
+          >
+        </li>
+      </ul>
+      <ul class="control-icons">
+        <li class="expand">
+          <i class="fa-solid fa-left-right"></i
+          ><span class="nav-label hidden">Expand</span>
+        </li>
+        <li class="log-out">
+          <a href="/logout">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span class="nav-label hidden">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <div class="container">
+        <h1>Supplier Order Management</h1>
+
+        <div class="filters">
+          <label>
+            Delivery Date:
+            <input type="date" id="filter-date" />
+          </label>
+
+          <label>
+            Status:
+            <select id="filter-status">
+              <option value="">All</option>
+              <option value="pending">Pending</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </label>
+
+          <label>
+            Supplier:
+            <input
+              type="text"
+              id="filter-supplier"
+              placeholder="Search supplier"
+            />
+          </label>
+
+          <button id="filter-btn">Filter</button>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="order-table" id="order-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>
+                  Product Name
+                  <button class="sort-btn" data-key="name">⇅</button>
+                </th>
+                <th>Quantity Ordered</th>
+                <th>Quantity Received</th>
+                <th>Price</th>
+                <th>Supplier</th>
+                <th>
+                  Delivery Date
+                  <button class="sort-btn" data-key="deliveryDate">⇅</button>
+                </th>
+                <th>Delivered Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <!-- Orders will be inserted here by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Modal -->
+        <div id="receiveModal" class="modal hidden">
+          <div class="modal-content">
+            <h3>Receive Order</h3>
+            <label>Enter quantity received:</label>
+            <input type="number" id="receivedQty" min="1" />
+            <div class="modal-actions">
+              <button id="confirmReceive">Confirm</button>
+              <button id="closeModal">Cancel</button>
+            </div>
+          </div>
+        </div>
+        <!-- Pagination -->
+        <div id="pagination" class="pagination">
+          <!-- Page buttons will be dynamically inserted here -->
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <h2 class="footer-brand">DA Constance Fluff 'N Stuff</h2>
+          <p class="footer-subtitle">Pet Supplies Store</p>
+          <p>Established 2023</p>
+        </div>
+        <div class="footer-right">
+          <ul>
+            <li>
+              <i class="fa-brands fa-instagram"></i>
+              <a
+                href="https://www.instagram.com/fluffnstuffbydaconstance/"
+                target="_blank"
+                >@fluffnstuffbydaconstance</a
+              >
+            </li>
+            <li>
+              <i class="fa-regular fa-envelope"></i>
+              <a href="mailto:srjdee@gmail.com">srjdee@gmail.com</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-dog"></i> Pedigree Profile:
+              <em>IAGD Record</em>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2023 DA Constance Fluff 'N Stuff Pet Supplies Store. All rights
+          reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

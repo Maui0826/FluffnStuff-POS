@@ -1,0 +1,201 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fefefe;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 450px;
+  margin: 40px auto;
+  padding: 36px 40px;
+  text-align: center;
+  background: #fff7fb;
+  border: 1px solid #ffe0ec;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body.wide-panel .login-container {
+  max-width: 1400px;
+  padding: 36px 40px;
+}
+
+/* ...rest of your styles below... */
+
+input[type='text'],
+input[type='password'],
+input[type='number'],
+input[type='email'],
+select {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  background-color: #ffb6c1;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+button:hover {
+  background-color: #f78ca2;
+}
+button.report-btn.active,
+.report-btn.active {
+  background-color: #ff729f !important;
+  color: #fff;
+  box-shadow: 0 3px 16px -4px #ce568b;
+  font-weight: bold;
+  transform: translateY(2px);
+  border: 2px solid #c13b6b;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+table {
+  border-collapse: collapse;
+  min-width: 1100px;
+  width: 100%;
+  background: #fff;
+  max-width: 100%;
+  table-layout: auto;
+}
+th,
+td {
+  border: 1px solid #d1bcbc;
+  padding: 8px;
+  text-align: left;
+  vertical-align: top;
+  word-break: break-word;
+  background: #fffafa;
+  min-width: 85px;
+}
+th {
+  background: #ffe4ed;
+  font-weight: bold;
+  white-space: nowrap;
+}
+tr:nth-child(even) td {
+  background: #fff6fa;
+}
+th:last-child,
+td:last-child {
+  min-width: 130px;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+  th,
+  td {
+    box-sizing: border-box;
+    width: 100%;
+  }
+  th {
+    position: sticky;
+    top: 0;
+    background: #ffdce5;
+  }
+}
+.editable-cell {
+  position: relative;
+}
+.edit-btn {
+  background: #ffb6c1;
+  border: none;
+  border-radius: 6px;
+  margin-left: 6px;
+  padding: 3px 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.edit-btn:hover {
+  background: #ee719c;
+}
+
+/* Print styles for reports: only show the report title/table, hide all else */
+@media print {
+  body,
+  html {
+    background: white !important;
+    color: #333 !important;
+  }
+  .login-container {
+    background: #ffe3ea !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 20px !important;
+  }
+  .print-hide,
+  a,
+  nav,
+  .report-btn,
+  .tagline,
+  #chart {
+    display: none !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  #report-output,
+  #report-output * {
+    visibility: visible;
+  }
+  #report-output {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+  }
+  .report-title {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: #772952 !important;
+    background: #ffe4ed !important;
+    padding: 1rem 0;
+    border-bottom: 2px solid #ffb6c1;
+    text-align: left;
+  }
+  table,
+  th,
+  td {
+    border: 1px solid #d187b3 !important;
+    color: #222 !important;
+    background: #fff !important;
+  }
+  th {
+    background: #f7b5d8 !important;
+    color: #772952 !important;
+    font-size: 1.1em !important;
+  }
+  td {
+    font-size: 1em !important;
+  }
+  td,
+  th {
+    font-family: inherit !important;
+  }
+}

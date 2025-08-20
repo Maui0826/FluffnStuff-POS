@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DA Constance Fluff 'N Stuff Pet Supplies Store</title>
+
+    <script
+      src="https://kit.fontawesome.com/c90dcd5d26.js"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="/scripts/profile.js"></script>
+    <link rel="stylesheet" href="styles/profile.css" />
+    <script src="./scripts/components/sidebar.js" defer></script>
+    <script type="module" src="./scripts/components/header.js" defer></script>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="logo-container">
+        <img id="logo" src="./assets/logo.png" alt="Logo" class="logo" />
+        <p>DA Constance Fluff 'N Stuff Pet Supplies Store</p>
+      </div>
+
+      <ul class="header-icons">
+        <li class="user-info">
+          <span id="header-name"></span>
+          <span id="header-role"></span>
+        </li>
+        <li class="profile">
+          <i class="fa-regular fa-user"></i>
+        </li>
+        <li class="about-us">
+          <a href="/about-us">
+            <span class="nav-label">About Us</span>
+          </a>
+        </li>
+      </ul>
+    </header>
+
+    <nav class="sidebar">
+      <ul class="nav-icons">
+        <li>
+          <a href="/point-of-sale" class="pos-system"
+            ><i class="fa-solid fa-dollar-sign"></i
+            ><span class="nav-label hidden">POS</span></a
+          >
+        </li>
+        <li>
+          <a href="/transactions" class="transaction"
+            ><i class="fa-solid fa-receipt"></i
+            ><span class="nav-label hidden">Transaction History</span></a
+          >
+        </li>
+      </ul>
+      <ul class="control-icons">
+        <li class="expand">
+          <i class="fa-solid fa-left-right"></i
+          ><span class="nav-label hidden">Expand</span>
+        </li>
+        <li class="log-out">
+          <a href="/logout">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span class="nav-label hidden">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main class="profile-main">
+      <div class="container">
+        <h1 class="profile-title">PROFILE</h1>
+        <div class="profile-container">
+          <div class="profile-card">
+            <div class="profile-avatar">
+              <i class="fa-solid fa-user"></i>
+            </div>
+
+            <h2>
+              <span class="profile-name1"></span>
+            </h2>
+          </div>
+
+          <div class="profile-details">
+            <h2 class="profile-role"></h2>
+            <p>
+              <strong>Email:</strong>
+              <span class="profile-email"></span>
+            </p>
+            <p>
+              <strong>Birthday:</strong>
+              <span class="profile-birth"></span>
+            </p>
+
+            <div class="profile-actions">
+              <button class="btn" id="changePasswordBtn">
+                Change Password
+              </button>
+              <button class="btn" id="changeEmailBtn">Change Email</button>
+              <button class="btn" onclick="window.location.href='/dashboard'">
+                Return to Dashboard
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <dialog id="passwordModal">
+      <h3>Reset Password</h3>
+      <p>This will send a reset link to your email.</p>
+      <button id="submitPassword" class="btn">Send Link</button>
+      <button onclick="passwordModal.close()" class="btn">Cancel</button>
+    </dialog>
+
+    <dialog id="emailModal">
+      <h3>Change Email</h3>
+      <input type="email" id="newEmail" placeholder="Enter new email" />
+      <button id="submitEmail" class="btn">Send Confirmation</button>
+      <button onclick="emailModal.close()" class="btn">Cancel</button>
+    </dialog>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <h2 class="footer-brand">DA Constance Fluff 'N Stuff</h2>
+          <p class="footer-subtitle">Pet Supplies Store</p>
+          <p>Established 2023</p>
+        </div>
+        <div class="footer-right">
+          <ul>
+            <li>
+              <i class="fa-brands fa-instagram"></i>
+              <a
+                href="https://www.instagram.com/fluffnstuffbydaconstance/"
+                target="_blank"
+                >@fluffnstuffbydaconstance</a
+              >
+            </li>
+            <li>
+              <i class="fa-regular fa-envelope"></i>
+              <a href="mailto:srjdee@gmail.com">srjdee@gmail.com</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-dog"></i> Pedigree Profile:
+              <em>IAGD Record</em>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2023 DA Constance Fluff 'N Stuff Pet Supplies Store. All rights
+          reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

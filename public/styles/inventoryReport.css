@@ -1,0 +1,213 @@
+@import './style.css';
+@import './components/footer.css';
+@import './components/header.css';
+@import './components/sidebar.css';
+
+:root {
+  --main-color: #fefefe;
+  --sub-color: #fff7fb;
+  --border-color: #ffe0ec;
+  --border-color1: #ddd;
+  --header-color: #f8f9fa;
+  --primary-color: #4a90e2;
+  --secondary-color: #eba2e5;
+  --danger-color: #e74c3c;
+  --success-color: #2ecc71;
+  --light-gray: #f7f7f7;
+  --text-dark: #333;
+  --radius: 10px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center; /* centers the container horizontally */
+  box-sizing: border-box; /* ensures padding doesn’t push container */
+}
+
+.container {
+  width: 100%;
+  /* max-width: 1500px; prevents container from stretching too far */
+  background-color: var(--sub-color);
+  border-radius: 8px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 4px var(--border-color1);
+  box-sizing: border-box; /* ensures internal padding is included */
+}
+
+/* --- Page Title --- */
+.container h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+/* --- Filter Section --- */
+.report-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.report-filters label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.report-filters select,
+.report-filters input[type='date'] {
+  padding: 6px 8px;
+  margin-top: 4px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color1);
+  font-size: 0.9rem;
+  background-color: #fff;
+}
+
+.report-filters .btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: 0.2s ease-in-out;
+}
+
+.report-filters .btn:hover {
+  opacity: 0.85;
+}
+
+.download-btn {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+#generate-report {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+/* --- Charts Section --- */
+.charts {
+  margin-bottom: 2rem;
+}
+
+.charts h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.chart-container {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1rem;
+}
+
+/* --- Tables Section --- */
+.tables h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.table-wrapper {
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+}
+
+.table-wrapper h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+.table-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 600px; /* ensure scroll for small screens */
+}
+
+.table-wrapper th,
+.table-wrapper td {
+  padding: 8px 12px;
+  text-align: left;
+  border: 1px solid var(--border-color1);
+}
+
+.table-wrapper th {
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: 600;
+}
+
+.table-wrapper tbody tr:nth-child(even) {
+  background-color: var(--light-gray);
+}
+
+.table-wrapper tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* --- Summary Section --- */
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.summary p {
+  background-color: var(--light-gray);
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  flex: 1 1 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .report-filters {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .report-filters .btn {
+    width: 100%;
+  }
+
+  .chart-container {
+    width: 100%;
+  }
+
+  .table-wrapper table {
+    font-size: 0.8rem;
+  }
+}

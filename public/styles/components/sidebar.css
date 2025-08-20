@@ -1,0 +1,89 @@
+/*sidebar*/
+:root {
+  --main-color: #fefefe;
+  --sub-color: hsl(330, 100%, 98%);
+  --icon-color: #f39cbd;
+  --icon-color1: #e9d7e0;
+  --border-color: #ffe0ec;
+  --primary-color: #4a90e2;
+  --danger-color: #e74c3c;
+  --success-color: #2ecc71;
+  --light-gray: #f7f7f7;
+  --text-dark: #333;
+}
+
+.sidebar {
+  width: 4rem;
+  height: 100%;
+  padding-top: 4rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--main-color);
+
+  box-shadow: 4px 0px 4px 0px var(--border-color);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 500;
+
+  overflow-x: hidden;
+}
+
+.nav-icons,
+.control-icons {
+  width: 100%;
+  list-style-type: none;
+  flex: 1;
+
+  padding: 1rem;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nav-icons li,
+.nav-icons a,
+.control-icons li,
+.control-icons li a {
+  width: 100%;
+  padding: 0.5rem 0;
+  color: var(--icon-color);
+}
+
+.nav-icons a:hover,
+.control-icons li:hover {
+  background-color: var(--icon-color1);
+}
+
+.nav-icons {
+  justify-content: start;
+}
+
+.control-icons {
+  justify-content: end;
+}
+
+.pos-system i {
+  font-size: 1.5rem;
+}
+
+.nav-label {
+  padding-left: 20px;
+  word-break: none;
+}
+
+/*sidebar utils*/
+.expand-right {
+  width: 300px;
+  align-items: start;
+}
+
+.sidebar-expanded {
+  align-items: start;
+}

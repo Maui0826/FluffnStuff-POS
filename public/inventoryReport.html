@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory Report</title>
+    <script
+      src="https://kit.fontawesome.com/c90dcd5d26.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="../styles/inventoryReport.css" />
+    <!-- Chart.js (global) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+    <!-- Modular JS -->
+    <script type="module" src="../scripts/inventoryReport.js"></script>
+
+    <script src="../scripts/components/sidebar.js" defer></script>
+    <script type="module" src="../scripts/components/header.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo-container">
+        <img id="logo" src="../assets/logo.png" alt="Logo" class="logo" />
+        <p>DA Constance Fluff 'N Stuff Pet Supplies Store</p>
+      </div>
+
+      <ul class="header-icons">
+        <li class="user-info">
+          <span id="header-name"></span>
+          <span id="header-role"></span>
+        </li>
+        <li class="profile">
+          <i class="fa-regular fa-user"></i>
+        </li>
+        <li class="about-us">
+          <a href="/about-us">
+            <span class="nav-label">About Us</span>
+          </a>
+        </li>
+      </ul>
+    </header>
+
+    <nav class="sidebar">
+      <ul class="nav-icons">
+        <li>
+          <a href="/dashboard" class="dashboard">
+            <i class="fa-solid fa-gauge-high"></i>
+            <i data-lucide="gauge" class="lucide-icon"></i>
+            <span class="nav-label hidden">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="/point-of-sale" class="pos-system">
+            <i class="fa-solid fa-dollar-sign"></i>
+            <i data-lucide="dollar-sign" class="lucide-icon"></i>
+            <span class="nav-label hidden">POS</span>
+          </a>
+        </li>
+        <li>
+          <a href="/inventory" class="inventory">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <i data-lucide="boxes" class="lucide-icon"></i>
+            <span class="nav-label hidden">Inventory</span>
+          </a>
+        </li>
+        <li>
+          <a href="/supplies" class="order">
+            <i class="fa-solid fa-truck"></i>
+            <i data-lucide="truck" class="lucide-icon"></i>
+            <span class="nav-label hidden">Manage Order</span>
+          </a>
+        </li>
+        <li>
+          <a href="/manage-users" class="manage-user">
+            <i class="fa-solid fa-users-gear"></i>
+            <i data-lucide="users" class="lucide-icon"></i>
+            <span class="nav-label hidden">Users</span>
+          </a>
+        </li>
+        <li>
+          <a href="/reports" class="reports">
+            <i class="fa-solid fa-chart-line"></i>
+            <i data-lucide="line-chart" class="lucide-icon"></i>
+            <span class="nav-label hidden">Reports</span>
+          </a>
+        </li>
+        <li>
+          <a href="/transactions" class="transaction">
+            <i class="fa-solid fa-receipt"></i>
+            <i data-lucide="receipt" class="lucide-icon"></i>
+            <span class="nav-label hidden">Transaction History</span>
+          </a>
+        </li>
+        <li>
+          <a href="/user-actions" class="logs">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <i data-lucide="clipboard-list" class="lucide-icon"></i>
+            <span class="nav-label hidden">Action Logs</span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="control-icons">
+        <li class="expand">
+          <i class="fa-solid fa-left-right"></i>
+          <i data-lucide="arrow-left-right" class="lucide-icon"></i>
+          <span class="nav-label hidden">Expand</span>
+        </li>
+        <li class="log-out">
+          <a href="/logout">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <i data-lucide="log-out" class="lucide-icon"></i>
+            <span class="nav-label hidden">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <div class="container">
+        <h1>Inventory Report</h1>
+
+        <div class="report-filters">
+          <label>
+            Report Type:
+            <select id="report-type">
+              <option value="sales">Sales Report</option>
+              <option value="inventory" selected>Inventory Report</option>
+              <option value="order">Order Report</option>
+            </select>
+          </label>
+
+          <label>
+            From:
+            <input type="date" id="from-date" />
+          </label>
+
+          <label>
+            To:
+            <input type="date" id="to-date" />
+          </label>
+
+          <button id="generate-report" class="btn">Generate</button>
+          <button id="download-report" class="btn download-btn">
+            Download / Print
+          </button>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts">
+          <h2>Charts</h2>
+          <div class="chart-container">
+            <canvas id="top-moving-chart" width="400" height="200"></canvas>
+          </div>
+          <div class="chart-container">
+            <canvas id="low-stock-chart" width="400" height="200"></canvas>
+          </div>
+        </div>
+
+        <!-- Tables -->
+        <div class="tables">
+          <h2>Tables</h2>
+
+          <div class="table-wrapper">
+            <h3>Top Moving Items (by SKU)</h3>
+            <table id="top-sku-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>SKU</th>
+                  <th>Product Name</th>
+                  <th>Quantity Sold</th>
+                  <th>COGS</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div class="table-wrapper">
+            <h3>Top Moving Items (by Category)</h3>
+            <table id="top-category-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Category</th>
+                  <th>Quantity Sold</th>
+                  <th>COGS</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div class="table-wrapper">
+            <h3>Volume of Refunds</h3>
+            <table id="refund-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Product Name</th>
+                  <th>Quantity Refunded</th>
+                  <th>Refund Amount</th>
+                  <th>Reason</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div class="table-wrapper">
+            <h3>Volume of Damaged Items</h3>
+            <table id="damaged-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Product Name</th>
+                  <th>Quantity Damaged</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div class="table-wrapper">
+            <h3>Low Stock Duration (Days)</h3>
+            <table id="low-stock-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Product Name</th>
+                  <th>Days Below Threshold</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div id="summary-values" class="summary"></div>
+
+        <!-- Refund Summary Table -->
+        <div class="table-wrapper">
+          <h3>Refund Summary by Reason</h3>
+          <table id="refund-summary-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Reason</th>
+                <th>Quantity</th>
+                <th>Total Amount (₱)</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <h2 class="footer-brand">DA Constance Fluff 'N Stuff</h2>
+          <p class="footer-subtitle">Pet Supplies Store</p>
+          <p>Established 2023</p>
+        </div>
+        <div class="footer-right">
+          <ul>
+            <li>
+              <i class="fa-brands fa-instagram"></i>
+              <a
+                href="https://www.instagram.com/fluffnstuffbydaconstance/"
+                target="_blank"
+                >@fluffnstuffbydaconstance</a
+              >
+            </li>
+            <li>
+              <i class="fa-regular fa-envelope"></i>
+              <a href="mailto:srjdee@gmail.com">srjdee@gmail.com</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-dog"></i> Pedigree Profile:
+              <em>IAGD Record</em>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2023 DA Constance Fluff 'N Stuff Pet Supplies Store. All rights
+          reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

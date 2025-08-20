@@ -1,0 +1,603 @@
+@import './style.css';
+@import './components/footer.css';
+@import './components/header.css';
+@import './components/sidebar.css';
+/* === Variables === */
+:root {
+  --main-color: #fefefe;
+  --sub-color: #fff7fb;
+  --border-color: #ffe0ec;
+  --border-color1: #ddd;
+  --header-color: #f8f9fa;
+  --primary-color: #4a90e2;
+  --secondary-color: #eba2e5;
+  --danger-color: #e74c3c;
+  --warning-color: #f39c12;
+  --success-color: #2ecc71;
+  --light-gray: #f7f7f7;
+  --text-dark: #333;
+  --radius: 10px;
+  --transition: 0.3s ease;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--sub-color);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 4px var(--border-color1);
+}
+
+.container h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* === Table Header / Controls === */
+.table-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  background: var(--main-color);
+  padding: 4px 6px;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px var(--border-color);
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 8px 12px;
+  border-radius: 30px;
+  font-size: 16px;
+}
+
+.search-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+.search-btn svg {
+  width: 30px;
+  height: 30px;
+}
+
+.search-btn:hover {
+  background: #357ab8;
+}
+
+.dropdown {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  color: var(--text-dark);
+  background-color: #fff;
+}
+
+/* === Grid Table === */
+.grid-table {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1fr;
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background-color: var(--main-color);
+}
+
+.grid-header-row {
+  display: contents;
+}
+
+.grid-header {
+  background-color: var(--header-color);
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+}
+
+.grid-header:last-child {
+  border-right: none;
+}
+
+.grid-data {
+  display: contents;
+}
+
+.grid-row {
+  display: contents;
+}
+
+.grid-row > div {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.grid-row:nth-child(odd) > div {
+  background-color: #fafafa;
+}
+
+.grid-row:hover > div {
+  background-color: #e7f1ff;
+}
+
+/* === Buttons === */
+button {
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.view-btn,
+.remove-btn,
+.suspend-btn,
+.ban-btn,
+.update-btn,
+.unban-btn,
+.btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  border: none;
+  margin: 2px;
+}
+
+.view-btn {
+  background: var(--primary-color);
+  color: #fff;
+}
+.view-btn:hover {
+  background: #357ab8;
+}
+
+.remove-btn {
+  background: var(--danger-color);
+  color: #fff;
+}
+.remove-btn:hover {
+  background: #b52a37;
+}
+
+.update-btn {
+  background-color: var(--success-color);
+  color: var(--main-color);
+}
+
+.suspend-btn {
+  background: var(--warning-color);
+  color: #fff;
+}
+.suspend-btn:disabled {
+  background: #f0c27b;
+  cursor: not-allowed;
+}
+
+.ban-btn {
+  background: var(--danger-color);
+  color: #fff;
+}
+.ban-btn:disabled {
+  background: #f5b7b1;
+  cursor: not-allowed;
+}
+
+.unban-btn {
+  background: var(--success-color);
+  color: #fff;
+}
+.unban-btn:disabled {
+  background: #a3e4d7;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: #357ab8;
+}
+
+.btn-secondary {
+  background: #d1d1d1;
+  color: #333;
+}
+.btn-secondary:hover {
+  background: #b5b5b5;
+}
+
+.btn-success {
+  background: var(--success-color);
+  color: #fff;
+}
+.btn-success:hover {
+  background: #28b86f;
+}
+
+/* === Modal === */
+/* .modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  overflow-y: auto;
+} */
+
+.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.6); /* dark overlay */
+  justify-content: center;
+  align-items: center;
+}
+/* 
+.modal-content {
+  background: var(--main-color);
+  margin: 5% auto;
+  padding: 2rem;
+  max-width: 500px;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  animation: slideIn 0.3s ease-out;
+} */
+
+.modal-content {
+  background: var(--main-color);
+  margin: auto;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  animation: fadeInDown 0.3s ease;
+}
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.modal-close:hover {
+  color: #e74c3c;
+}
+
+/* Heading */
+.modal-content h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
+
+/* Form Inputs */
+#update-user-form input,
+#update-user-form select {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border 0.2s;
+}
+
+#update-user-form input:focus,
+#update-user-form select:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* Submit Button */
+#update-user-form .btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* === Sort Button === */
+.sort-btn {
+  background: none;
+  border: none;
+  margin-left: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.sort-btn:hover {
+  color: var(--primary-color);
+}
+.sort-btn.asc i {
+  transform: rotate(0deg);
+}
+.sort-btn.desc i {
+  transform: rotate(180deg);
+}
+
+/* === Pagination === */
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.pagination-container span {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* === Pagination Buttons === */
+.pagination-numbers {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pagination-numbers .btn-number {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color1);
+  background-color: var(--main-color);
+  color: var(--text-dark);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pagination-numbers .btn-number:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+.pagination-numbers .btn-number.active {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+  font-weight: 600;
+}
+
+.pagination-container button#prev-page,
+.pagination-container button#next-page {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color1);
+  background-color: var(--main-color);
+  color: var(--text-dark);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pagination-container button#prev-page:hover:not(:disabled),
+.pagination-container button#next-page:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+.pagination-container button:disabled {
+  background-color: #eee;
+  color: #aaa;
+  cursor: not-allowed;
+  border-color: #ddd;
+}
+
+/* Prev / Next Buttons */
+.pagination-container button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color1);
+  background-color: var(--main-color);
+  color: var(--text-dark);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pagination-container button:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+.pagination-container button:disabled {
+  background-color: #eee;
+  color: #aaa;
+  border-color: #ddd;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  flex: 1;
+}
+
+.view-password-btn {
+  margin-left: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 16px;
+}
+
+/* === Form inside modal === */
+#add-user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#add-user-form input,
+#add-user-form select {
+  padding: 10px 14px;
+  font-size: 16px;
+  border-radius: var(--radius);
+  border: 1px solid #ccc;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--main-color);
+  transition: var(--transition);
+}
+
+#add-user-form input:focus,
+#add-user-form select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 6px rgba(74, 144, 226, 0.3);
+}
+
+#add-user-form button {
+  border: none;
+  cursor: pointer;
+}
+#add-user-form button:hover {
+  opacity: 0.9;
+}
+
+#add-user-form select:hover {
+  border-color: var(--primary-color);
+}
+
+.btn-success,
+.btn {
+  background: #27ae60;
+  color: #fff;
+}
+.btn-success:hover {
+  background: #219150;
+}
+
+/* Responsive Pagination */
+@media (max-width: 500px) {
+  .pagination-container {
+    justify-content: center;
+  }
+  .pagination-numbers {
+    justify-content: center;
+  }
+  .pagination-numbers .btn-number {
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+  .pagination-container button#prev-page,
+  .pagination-container button#next-page {
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .grid-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .grid-header,
+  .grid-row > div {
+    display: inline-block;
+    min-width: 140px;
+    vertical-align: top;
+  }
+  .table-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .search-container,
+  .dropdown,
+  #add-user-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  #add-user-form input,
+  #add-user-form select,
+  #add-user-form button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}

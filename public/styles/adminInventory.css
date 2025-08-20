@@ -1,0 +1,407 @@
+@import './style.css';
+@import './components/footer.css';
+@import './components/header.css';
+@import './components/sidebar.css';
+
+:root {
+  --main-color: #fefefe;
+  --sub-color: #fff7fb;
+  --border-color: #ffe0ec;
+  --border-color1: #ddd;
+  --header-color: #f8f9fa;
+  --primary-color: #4a90e2;
+  --secondary-color: #eba2e5;
+  --danger-color: #e74c3c;
+  --success-color: #2ecc71;
+  --light-gray: #f7f7f7;
+  --text-dark: #333;
+  --radius: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--sub-color);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 4px var(--border-color1);
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #343a40;
+  font-weight: 600;
+}
+
+.inventory-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.inventory-actions button {
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  background-color: var(--primary-color);
+  color: var(--main-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.inventory-actions button:hover {
+  background-color: #0056b3;
+}
+
+/* Inventory Table */
+.inventory-table {
+  overflow-x: auto;
+}
+
+.inventory-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  min-width: 900px;
+}
+
+.inventory-table th,
+.inventory-table td {
+  padding: 0.75rem 1rem;
+  background-color: var(--main-color);
+  border: 1px solid var(--border-color);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.inventory-table th {
+  background-color: var(--header-color);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-align: left;
+}
+
+.inventory-table td.low-stock {
+  background-color: #ffe5e5;
+  color: #d40000;
+  font-weight: bold;
+}
+
+.inventory-table img {
+  width: 80px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Table Buttons */
+.inventory-table button {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  margin-right: 4px;
+}
+
+.inventory-table .edit-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.inventory-table .edit-btn:hover {
+  background-color: #218838;
+}
+
+.inventory-table .delete-btn {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.inventory-table .delete-btn:hover {
+  background-color: #c82333;
+}
+
+.inventory-table .order-btn {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.inventory-table .order-btn:hover {
+  background-color: #e0a800;
+}
+
+/* Sort Icon */
+.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sort-icon {
+  margin-left: 6px;
+  font-size: 0.75rem;
+  color: #888;
+}
+
+th:hover .sort-icon {
+  color: var(--text-dark);
+}
+
+/* Modals */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: var(--text-dark);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: var(--main-color);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  position: relative;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.modal-content button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.modal-content button[type='submit'] {
+  background-color: var(--primary-color);
+  color: var(--main-color);
+}
+
+.modal-content button[type='submit']:hover {
+  background-color: #0056b3;
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.modal-content .close:hover {
+  color: var(--text-dark);
+}
+
+/* Hover for table rows */
+.inventory-table tbody tr:hover {
+  background-color: #f1f3f5;
+}
+
+/* Hover effect on sortable headers */
+.inventory-table th.sortable:hover {
+  background-color: #e9ecef;
+  color: #007bff;
+}
+
+.inventory-table th.sortable:hover .sort-icon {
+  color: #007bff;
+}
+
+/* Hover effects for action buttons */
+.inventory-table button {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.inventory-table button:hover {
+  transform: scale(1.05);
+}
+
+.inventory-table .edit-btn:hover {
+  background-color: #1e7e34;
+}
+
+.inventory-table .delete-btn:hover {
+  background-color: #bd2130;
+}
+
+.inventory-table .order-btn:hover {
+  background-color: #d39e00;
+}
+
+/* Inventory action buttons */
+.inventory-actions button {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.inventory-actions button:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+/* Modal close hover */
+.modal-content .close:hover {
+  color: #000;
+  transform: scale(1.2);
+  transition: transform 0.2s ease;
+}
+
+/* Form input hover */
+.modal-content input:hover,
+.modal-content select:hover,
+.modal-content textarea:hover {
+  border-color: #007bff;
+  background-color: #f9fcff;
+}
+
+/* Modal submit hover */
+.modal-content button[type='submit']:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+#adjustment-section {
+  margin-top: 1rem;
+}
+
+#adjustment-section input,
+#adjustment-section textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#edit-quantity-toggle {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#edit-quantity-toggle:hover {
+  background-color: #357ab8;
+}
+/* ✅ Pagination Styles */
+#pagination {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+#pagination button {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--border-color1);
+  border-radius: 6px;
+  background-color: var(--main-color);
+  color: var(--text-dark);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  min-width: 40px;
+}
+
+/* Hover effect */
+#pagination button:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  color: var(--main-color);
+  border-color: var(--primary-color);
+}
+
+/* Disabled buttons */
+#pagination button:disabled {
+  background-color: var(--light-gray);
+  color: #999;
+  cursor: not-allowed;
+  border-color: var(--border-color1);
+}
+
+/* Active page button */
+#pagination button.active {
+  background-color: var(--primary-color);
+  color: var(--main-color);
+  font-weight: bold;
+  border-color: var(--primary-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .inventory-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .inventory-table table {
+    font-size: 0.85rem;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+}

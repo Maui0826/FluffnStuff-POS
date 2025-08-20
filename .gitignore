@@ -1,0 +1,8 @@
+.env
+node_modules/
+devScripts/
+.vscode/
+seed.js
+seed1.js
+seedOrder.js
+seedUsers.js

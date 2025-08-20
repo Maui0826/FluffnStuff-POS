@@ -1,0 +1,160 @@
+@import './style.css';
+@import './components/footer.css';
+@import './components/header.css';
+@import './components/sidebar.css';
+
+:root {
+  --main-color: #fefefe;
+  --sub-color: #fff7fb;
+  --border-color: #ffe0ec;
+  --border-color1: #ddd;
+  --header-color: #f8f9fa;
+  --primary-color: #4a90e2;
+  --secondary-color: #eba2e5;
+  --danger-color: #e74c3c;
+  --success-color: #2ecc71;
+  --light-gray: #f7f7f7;
+  --text-dark: #333;
+  --radius: 10px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--sub-color);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 4px var(--border-color1);
+}
+
+.logs-section {
+  width: 100%;
+  background-color: var(--main-color);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.logs-section h2 {
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  font-size: 1.4rem;
+  color: var(--text-dark);
+}
+
+.logs-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.logs-controls input[type='text'],
+.logs-controls select,
+.logs-controls input[type='date'] {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  flex: 1;
+  min-width: 160px;
+  color: var(--text-dark);
+  background-color: var(--main-color);
+}
+
+.logs-controls button {
+  background-color: var(--primary-color);
+  color: var(--main-color);
+  padding: 0.55rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.logs-controls button:hover {
+  background-color: #357ab8; /* darker version of primary */
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.logs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.logs-table thead {
+  background-color: var(--light-gray);
+}
+
+.logs-table th,
+.logs-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  text-align: left;
+  color: var(--text-dark);
+}
+
+.logs-table th {
+  background-color: var(--header-color);
+}
+
+.logs-table tbody tr:nth-child(even) {
+  background-color: var(--sub-color);
+}
+
+/* ✅ Pagination Styles */
+#pagination {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+#pagination button {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--border-color1);
+  border-radius: 6px;
+  background-color: var(--main-color);
+  color: var(--text-dark);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  min-width: 40px;
+}
+
+#pagination button:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  color: var(--main-color);
+  border-color: var(--primary-color);
+}
+
+#pagination button:disabled {
+  background-color: var(--light-gray);
+  color: #999;
+  cursor: not-allowed;
+}
+
+#pagination button[disabled]:not(:first-child):not(:last-child) {
+  background-color: var(--primary-color);
+  color: var(--main-color);
+  font-weight: bold;
+}

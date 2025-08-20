@@ -1,0 +1,87 @@
+main {
+  max-width: 450px;
+  height: 600px;
+}
+
+.container img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.container h1 {
+  font-size: 1.8rem;
+  color: #c03e7b;
+  margin-bottom: 10px;
+}
+
+.container .tagline {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #6c6c6c;
+  margin-bottom: 25px;
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  width: 100%;
+  text-align: left;
+}
+
+.form-group label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  transition: border 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #c03e7b;
+  box-shadow: 0 0 0 2px rgba(192, 62, 123, 0.2);
+}
+
+button[type='submit'] {
+  background-color: #c03e7b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  width: 100%;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type='submit']:hover {
+  background-color: #a63468;
+}
+
+.container p {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.container a {
+  font-size: 0.9rem;
+  margin: 0 6px;
+  color: #ae4a76;
+}

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Inventory</title>
+    <script
+      src="https://kit.fontawesome.com/c90dcd5d26.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="styles/adminInventory.css" />
+    <script src="./scripts/components/sidebar.js" defer></script>
+    <script type="module" src="./scripts/components/header.js" defer></script>
+
+    <script type="module" src="/scripts/adminInventory.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo-container">
+        <img id="logo" src="./assets/logo.png" alt="Logo" class="logo" />
+        <p>DA Constance Fluff 'N Stuff Pet Supplies Store</p>
+      </div>
+
+      <ul class="header-icons">
+        <li class="user-info">
+          <span id="header-name"></span>
+          <span id="header-role"></span>
+        </li>
+        <li class="profile">
+          <i class="fa-regular fa-user"></i>
+        </li>
+        <li class="about-us">
+          <a href="/about-us">
+            <span class="nav-label">About Us</span>
+          </a>
+        </li>
+      </ul>
+    </header>
+
+    <nav class="sidebar">
+      <ul class="nav-icons">
+        <li>
+          <a href="/dashboard" class="dashboard">
+            <i class="fa-solid fa-gauge-high"></i>
+            <i data-lucide="gauge" class="lucide-icon"></i>
+            <span class="nav-label hidden">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="/point-of-sale" class="pos-system">
+            <i class="fa-solid fa-dollar-sign"></i>
+            <i data-lucide="dollar-sign" class="lucide-icon"></i>
+            <span class="nav-label hidden">POS</span>
+          </a>
+        </li>
+        <li>
+          <a href="/inventory" class="inventory">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <i data-lucide="boxes" class="lucide-icon"></i>
+            <span class="nav-label hidden">Inventory</span>
+          </a>
+        </li>
+        <li>
+          <a href="/supplies" class="order">
+            <i class="fa-solid fa-truck"></i>
+            <i data-lucide="truck" class="lucide-icon"></i>
+            <span class="nav-label hidden">Manage Order</span>
+          </a>
+        </li>
+        <li>
+          <a href="/manage-users" class="manage-user">
+            <i class="fa-solid fa-users-gear"></i>
+            <i data-lucide="users" class="lucide-icon"></i>
+            <span class="nav-label hidden">Users</span>
+          </a>
+        </li>
+        <li>
+          <a href="/reports" class="reports">
+            <i class="fa-solid fa-chart-line"></i>
+            <i data-lucide="line-chart" class="lucide-icon"></i>
+            <span class="nav-label hidden">Reports</span>
+          </a>
+        </li>
+        <li>
+          <a href="/transactions" class="transaction">
+            <i class="fa-solid fa-receipt"></i>
+            <i data-lucide="receipt" class="lucide-icon"></i>
+            <span class="nav-label hidden">Transaction History</span>
+          </a>
+        </li>
+        <li>
+          <a href="/user-actions" class="logs">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <i data-lucide="clipboard-list" class="lucide-icon"></i>
+            <span class="nav-label hidden">Action Logs</span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="control-icons">
+        <li class="expand">
+          <i class="fa-solid fa-left-right"></i>
+          <i data-lucide="arrow-left-right" class="lucide-icon"></i>
+          <span class="nav-label hidden">Expand</span>
+        </li>
+        <li class="log-out">
+          <a href="/logout">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <i data-lucide="log-out" class="lucide-icon"></i>
+            <span class="nav-label hidden">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <div class="container">
+        <h1>Inventory Management</h1>
+
+        <div class="inventory-actions">
+          <button
+            id="manage-category"
+            onclick="window.location.href='/category'"
+          >
+            <i class="fa-solid fa-tags"></i> Manage Categories
+          </button>
+          <button id="add-product-btn">
+            <i class="fa-solid fa-plus"></i> Add Product
+          </button>
+        </div>
+
+        <section class="inventory-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th id="sort-sku" class="sortable">
+                  SKU <span class="sort-icon" data-key="sku">▲▼</span>
+                </th>
+                <th id="sort-name" class="sortable">
+                  Product Name <span class="sort-icon" data-key="name">▲▼</span>
+                </th>
+                <th id="sort-category" class="sortable">
+                  Category <span class="sort-icon" data-key="category">▲▼</span>
+                </th>
+                <th id="sort-price" class="sortable">
+                  Price <span class="sort-icon" data-key="price">▲▼</span>
+                </th>
+                <th id="sort-acquisition" class="sortable">
+                  Acquisition Price
+                  <span class="sort-icon" data-key="acquisitionPrice">▲▼</span>
+                </th>
+                <th id="sort-quantity" class="sortable">
+                  Quantity <span class="sort-icon" data-key="quantity">▲▼</span>
+                </th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inventory-body">
+              <!-- Product rows will be dynamically inserted here -->
+            </tbody>
+          </table>
+        </section>
+        <!-- Pagination Controls -->
+        <div id="pagination" class="pagination">
+          <!-- Buttons will be dynamically inserted here -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Add Product Modal -->
+    <div id="add-product-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="close-add-product">&times;</span>
+        <h2>Add New Product</h2>
+        <form id="add-product-form" enctype="multipart/form-data">
+          <input type="text" id="product-sku" placeholder="SKU" required />
+          <input
+            type="text"
+            id="product-name"
+            placeholder="Product Name"
+            required
+          />
+          <select id="product-category" required>
+            <option value="">Select Category</option>
+            <!-- Categories will be dynamically inserted here -->
+          </select>
+          <input
+            type="number"
+            id="product-price"
+            placeholder="Selling Price"
+            min="0"
+            step="0.01"
+            required
+          />
+          <input
+            type="number"
+            id="product-acquisition"
+            placeholder="Acquisition Price"
+            min="0"
+            step="0.01"
+            required
+          />
+          <input
+            type="number"
+            id="product-quantity"
+            placeholder="Quantity"
+            min="0"
+            required
+          />
+          <input
+            type="number"
+            id="product-low-threshold"
+            placeholder="Low Stock Threshold"
+            min="0"
+            value="5"
+          />
+          <textarea
+            id="product-description"
+            placeholder="Description"
+          ></textarea>
+
+          <label
+            for="product-img-file"
+            style="margin-bottom: 0.5rem; display: block"
+            >Upload Product Image:</label
+          >
+          <input type="file" id="product-img-file" accept="image/*" />
+          <input
+            type="text"
+            id="product-img-url"
+            placeholder="Or enter Image URL (optional)"
+          />
+
+          <button type="submit">Add Product</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Update Product Modal -->
+    <div id="update-product-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="close-update-product">&times;</span>
+        <h2>Update Product</h2>
+        <form id="update-product-form" enctype="multipart/form-data">
+          <input type="text" id="update-sku" placeholder="SKU" required />
+          <input
+            type="text"
+            id="update-name"
+            placeholder="Product Name"
+            required
+          />
+          <select id="update-category" required>
+            <option value="">Select Category</option>
+          </select>
+
+          <input
+            type="number"
+            id="update-price"
+            placeholder="Selling Price"
+            min="0"
+            required
+          />
+          <input
+            type="number"
+            id="update-acquisition"
+            placeholder="Acquisition Price"
+            min="0"
+            required
+          />
+          <textarea
+            id="update-description"
+            placeholder="Description"
+            required
+          ></textarea>
+
+          <label
+            for="update-img-file"
+            style="margin-bottom: 0.5rem; display: block"
+            >Upload Product Image:</label
+          >
+          <input type="file" id="update-img-file" accept="image/*" />
+          <input
+            type="text"
+            id="update-img-url"
+            placeholder="Or Image URL (optional)"
+          />
+
+          <!-- Quantity Adjustment Section -->
+          <div id="adjustment-section">
+            <label for="edit-quantity-toggle">Stock Adjustment</label>
+            <button type="button" id="edit-quantity-toggle">
+              Edit Quantity
+            </button>
+
+            <div id="quantity-adjustment-fields" class="hidden">
+              <input
+                type="number"
+                id="adjusted-quantity"
+                placeholder="New Quantity"
+              />
+              <input
+                type="text"
+                id="adjustment-reason"
+                placeholder="Reason (e.g. Damaged, Restocked)"
+              />
+              <textarea
+                id="adjustment-note"
+                placeholder="Note (optional remarks)"
+              ></textarea>
+            </div>
+          </div>
+
+          <input
+            type="number"
+            id="update-low-threshold"
+            placeholder="Low Stock Threshold"
+            min="0"
+          />
+
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Order Product Modal -->
+    <div id="order-product-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="close-order-product">&times;</span>
+        <h2>Order Product</h2>
+        <form id="order-product-form">
+          <input
+            type="text"
+            id="supplier-name"
+            placeholder="Supplier Name"
+            required
+          />
+          <input
+            type="number"
+            id="order-quantity"
+            placeholder="Order Quantity"
+            min="1"
+            required
+          />
+          <input type="date" id="expected-delivery" required />
+          <input
+            type="number"
+            id="order-price"
+            placeholder="Price per Unit"
+            step="0.01"
+            min="0"
+            required
+          />
+          <button type="submit">Place Order</button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <h2 class="footer-brand">DA Constance Fluff 'N Stuff</h2>
+          <p class="footer-subtitle">Pet Supplies Store</p>
+          <p>Established 2023</p>
+        </div>
+        <div class="footer-right">
+          <ul>
+            <li>
+              <i class="fa-brands fa-instagram"></i>
+              <a
+                href="https://www.instagram.com/fluffnstuffbydaconstance/"
+                target="_blank"
+                >@fluffnstuffbydaconstance</a
+              >
+            </li>
+            <li>
+              <i class="fa-regular fa-envelope"></i>
+              <a href="mailto:srjdee@gmail.com">srjdee@gmail.com</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-dog"></i> Pedigree Profile:
+              <em>IAGD Record</em>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2023 DA Constance Fluff 'N Stuff Pet Supplies Store. All rights
+          reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

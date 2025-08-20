@@ -1,0 +1,85 @@
+<!-- status.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CellLink</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .status-container {
+        background: white;
+        padding: 2rem 3rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        max-width: 400px;
+      }
+
+      .status-container h1 {
+        color: #cc0000;
+        margin-bottom: 1rem;
+      }
+
+      .status-container p {
+        font-size: 16px;
+        color: #333;
+      }
+
+      .status-container small {
+        display: block;
+        margin-top: 1rem;
+        color: #888;
+      }
+
+      .status-icon {
+        font-size: 3rem;
+        color: #cc0000;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="status-container" id="statusContent">
+      <div class="status-icon">🚫</div>
+      <h1 id="statusTitle">Account Restricted</h1>
+      <p id="statusMessage">
+        Your account status prevents access to this feature.
+      </p>
+      <small id="statusReason"></small>
+    </div>
+
+    <script>
+      // Check URL parameters to determine what to show
+      const params = new URLSearchParams(window.location.search);
+      const status = params.get('status');
+      const until = params.get('until');
+
+      const statusTitle = document.getElementById('statusTitle');
+      const statusMessage = document.getElementById('statusMessage');
+      const statusReason = document.getElementById('statusReason');
+
+      if (status === 'banned') {
+        statusTitle.textContent = 'Account Banned';
+        statusMessage.textContent =
+          'You have been banned from accessing the system.';
+      } else if (status === 'suspended') {
+        statusTitle.textContent = 'Account Suspended';
+        statusMessage.textContent =
+          'Your account has been temporarily suspended.';
+        if (until) {
+          const untilDate = new Date(until);
+          statusReason.textContent = `Suspension ends on: ${untilDate.toLocaleString()}`;
+        }
+      }
+    </script>
+  </body>
+</html>

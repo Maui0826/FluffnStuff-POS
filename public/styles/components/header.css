@@ -1,0 +1,108 @@
+:root {
+  --main-color: #fefefe;
+  --sub-color: #fff7fb;
+  --border-color: #ffe0ec;
+  --border-color1: #ddd;
+  --primary-color: #4a90e2;
+  --secondary-color: #eba2e5;
+  --danger-color: #e74c3c;
+  --success-color: #2ecc71;
+  --light-gray: #f7f7f7;
+  --text-dark: #333;
+}
+
+.header {
+  height: 4rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo left, icons right */
+  background-color: var(--sub-color);
+  box-shadow: 0px 5px 5px 0px var(--border-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0 20px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-container img {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+}
+
+.logo-container p {
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 350px;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  gap: 20px;
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+}
+
+.header-icons li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.header-icons li a {
+  text-decoration: none;
+  color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.user-info {
+  flex-direction: column; /* stack name & role */
+  align-items: flex-end; /* right-align */
+  color: var(--text-dark);
+  font-size: 0.9rem;
+  cursor: none;
+}
+
+#header-name {
+  font-weight: 600;
+}
+
+#header-role {
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+}
+
+.logo-container:hover {
+  transform: scale(1.02);
+}
+
+.header-icons .profile:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+/* ✅ Hover effect for About Us */
+.header-icons .about-us a:hover {
+  color: var(--primary-color); /* change text color */
+  transform: scale(1.05); /* slight zoom */
+  font-weight: 600; /* bold highlight */
+}

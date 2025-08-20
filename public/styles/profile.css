@@ -1,0 +1,237 @@
+@import './style.css';
+@import './components/footer.css';
+@import './components/header.css';
+@import './components/sidebar.css';
+
+/* -------------------- Variables -------------------- */
+:root {
+  --main-color: #fefefe;
+  --main-color1: #ffffff;
+  --sub-color: #fff7fb;
+  --border-color: #ffe0ec;
+  --border-color1: #ddd;
+  --header-color: #f8f9fa;
+  --primary-color: #4a90e2;
+  --secondary-color: #eba2e5;
+  --danger-color: #e74c3c;
+  --success-color: #2ecc71;
+  --light-gray: #f7f7f7;
+  --text-dark: #333;
+  --radius: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+.container {
+  width: 100%;
+  height: 600px;
+  margin: 0 auto;
+  background-color: var(--sub-color);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 4px var(--border-color1);
+}
+
+/* -------------------- Profile Title -------------------- */
+.profile-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-dark);
+}
+
+/* -------------------- Profile Container -------------------- */
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* -------------------- Profile Card -------------------- */
+.profile-card {
+  background-color: var(--main-color1);
+  color: white;
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  width: 350px;
+  min-height: 400px; /* taller card */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  /* Add border shadow */
+  border: 1px solid var(--light-gray);
+  box-shadow: 0 3px 5px var(--border-color1);
+}
+
+/* Profile Avatar */
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  background-color: var(--secondary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Profile Role */
+.profile-role {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+/* -------------------- Modal Submit Buttons -------------------- */
+dialog .btn {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--primary-color);
+  color: var(--main-color1);
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+dialog .btn:hover {
+  background-color: var(--secondary-color);
+  color: var(--main-color1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+dialog .btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* -------------------- Profile Details -------------------- */
+.profile-details {
+  background-color: var(--main-color);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  width: 350px;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.profile-name1 {
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.profile-details strong {
+  font-weight: 600;
+}
+
+/* -------------------- Action Buttons -------------------- */
+.profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.profile-actions button {
+  flex: 1 1 120px;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  color: var(--main-color);
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-actions button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* -------------------- Modals -------------------- */
+dialog {
+  padding: 2rem;
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  max-width: 90%;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+dialog input {
+  display: block;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color1);
+  border-radius: var(--radius);
+}
+
+/* -------------------- Responsive -------------------- */
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-card,
+  .profile-details {
+    width: 90%;
+  }
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+
+  .profile-role {
+    font-size: 1.25rem;
+  }
+
+  .profile-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-title {
+    font-size: 1.5rem;
+  }
+
+  .profile-actions button {
+    width: 100%;
+  }
+}
