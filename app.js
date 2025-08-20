@@ -10,6 +10,7 @@ import globalErrorHandler from './controllers/globalErrorHandler.js';
 import { protect } from './middlewares/authMiddleware.js';
 import mongoSanitize from './middlewares/mongoSanitize.js';
 
+import cors from 'cors';
 import appRouter from './routes/app-routes.js';
 import authRouter from './routes/auth-route.js';
 import dashboard from './routes/dashboard-route.js';
@@ -23,7 +24,26 @@ import refundRoute from './routes/refund-route.js';
 import report from './routes/report-route.js';
 
 import dailyInventoryCron from './cron/dailyInventoryCron.js';
+
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
+
 const app = express();
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, Postman)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  })
+);
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

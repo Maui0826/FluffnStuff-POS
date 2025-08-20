@@ -1,6 +1,6 @@
 // Create a user
 
-const API_BASE = 'https://fluffnstuff-pos.onrender.com/api/v1/manage-users';
+const API_BASE = import.meta.env.ALLOWED_ORIGINS + '/api/v1/manage-users';
 
 export async function createUserAPI(userData) {
   try {

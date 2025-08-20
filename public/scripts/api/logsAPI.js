@@ -1,7 +1,6 @@
 // api/logsAPI.js
 
-const API_BASE = 'https://fluffnstuff-pos.onrender.com/api/v1';
-
+const API_BASE = import.meta.env.ALLOWED_ORIGINS + '/api/v1';
 export const getAllLogs = async (filters = {}, page = 1, limit = 10) => {
   const params = new URLSearchParams();
 

@@ -1,4 +1,6 @@
-const BASE_URL = 'https://fluffnstuff-pos.onrender.com/api/v1/refunds';
+const BASE_URL = import.meta.env.ALLOWED_ORIGINS + '/api/v1/refunds';
+
+const API_URL = import.meta.env.ALLOWED_ORIGINS + '/api/v1';
 
 export const searchReceipt = async receiptNum => {
   const res = await fetch(`${BASE_URL}/${receiptNum}/search`, {
@@ -39,8 +41,6 @@ export const refundProduct = async payload => {
 };
 
 // api/transactionAPI.js
-
-const API_URL = 'https://fluffnstuff-pos.onrender.com/api/v1';
 
 export const fetchTransactionHistory = async (filters = {}) => {
   try {
