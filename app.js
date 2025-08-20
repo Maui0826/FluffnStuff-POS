@@ -31,28 +31,20 @@ const app = express();
 
 app.use(cookieParser());
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true, // allow cookies
+  })
+);
+
 app.use(express.urlencoded({ extended: false }));
 app.use(mongoSanitize);
 dailyInventoryCron(); // start the cron
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, Postman)
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        return callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true,
-  })
-);
 
 app.use(express.static(join(__dirname, 'public')));
 
