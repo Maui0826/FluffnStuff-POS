@@ -1,6 +1,6 @@
-const BASE_URL = import.meta.env.ALLOWED_ORIGINS + '/api/v1/refunds';
+const BASE_URL = '/api/v1/refunds';
 
-const API_URL = import.meta.env.ALLOWED_ORIGINS + '/api/v1';
+const API_URL = '/api/v1';
 
 export const searchReceipt = async receiptNum => {
   const res = await fetch(`${BASE_URL}/${receiptNum}/search`, {

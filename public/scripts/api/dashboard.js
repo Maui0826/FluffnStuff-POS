@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.ALLOWED_ORIGINS + '/api/v1';
+const API_BASE = '/api/v1';
 
 export const fetchDashboard = async () => {
   try {

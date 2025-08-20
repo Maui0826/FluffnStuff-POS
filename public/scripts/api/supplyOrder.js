@@ -1,6 +1,6 @@
 // scripts/api/orderAPI.js
 
-const API_BASE = import.meta.env.ALLOWED_ORIGINS + '/api/v1/supplies';
+const API_BASE = '/api/v1/supplies';
 
 const orderAPI = {
   // Fetch all stock orders with optional filters

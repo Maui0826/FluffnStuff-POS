@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.ALLOWED_ORIGINS + '/api/v1/reports';
+const BASE_URL = '/api/v1/reports';
 export const fetchSalesReport = async (fromDate, toDate) => {
   try {
     const response = await fetch(

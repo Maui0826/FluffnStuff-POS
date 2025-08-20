@@ -1,6 +1,6 @@
 // scripts/api/posAPI.js
 
-const BASE_URL = import.meta.env.ALLOWED_ORIGINS + '/api/v1';
+const BASE_URL = '/api/v1';
 /**
  * Search products by SKU or name
  */

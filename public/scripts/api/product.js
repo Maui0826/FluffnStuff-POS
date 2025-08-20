@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.ALLOWED_ORIGINS + '/api/v1/inventory';
+const API_BASE = '/api/v1/inventory';
 
 async function getAllProductsAPI(params = {}) {
   try {

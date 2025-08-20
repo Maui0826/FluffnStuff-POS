@@ -16,11 +16,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 const PORT = process.env.PORT;
 
-// express app
-import app from './app.js';
-
 // db connect
 import mongoose from 'mongoose';
+// express app
+import app from './app.js';
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
   console.log(`connected to ${mongoose.connection.name}`);
