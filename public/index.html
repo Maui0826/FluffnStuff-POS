@@ -42,9 +42,7 @@
       </div>
     </main>
 
-    <script type="module">
-      import axios from 'https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js';
-
+    <script>
       document.addEventListener('DOMContentLoaded', () => {
         const loginForm = document.querySelector('#loginForm');
 
@@ -55,23 +53,27 @@
           const password = document.querySelector('#password').value.trim();
 
           try {
-            const res = await axios.post(
-              '/api/auth/login',
-              {
+            const response = await fetch(`/api/auth/login`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              credentials: 'include',
+              body: JSON.stringify({
                 email,
                 password,
-              },
-              { withCredentials: true }
-            );
+              }),
+            });
 
-            if (res.data.redirectUrl) {
-              window.location.href = res.data.redirectUrl;
+            if (response.redirected) {
+              window.location.href = response.url;
             } else {
-              alert(res.data.message || 'Login failed.');
+              const data = await response.json();
+              alert(data.message || 'Login failed. Please try again.');
             }
           } catch (err) {
             console.error(err);
-            alert('Something went wrong.');
+            alert('Something went wrong. Please try again later.');
           }
         });
       });
