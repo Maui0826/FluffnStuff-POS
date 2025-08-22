@@ -28,7 +28,8 @@ export const refundProduct = catchAsync(async (req, res, next) => {
     productId: prod._id,
     quantity: Number(quantity),
   };
-  const transItem = await TransactItem.refundItem(transItemData);
+  const transItem = await TransactItem.refundItem(transItemData, reason);
+
   if (!transItem)
     return next(new AppError('Transaction item refund failed.', 404));
 

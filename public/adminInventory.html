@@ -128,6 +128,21 @@
           <button id="add-product-btn">
             <i class="fa-solid fa-plus"></i> Add Product
           </button>
+          <button class="order-btn">Order</button>
+        </div>
+
+        <!-- Filters -->
+        <div class="inventory-filters">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search Product Name/SKU"
+          />
+          <select id="supplier-filter">
+            <option value="">All Suppliers</option>
+            <!-- Supplier options will be dynamically populated -->
+          </select>
+          <button id="apply-filters">Apply</button>
         </div>
 
         <section class="inventory-table">
@@ -151,6 +166,7 @@
                   Acquisition Price
                   <span class="sort-icon" data-key="acquisitionPrice">▲▼</span>
                 </th>
+                <th id="supplier">Supplier</th>
                 <th id="sort-quantity" class="sortable">
                   Quantity <span class="sort-icon" data-key="quantity">▲▼</span>
                 </th>
@@ -203,6 +219,7 @@
             step="0.01"
             required
           />
+          <input type="text" id="suppliers-name" placeholder="Supplier Name" />
           <input
             type="number"
             id="product-quantity"
@@ -261,6 +278,7 @@
             id="update-price"
             placeholder="Selling Price"
             min="0"
+            step="0.01"
             required
           />
           <input
@@ -268,6 +286,7 @@
             id="update-acquisition"
             placeholder="Acquisition Price"
             min="0"
+            step="0.01"
             required
           />
           <textarea
@@ -329,31 +348,43 @@
     <div id="order-product-modal" class="modal">
       <div class="modal-content">
         <span class="close" id="close-order-product">&times;</span>
-        <h2>Order Product</h2>
+        <h2>Order Products</h2>
+
         <form id="order-product-form">
-          <input
-            type="text"
-            id="supplier-name"
-            placeholder="Supplier Name"
-            required
-          />
-          <input
-            type="number"
-            id="order-quantity"
-            placeholder="Order Quantity"
-            min="1"
-            required
-          />
-          <input type="date" id="expected-delivery" required />
-          <input
-            type="number"
-            id="order-price"
-            placeholder="Price per Unit"
-            step="0.01"
-            min="0"
-            required
-          />
-          <button type="submit">Place Order</button>
+          <!-- Supplier Name -->
+          <div id="order-supplier-container">
+            <select id="order-supplier-name" required>
+              <option value="">Select Supplier</option>
+              <!-- Existing suppliers will be populated here -->
+            </select>
+            <input
+              type="text"
+              id="custom-supplier-input"
+              placeholder="Enter new supplier"
+              style="display: none"
+            />
+          </div>
+
+          <!-- Expected Delivery -->
+          <input type="date" id="order-expected-delivery" required />
+
+          <!-- Products Table -->
+          <table id="order-products-table">
+            <thead>
+              <tr>
+                <th>
+                  <input type="checkbox" id="select-all-order-products" />
+                </th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>ORDER QUANTITY</th>
+                <th>AQUISITION</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+
+          <button type="submit" id="submit-multi-order">Place Order</button>
         </form>
       </div>
     </div>

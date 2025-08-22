@@ -51,12 +51,13 @@ async function deleteProductAPI(productId) {
   return res.json();
 }
 
-async function orderStockAPI(productId, orderData) {
+async function orderStockAPI(orderData) {
   try {
-    const res = await fetch(`${API_BASE}/order/${productId}`, {
+    const res = await fetch(`${API_BASE}/order/`, {
+      // endpoint without productId
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(orderData),
+      body: JSON.stringify(orderData), // expects { supplierName, deliveryDate, products: [...] }
     });
 
     if (!res.ok) {

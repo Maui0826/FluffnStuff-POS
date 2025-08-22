@@ -192,6 +192,119 @@ main {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+/* --- Inventory Table --- */
+#inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  min-width: 600px; /* ensures horizontal scroll if needed */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+#inventory-table th,
+#inventory-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color1);
+}
+
+#inventory-table th {
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: 600;
+}
+
+#inventory-table tbody tr:nth-child(even) {
+  background-color: var(--light-gray);
+}
+
+#inventory-table tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* --- Product Modal --- */
+#product-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+#product-modal .modal-content {
+  background-color: var(--main-color);
+  border-radius: var(--radius);
+  width: 90%;
+  max-width: 900px;
+  max-height: 90%;
+  overflow-y: auto;
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#product-modal .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--danger-color);
+  cursor: pointer;
+}
+
+#product-modal h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+#product-modal h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+#product-modal table.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+}
+
+#product-modal table.detail-table th,
+#product-modal table.detail-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border: 1px solid var(--border-color1);
+}
+
+#product-modal table.detail-table th {
+  background-color: var(--secondary-color);
+  color: #fff;
+  font-weight: 600;
+}
+
+#product-modal table.detail-table tbody tr:nth-child(even) {
+  background-color: var(--light-gray);
+}
+
+#product-modal table.detail-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
   .report-filters {

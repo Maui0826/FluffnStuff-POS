@@ -2,11 +2,29 @@ import Product from '../models/productModel.js';
 import Inventory from '../models/inventoryModel.js';
 import Category from '../models/categoryModel.js';
 import AppError from '../utils/AppError.js';
-const getAllProducts = async ({ page = 1, limit = 10 } = {}) => {
+import Supplier from '../models/supplierModel.js';
+
+const getAllProducts = async ({
+  page = 1,
+  limit = 10,
+  search = '',
+  supplier = '',
+} = {}) => {
   const skip = (page - 1) * limit;
 
+  // Build base query
+  const query = { status: 'active' };
+
+  // Add search filter (name or SKU)
+  if (search) {
+    query.$or = [
+      { name: { $regex: search, $options: 'i' } },
+      { sku: { $regex: search, $options: 'i' } },
+    ];
+  }
+
   // Fetch products with category info
-  const products = await Product.find({ status: 'active' })
+  const products = await Product.find(query)
     .populate({
       path: 'categoryId',
       model: Category,
@@ -18,13 +36,24 @@ const getAllProducts = async ({ page = 1, limit = 10 } = {}) => {
     .lean();
 
   // Fetch total count for pagination
-  const totalCount = await Product.countDocuments({ status: 'active' });
+  const totalCount = await Product.countDocuments(query);
 
-  // Fetch inventory data for the products
+  // Fetch inventory and supplier data
   const productIds = products.map(p => p._id);
+
+  let suppliers = await Supplier.find({
+    productId: { $in: productIds },
+  }).lean();
+
+  // Apply supplier filter if provided
+  if (supplier) {
+    suppliers = suppliers.filter(
+      s => s.supplierName.toLowerCase() === supplier.toLowerCase()
+    );
+  }
+
   const inventories = await Inventory.find({
     productId: { $in: productIds },
-    status: 'active',
   }).lean();
 
   // Map inventory to product
@@ -33,9 +62,18 @@ const getAllProducts = async ({ page = 1, limit = 10 } = {}) => {
     inventoryMap[inv.productId.toString()] = inv;
   });
 
-  // Merge product and inventory data
+  // Map suppliers to product
+  const supplierMap = {};
+  suppliers.forEach(sup => {
+    const pid = sup.productId.toString();
+    if (!supplierMap[pid]) supplierMap[pid] = [];
+    supplierMap[pid].push(sup.supplierName);
+  });
+
+  // Merge product, inventory, and supplier data
   const result = products.map(p => {
     const inv = inventoryMap[p._id.toString()] || {};
+    const supplierNames = supplierMap[p._id.toString()] || [];
     return {
       _id: p._id,
       imageUrl: p.imageUrl || '',
@@ -48,6 +86,7 @@ const getAllProducts = async ({ page = 1, limit = 10 } = {}) => {
         : 0,
       quantity: inv.quantity || 0,
       description: p.description || '',
+      supplierName: supplierNames.join(', '),
       actions: '',
     };
   });
@@ -61,20 +100,39 @@ const searchProduct = async query => {
   const q = String(query).trim();
   const regex = new RegExp(q, 'i');
 
-  // Fetch all matches (exact or partial)
+  // Fetch all matching products
   let products = await Product.find({
     status: 'active',
     $or: [{ sku: regex }, { name: regex }],
   }).limit(20);
 
-  // Sort so that exact SKU or name matches come first
-  products.sort((a, b) => {
+  // Fetch inventory quantities for these products
+  const productIds = products.map(p => p._id);
+  const inventories = await Inventory.find({
+    productId: { $in: productIds },
+  })
+    .select('productId quantity')
+    .lean();
+
+  const inventoryMap = {};
+  inventories.forEach(inv => {
+    inventoryMap[inv.productId.toString()] = inv.quantity;
+  });
+
+  // Attach quantity to each product
+  const productsWithQty = products.map(p => ({
+    ...p.toObject(),
+    quantity: inventoryMap[p._id.toString()] || 0, // default 0 if not found
+  }));
+
+  // Sort exact matches first
+  productsWithQty.sort((a, b) => {
     const exactA = a.sku === q || a.name === q ? 0 : 1;
     const exactB = b.sku === q || b.name === q ? 0 : 1;
     return exactA - exactB;
   });
 
-  return products;
+  return productsWithQty;
 };
 
 const getProductById = async id => {
@@ -141,8 +199,14 @@ const getAllProductsByCategoryId = async categoryId => {
   return products; // returns an array of products
 };
 
+const getProducts = async () => {
+  const prod = await Product.find().select('_id name');
+  return prod;
+};
+
 export default {
   getProductById,
+  getProducts,
   createProduct,
   updateProduct,
   deleteProduct,

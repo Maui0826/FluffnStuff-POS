@@ -6,6 +6,17 @@ export const generateInventoryPDF = (reportData, fromDate, toDate) => {
   const margin = 40;
   let currentY = 40;
 
+  // --- Safe formatter ---
+  const safe = (val, fallback = 'N/A') => {
+    if (val === undefined || val === null || val === '') return fallback;
+    if (typeof val === 'number') return val;
+    if (!isNaN(Number(val))) return Number(val);
+    return val;
+  };
+
+  const safeMoney = val =>
+    '₱' + Number(val?.$numberDecimal ?? val ?? 0).toLocaleString();
+
   // --- Add Logo ---
   const imgEl = document.getElementById('logo');
   if (imgEl) {
@@ -60,32 +71,25 @@ export const generateInventoryPDF = (reportData, fromDate, toDate) => {
   currentY += 15;
 
   doc.setFont('times', 'normal');
-  const totalInventoryValue = Number(
-    reportData.summary?.totalInventoryValue?.$numberDecimal || 0
+  const totalInventoryValue = safe(
+    reportData.summary?.totalInventoryValue?.$numberDecimal,
+    0
   );
+  const totalQuantitySold = safe(reportData.summary?.totalQuantitySold, 0);
+  const totalRefunds = safe(reportData.summary?.totalRefunds, 0);
+  const lowStockCount = safe(reportData.summary?.lowStockCount, 0);
+
   doc.text(
-    `Total Inventory Value: ₱${totalInventoryValue.toLocaleString()}`,
+    `Total Inventory Value: ${safeMoney(totalInventoryValue)}`,
     margin,
     currentY
   );
   currentY += 12;
-  doc.text(
-    `Total Quantity Sold: ${reportData.summary.totalQuantitySold}`,
-    margin,
-    currentY
-  );
+  doc.text(`Total Quantity Sold: ${totalQuantitySold}`, margin, currentY);
   currentY += 12;
-  doc.text(
-    `Total Refunds: ₱${reportData.summary.totalRefunds.toLocaleString()}`,
-    margin,
-    currentY
-  );
+  doc.text(`Total Refunds: ${safeMoney(totalRefunds)}`, margin, currentY);
   currentY += 12;
-  doc.text(
-    `Low Stock Items: ${reportData.summary.lowStockCount}`,
-    margin,
-    currentY
-  );
+  doc.text(`Low Stock Items: ${lowStockCount}`, margin, currentY);
   currentY += 30;
 
   // --- Helper to add table ---
@@ -108,7 +112,7 @@ export const generateInventoryPDF = (reportData, fromDate, toDate) => {
       },
       bodyStyles: { font: 'times', fontSize: 10 },
       alternateRowStyles: { fillColor: [245, 245, 245] },
-      columnStyles: columnStyles,
+      columnStyles,
       styles: { overflow: 'linebreak', cellPadding: 4 },
       didDrawPage: () => {
         const pageCount = doc.internal.getNumberOfPages();
@@ -128,83 +132,118 @@ export const generateInventoryPDF = (reportData, fromDate, toDate) => {
     currentY = doc.lastAutoTable.finalY + 20;
   };
 
-  // --- Add Tables with optimized widths ---
-  addTable(
-    'Top Moving Items (by SKU)',
-    ['#', 'SKU', 'Product Name', 'Quantity Sold', 'COGS'],
-    reportData.topSellingBySKU.map(i => ({
-      sku: i.sku,
-      name: i.name,
-      quantity: i.quantity,
-      cogs: '₱' + i.cogs.toLocaleString(),
-    })),
+  // --- Current Inventory Table ---
+  if (reportData.inventorySummary?.length) {
+    addTable(
+      'Current Inventory',
+      ['#', 'Product Name', 'Qty on Hand', 'Acquisition Price (₱)'],
+      reportData.inventorySummary.map(item => ({
+        name: safe(item.productName),
+        qtyOnHand: safe(item.qtyOnHand, 0),
+        acquisitionPrice: safeMoney(item.acquisitionPrice),
+      })),
+      { 1: { cellWidth: 200 }, 2: { cellWidth: 80 }, 3: { cellWidth: 100 } }
+    );
+  }
+
+  // --- Other Tables ---
+  const tableData = [
     {
-      1: { cellWidth: 80 },
-      2: { cellWidth: 200 },
-      3: { cellWidth: 80 },
-      4: { cellWidth: 60 },
-    }
-  );
-
-  addTable(
-    'Top Moving Items (by Category)',
-    ['#', 'Category', 'Quantity Sold', 'COGS'],
-    reportData.topSellingByCategory.map(i => ({
-      category: i.category,
-      quantity: i.quantity,
-      cogs: '₱' + i.cogs.toLocaleString(),
-    })),
-    { 1: { cellWidth: 150 }, 2: { cellWidth: 100 }, 3: { cellWidth: 80 } }
-  );
-
-  addTable(
-    'Volume of Refunds',
-    ['#', 'Product Name', 'Quantity Refunded', 'Refund Amount', 'Reason'],
-    reportData.refunds.map(i => ({
-      name: i.name,
-      quantity: i.quantity,
-      amount: '₱' + i.amount.toLocaleString(),
-      reason: i.reason,
-    })),
+      title: 'Top Moving Items (by SKU)',
+      headers: ['#', 'SKU', 'Product Name', 'Quantity Sold', 'COGS'],
+      data: reportData.topSellingBySKU,
+      map: i => ({
+        sku: safe(i.sku),
+        name: safe(i.name),
+        quantity: safe(i.quantity, 0),
+        cogs: safeMoney(i.cogs),
+      }),
+      styles: {
+        1: { cellWidth: 80 },
+        2: { cellWidth: 200 },
+        3: { cellWidth: 80 },
+        4: { cellWidth: 60 },
+      },
+    },
     {
-      1: { cellWidth: 200 },
-      2: { cellWidth: 70 },
-      3: { cellWidth: 80 },
-      4: { cellWidth: 120 },
-    }
-  );
+      title: 'Top Moving Items (by Category)',
+      headers: ['#', 'Category', 'Quantity Sold', 'COGS'],
+      data: reportData.topSellingByCategory,
+      map: i => ({
+        category: safe(i.category),
+        quantity: safe(i.quantity, 0),
+        cogs: safeMoney(i.cogs),
+      }),
+      styles: {
+        1: { cellWidth: 150 },
+        2: { cellWidth: 100 },
+        3: { cellWidth: 80 },
+      },
+    },
+    {
+      title: 'Volume of Refunds',
+      headers: [
+        '#',
+        'Product Name',
+        'Quantity Refunded',
+        'Refund Amount',
+        'Reason',
+      ],
+      data: reportData.refunds,
+      map: i => ({
+        name: safe(i.name),
+        quantity: safe(i.quantity, 0),
+        amount: safeMoney(i.amount),
+        reason: safe(i.reason),
+      }),
+      styles: {
+        1: { cellWidth: 200 },
+        2: { cellWidth: 70 },
+        3: { cellWidth: 80 },
+        4: { cellWidth: 120 },
+      },
+    },
+    {
+      title: 'Refund Summary by Reason',
+      headers: ['#', 'Reason', 'Quantity', 'Total Amount (₱)'],
+      data: reportData.refundSummary,
+      map: i => ({
+        reason: safe(i.reason),
+        quantity: safe(i.totalQty, 0),
+        totalAmount: safeMoney(i.totalAmount),
+      }),
+      styles: {
+        1: { cellWidth: 200 },
+        2: { cellWidth: 70 },
+        3: { cellWidth: 100 },
+      },
+    },
+    {
+      title: 'Volume of Damaged Items',
+      headers: ['#', 'Product Name', 'Quantity Damaged'],
+      data: reportData.damaged,
+      map: i => ({
+        name: safe(i.name),
+        quantity: safe(i.quantity, 0),
+      }),
+      styles: { 1: { cellWidth: 200 }, 2: { cellWidth: 80 } },
+    },
+    {
+      title: 'Low Stock Duration (Days)',
+      headers: ['#', 'Product Name', 'Days Below Threshold'],
+      data: reportData.lowStock,
+      map: i => ({
+        name: safe(i.name),
+        days: safe(i.days, 0),
+      }),
+      styles: { 1: { cellWidth: 200 }, 2: { cellWidth: 80 } },
+    },
+  ];
 
-  addTable(
-    'Refund Summary by Reason',
-    ['#', 'Reason', 'Quantity', 'Total Amount (₱)'],
-    reportData.refundSummary.map(i => ({
-      reason: i.reason,
-      quantity: i.totalQty,
-      totalAmount: '₱' + i.totalAmount.toLocaleString(),
-    })),
-    { 1: { cellWidth: 200 }, 2: { cellWidth: 70 }, 3: { cellWidth: 100 } }
-  );
+  tableData.forEach(tbl => {
+    if (tbl.data?.length)
+      addTable(tbl.title, tbl.headers, tbl.data.map(tbl.map), tbl.styles);
+  });
 
-  addTable(
-    'Volume of Damaged Items',
-    ['#', 'Product Name', 'Quantity Damaged'],
-    reportData.damaged.map(i => ({
-      name: i.name,
-      quantity: i.quantity,
-    })),
-    { 1: { cellWidth: 200 }, 2: { cellWidth: 80 } }
-  );
-
-  addTable(
-    'Low Stock Duration (Days)',
-    ['#', 'Product Name', 'Days Below Threshold'],
-    reportData.lowStock.map(i => ({
-      name: i.name,
-      days: i.days,
-    })),
-    { 1: { cellWidth: 200 }, 2: { cellWidth: 80 } }
-  );
-
-  // --- Save PDF ---
   doc.save(`Inventory_Report_${fromDate || 'all'}_to_${toDate || 'all'}.pdf`);
 };

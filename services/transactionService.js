@@ -4,6 +4,7 @@ import TransactionItem from '../models/transactionItem.js';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
 import timezone from 'dayjs/plugin/timezone.js';
+import Inventory from '../models/inventoryModel.js';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -129,7 +130,8 @@ const createTransaction = async ({
     });
 
     // 3) create transaction items
-    const txItems = items.map(item => {
+    const txItems = [];
+    for (const item of items) {
       const price = Number(item.price) || 0;
       const qty = Number(item.quantity) || 0;
       const lineTotal = price * qty;
@@ -137,7 +139,7 @@ const createTransaction = async ({
       const vatAmount =
         vatType === 'vatable' ? lineTotal - lineTotal / 1.12 : 0;
 
-      return {
+      txItems.push({
         transactionId: transaction._id,
         productId: item._id || item.productId,
         quantity: qty,
@@ -146,8 +148,15 @@ const createTransaction = async ({
         vatType,
         vatAmount: toD128(vatAmount),
         netAmount: toD128(lineTotal),
-      };
-    });
+      });
+
+      // --- Update inventory quantity ---
+      await Inventory.findOneAndUpdate(
+        { productId: item._id || item.productId, status: 'active' },
+        { $inc: { quantity: -qty }, updatedAt: Date.now() },
+        { session, new: true }
+      );
+    }
 
     await TransactionItem.insertMany(txItems, { session });
 

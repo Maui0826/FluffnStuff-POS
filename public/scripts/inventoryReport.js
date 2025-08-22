@@ -5,6 +5,7 @@ import { generateInventoryPDF } from './utils/pdf.js';
 
 let reportData = {};
 
+// --- Default Dates ---
 const today = new Date().toISOString().split('T')[0];
 document.getElementById('from-date').value = today;
 document.getElementById('to-date').value = today;
@@ -13,84 +14,43 @@ document.getElementById('to-date').value = today;
 const chartsSection = document.querySelector('.charts');
 const tablesSection = document.querySelector('.tables');
 const summaryDiv = document.getElementById('summary-values');
+const refundSummarySection = document
+  .querySelector('#refund-summary-table')
+  ?.closest('.table-wrapper');
 
-// --- Hide sections function ---
+// ================== HELPERS ==================
+
+// Hide report sections
 function hideSections() {
   if (chartsSection) chartsSection.style.display = 'none';
   if (tablesSection) tablesSection.style.display = 'none';
   if (summaryDiv) summaryDiv.style.display = 'none';
+  if (refundSummarySection) refundSummarySection.style.display = 'none';
 }
 
-// --- Show sections function ---
+// Show report sections
 function showSections() {
   if (chartsSection) chartsSection.style.display = '';
   if (tablesSection) tablesSection.style.display = '';
   if (summaryDiv) summaryDiv.style.display = 'flex';
+  if (refundSummarySection) refundSummarySection.style.display = '';
 }
 
-// --- Navigate to report page based on selection ---
+// Navigate to other report pages
 function navigateToReport(reportType) {
-  switch (reportType) {
-    case 'sales':
-      window.location.href = '/reports/sales';
-      break;
-    case 'inventory':
-      window.location.href = '/reports/inventory';
-      break;
-    case 'order':
-      window.location.href = '/reports/order';
-      break;
-    default:
-      console.warn('Unknown report type:', reportType);
+  const routes = {
+    sales: '/reports/sales',
+    inventory: '/reports/inventory',
+    order: '/reports/order',
+  };
+  if (routes[reportType]) {
+    window.location.href = routes[reportType];
+  } else {
+    console.warn('Unknown report type:', reportType);
   }
 }
 
-// --- Hide sections when filters change ---
-const filters = document.querySelectorAll('#report-type, #from-date, #to-date');
-filters.forEach(filter => {
-  filter.addEventListener('change', hideSections);
-  filter.addEventListener('input', hideSections); // For date inputs
-});
-
-// --- Report Type Navigation ---
-const reportTypeSelect = document.getElementById('report-type');
-reportTypeSelect.addEventListener('change', e => {
-  const selectedType = e.target.value;
-  navigateToReport(selectedType);
-});
-
-// --- Generate Report ---
-document
-  .getElementById('generate-report')
-  .addEventListener('click', async () => {
-    const from = document.getElementById('from-date').value || today;
-    const to = document.getElementById('to-date').value || today;
-
-    try {
-      reportData = await fetchInventoryReport(from, to);
-
-      renderAllTables(reportData);
-      renderCharts(reportData, {
-        topMovingChartId: 'top-moving-chart',
-        lowStockChartId: 'low-stock-chart',
-      });
-
-      showSections(); // Show charts and tables after generation
-    } catch (err) {
-      console.error(err);
-      alert('Error fetching report data.');
-    }
-  });
-
-// --- Download PDF ---
-document.getElementById('download-report').addEventListener('click', () => {
-  if (!reportData.topSellingBySKU) return alert('Generate report first!');
-  const from = document.getElementById('from-date').value || today;
-  const to = document.getElementById('to-date').value || today;
-  generateInventoryPDF(reportData, from, to);
-});
-
-// --- Render all tables ---
+// Render all report tables
 function renderAllTables(data) {
   renderTable(
     '#top-sku-table',
@@ -154,7 +114,7 @@ function renderAllTables(data) {
     })
   );
 
-  // Render summary
+  // --- Summary ---
   const totalInventoryValue = Number(
     data.summary?.totalInventoryValue?.$numberDecimal || 0
   );
@@ -167,3 +127,75 @@ function renderAllTables(data) {
     <p>Total Refunds: ₱${totalRefunds.toLocaleString()}</p>
   `;
 }
+
+// ================== EVENT LISTENERS ==================
+
+// Hide sections when filters change
+document
+  .querySelectorAll('#report-type, #from-date, #to-date')
+  .forEach(filter => {
+    filter.addEventListener('change', hideSections);
+    filter.addEventListener('input', hideSections);
+  });
+
+// Report type navigation
+document
+  .getElementById('report-type')
+  .addEventListener('change', e => navigateToReport(e.target.value));
+
+// Generate report
+document
+  .getElementById('generate-report')
+  .addEventListener('click', async () => {
+    const from = document.getElementById('from-date').value || today;
+    const to = document.getElementById('to-date').value || today;
+
+    try {
+      reportData = await fetchInventoryReport(from, to);
+      renderAllTables(reportData);
+      renderCharts(reportData, {
+        topMovingChartId: 'top-moving-chart',
+        lowStockChartId: 'low-stock-chart',
+      });
+      showSections();
+    } catch (err) {
+      console.error(err);
+      alert('Error fetching report data.');
+    }
+  });
+
+// Download PDF
+document.getElementById('download-report').addEventListener('click', () => {
+  if (!reportData.topSellingBySKU) {
+    return alert('Generate report first!');
+  }
+  const from = document.getElementById('from-date').value || today;
+  const to = document.getElementById('to-date').value || today;
+  generateInventoryPDF(reportData, from, to);
+});
+
+// Overview report
+document
+  .getElementById('overview-report')
+  .addEventListener('click', async () => {
+    const from = document.getElementById('from-date').value || today;
+    const to = document.getElementById('to-date').value || today;
+
+    try {
+      if (!reportData || Object.keys(reportData).length === 0) {
+        reportData = await fetchInventoryReport(from, to);
+        renderAllTables(reportData);
+        renderCharts(reportData, {
+          topMovingChartId: 'top-moving-chart',
+          lowStockChartId: 'low-stock-chart',
+        });
+      }
+      showSections();
+    } catch (err) {
+      console.error(err);
+      alert('Error fetching report data.');
+    }
+  });
+
+// ================== INIT ==================
+hideSections(); // hide on page load

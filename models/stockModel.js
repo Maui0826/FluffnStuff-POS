@@ -7,6 +7,11 @@ const stockSchema = new mongoose.Schema({
     ref: 'Product',
     required: true,
   },
+  supplierId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product',
+    required: true,
+  },
   supplierName: { type: String, required: true },
   orderQuantity: { type: Number, required: true },
   deliveredQuantity: { type: Number, default: 0 },

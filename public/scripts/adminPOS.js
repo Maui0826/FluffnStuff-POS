@@ -301,6 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const result = await createTransaction(transactionData);
 
     if (result && result.status === 'success') {
+      const receiptNum = result.data.transaction.receiptNum; // <-- get receiptNum from response
       alert('Transaction successful!');
 
       // Generate receipt content
@@ -340,11 +341,10 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="center bold">
       DA Constance Fluff 'N Stuff<br>
       Pet Supplies Store<br>
-      Address: 123 Sample St., City, Province<br>
-      Contact: 0917-XXX-XXXX<br>
-      TIN: 123-456-789<br>
-      Transaction #: ${Math.floor(Math.random() * 1000000)}<br>
-      Cashier: __________<br>
+      Address: Pasig City, Metro Manilae<br>
+      Business Email: srjdee@gmail.com<br>
+      Transaction #: ${receiptNum}<br>
+
       DATE: ${new Date().toLocaleString()}
     </div>
 
@@ -434,40 +434,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const listContainer = document.createElement('div');
     listContainer.classList.add('preview-list');
 
-    // Limit to first 3 visible, scroll for more
     results.forEach(product => {
       const price = parseFloat(product.price.$numberDecimal || product.price);
-
       const itemDiv = document.createElement('div');
       itemDiv.classList.add('preview-item');
+
+      // Add sold-out style if quantity is 0
+      if (product.quantity === 0) {
+        itemDiv.style.opacity = '0.5';
+        itemDiv.style.pointerEvents = 'none'; // prevent clicking
+      }
+
       const desc = product.description || '';
       const shortDesc = desc.length > 10 ? desc.slice(0, 10) + '...' : desc;
+
       itemDiv.innerHTML = `
       <img src="${product.imageUrl || './assets/default.png'}" />
-    <div>
-    <p style="font-weight:bold;">${product.name}</p>
-  <p style="font-size:1rem;color:#555;"><strong>SKU:</strong> ${product.sku}</p>
-  <p><strong>Price:</strong> ₱${price.toFixed(2)}</p>
-  <p style="font-size:1rem;color:#555;"><strong>Desc: </strong>${
-    shortDesc || ''
-  }</p>
-</div>
-   `;
+      <div>
+        <p style="font-weight:bold;">${product.name}</p>
+        <p style="font-size:1rem;color:#555;"><strong>SKU:</strong> ${
+          product.sku
+        }</p>
+        <p><strong>Price:</strong> ₱${price.toFixed(2)}</p>
+        <p style="font-size:1rem;color:#555;"><strong>Desc: </strong>${shortDesc}</p>
+        <p style="color:green;font-weight:bold;">${
+          product.quantity === 0 ? 'Sold Out' : `Qty: ${product.quantity}`
+        }</p>
+      </div>
+    `;
 
-      // Click to fill input & add to cart
-      itemDiv.addEventListener('click', () => {
-        // Remove selection from all items
-        listContainer.querySelectorAll('.preview-item').forEach(el => {
-          el.classList.remove('selected');
+      // Click to fill input & add to cart (skip if sold out)
+      if (product.quantity > 0) {
+        itemDiv.addEventListener('click', () => {
+          listContainer.querySelectorAll('.preview-item').forEach(el => {
+            el.classList.remove('selected');
+          });
+          itemDiv.classList.add('selected');
+          skuInput.value = product.sku;
+          qtyInput.value = 1;
         });
-
-        // Highlight the clicked item
-        itemDiv.classList.add('selected');
-
-        // Fill the SKU and reset quantity
-        skuInput.value = product.sku;
-        qtyInput.value = 1;
-      });
+      }
 
       listContainer.appendChild(itemDiv);
     });

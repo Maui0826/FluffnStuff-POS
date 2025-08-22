@@ -85,17 +85,29 @@ refundForm.addEventListener('submit', async e => {
   e.preventDefault();
   messageDiv.textContent = '';
 
+  const sku = skuSelect.value;
+  const quantity = Number(quantityInput.value);
+  const price = parseFloat(priceInput.value);
+
   const payload = {
     receiptNum: receiptInput.value.trim(),
-    sku: skuSelect.value,
-    quantity: quantityInput.value,
+    sku,
+    quantity,
     reason: document.getElementById('reason').value,
     note: document.getElementById('note').value,
   };
 
   try {
-    const data = await refundProduct(payload);
-    messageDiv.textContent = `Refund successful! Updated transaction total: ${data.data.totalAmount}`;
+    const res = await refundProduct(payload);
+
+    // Compute total refund amount = price × quantity
+    const totalRefund = price * quantity;
+
+    messageDiv.textContent = `Refund successful! Refunded amount: ₱${totalRefund.toFixed(
+      2
+    )}`;
+
+    // Reset form and UI
     refundForm.reset();
     refundForm.style.display = 'none';
     skuSelect.innerHTML = '<option value="">Select Product</option>';

@@ -52,7 +52,7 @@ const getItemsByTransaction = async transactId => {
   }
 };
 
-const refundItem = async data => {
+const refundItem = async (data, reason) => {
   const session = await mongoose.startSession();
   session.startTransaction();
 
@@ -77,15 +77,17 @@ const refundItem = async data => {
     transItem.quantity -= data.quantity;
     if (transItem.quantity === 0) transItem.isRefunded = true;
 
-    // Save will trigger pre-save to recalc totalAmount, vatAmount, netAmount
     await transItem.save({ session });
 
-    // 4. Update inventory
-    await inventoryModel.findOneAndUpdate(
-      { productId: data.productId, isDeleted: false },
-      { $inc: { quantity: data.quantity } },
-      { session }
-    );
+    // 4. Update inventory ONLY for allowed reasons
+    const restockReasons = ['customer request', 'overcharge', 'wrong item'];
+    if (restockReasons.includes(reason.toLowerCase())) {
+      await inventoryModel.findOneAndUpdate(
+        { productId: data.productId },
+        { $inc: { quantity: data.quantity } },
+        { session }
+      );
+    }
 
     await session.commitTransaction();
     session.endSession();
@@ -97,6 +99,7 @@ const refundItem = async data => {
     throw err;
   }
 };
+
 export default {
   deleteTransactionItem,
   createTransItem,

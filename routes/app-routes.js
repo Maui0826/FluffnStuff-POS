@@ -141,9 +141,15 @@ router.route('/reports/sales').get(protect, async (req, res, next) => {
 
 router.route('/reports/inventory').get(protect, async (req, res, next) => {
   if (req.currentUser.role === 'admin' || req.currentUser.role === 'owner') {
-    res.sendFile(join(__dirname, '..', 'public', 'inventoryReport.html'));
+    res.sendFile(join(__dirname, '..', 'public', 'inventoryReportPage.html'));
   }
 });
+
+// router.route('/reports/inventory').get(protect, async (req, res, next) => {
+//   if (req.currentUser.role === 'admin' || req.currentUser.role === 'owner') {
+//     res.sendFile(join(__dirname, '..', 'public', 'inventoryReport.html'));
+//   }
+// });
 
 router.route('/reports/order').get(protect, async (req, res, next) => {
   if (req.currentUser.role === 'admin' || req.currentUser.role === 'owner') {

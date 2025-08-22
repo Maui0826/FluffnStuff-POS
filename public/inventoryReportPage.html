@@ -18,7 +18,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
     <!-- Modular JS -->
-    <script type="module" src="../scripts/inventoryReport.js"></script>
+    <script type="module" src="../scripts/merge.js"></script>
+    <!-- <script type="module" src="../scripts/inventoryRP.js"></script> -->
 
     <script src="../scripts/components/sidebar.js" defer></script>
     <script type="module" src="../scripts/components/header.js" defer></script>
@@ -126,6 +127,7 @@
       <div class="container">
         <h1>Inventory Report</h1>
 
+        <!-- 📌 Filters -->
         <div class="report-filters">
           <label>
             Report Type:
@@ -153,24 +155,32 @@
           </button>
         </div>
 
-        <!-- Charts -->
         <div class="charts">
-          <h2>Charts</h2>
-          <div class="chart-container">
-            <canvas id="top-moving-chart" width="400" height="200"></canvas>
-          </div>
-          <div class="chart-container">
-            <canvas id="low-stock-chart" width="400" height="200"></canvas>
-          </div>
+          <canvas id="top-moving-chart"></canvas>
+          <canvas id="low-stock-chart"></canvas>
         </div>
+        <!-- 📌 Inventory Summary Table -->
+        <table id="inventory-table" class="report-table">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Qty Received</th>
+              <th>Qty Sold</th>
+              <th>Qty Damaged</th>
+              <th>Qty On Hand</th>
+            </tr>
+          </thead>
+          <tbody id="inventory-body">
+            <!-- Data inserted via JS -->
+          </tbody>
+        </table>
 
-        <!-- Tables -->
+        <!-- 📌 Other tables for full report -->
         <div class="tables">
-          <h2>Tables</h2>
-
+          <!-- Top SKU Table -->
           <div class="table-wrapper">
-            <h3>Top Moving Items (by SKU)</h3>
-            <table id="top-sku-table">
+            <h2>Top Selling by SKU</h2>
+            <table id="top-sku-table" class="report-table">
               <thead>
                 <tr>
                   <th>#</th>
@@ -184,9 +194,10 @@
             </table>
           </div>
 
+          <!-- Top Category Table -->
           <div class="table-wrapper">
-            <h3>Top Moving Items (by Category)</h3>
-            <table id="top-category-table">
+            <h2>Top Selling by Category</h2>
+            <table id="top-category-table" class="report-table">
               <thead>
                 <tr>
                   <th>#</th>
@@ -199,15 +210,16 @@
             </table>
           </div>
 
+          <!-- Refund Table -->
           <div class="table-wrapper">
-            <h3>Volume of Refunds</h3>
-            <table id="refund-table">
+            <h2>Refunds / Returns</h2>
+            <table id="refund-table" class="report-table">
               <thead>
                 <tr>
                   <th>#</th>
                   <th>Product Name</th>
                   <th>Quantity Refunded</th>
-                  <th>Refund Amount</th>
+                  <th>Amount</th>
                   <th>Reason</th>
                 </tr>
               </thead>
@@ -215,9 +227,10 @@
             </table>
           </div>
 
+          <!-- Damaged Items Table -->
           <div class="table-wrapper">
-            <h3>Volume of Damaged Items</h3>
-            <table id="damaged-table">
+            <h2>Damaged Items</h2>
+            <table id="damaged-table" class="report-table">
               <thead>
                 <tr>
                   <th>#</th>
@@ -229,9 +242,10 @@
             </table>
           </div>
 
+          <!-- Low Stock Table -->
           <div class="table-wrapper">
-            <h3>Low Stock Duration (Days)</h3>
-            <table id="low-stock-table">
+            <h2>Low Stock Products</h2>
+            <table id="low-stock-table" class="report-table">
               <thead>
                 <tr>
                   <th>#</th>
@@ -243,17 +257,16 @@
             </table>
           </div>
 
-          <!-- ✅ Inventory Summary Table -->
+          <!-- Refund Summary Table -->
           <div class="table-wrapper">
-            <h3>Inventory Summary</h3>
-            <table id="inventory-summary">
+            <h2>Refund Summary</h2>
+            <table id="refund-summary-table" class="report-table">
               <thead>
                 <tr>
-                  <th>Product Name</th>
-                  <th>Qty Received</th>
-                  <th>Qty Sold</th>
-                  <th>Qty Damaged</th>
-                  <th>Qty On Hand</th>
+                  <th>#</th>
+                  <th>Reason</th>
+                  <th>Quantity</th>
+                  <th>Total Amount</th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -261,71 +274,60 @@
           </div>
         </div>
 
-        <!-- Summary -->
-        <div id="summary-values" class="summary"></div>
-
-        <!-- Refund Summary Table -->
-        <div class="table-wrapper">
-          <h3>Refund Summary by Reason</h3>
-          <table id="refund-summary-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Reason</th>
-                <th>Quantity</th>
-                <th>Total Amount (₱)</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ✅ Detail Modal -->
-      <div id="detail-modal" class="modal">
-        <div class="modal-content">
-          <span class="close-btn" onclick="closeModal()">&times;</span>
-          <h3 id="modal-product-name"></h3>
-
-          <h4>Receive History</h4>
-          <table id="receive-table">
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Date Received</th>
-                <th>Qty Received</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-
-          <h4>Sold History</h4>
-          <table id="sold-table">
-            <thead>
-              <tr>
-                <th>Date Sold</th>
-                <th>Qty Sold</th>
-                <th>Total Amount</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-
-          <h4>Refund/Damaged History</h4>
-          <table id="refund-detail-table">
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Date Returned</th>
-                <th>Qty Returned</th>
-                <th>Reason</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+        <!-- 📌 Summary Section -->
+        <div id="summary-values" class="summary-values">
+          <!-- JS will populate summary here -->
         </div>
       </div>
     </main>
+
+    <!-- 📌 Modal for product details -->
+    <div id="product-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2 id="modal-product-name"></h2>
+
+        <!-- Table 1: Received -->
+        <h3>Received</h3>
+        <table class="detail-table">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Date Received</th>
+              <th>Qty Received</th>
+            </tr>
+          </thead>
+          <tbody id="received-body"></tbody>
+        </table>
+
+        <!-- Table 2: Sold -->
+        <h3>Sold</h3>
+        <table class="detail-table">
+          <thead>
+            <tr>
+              <th>Date Sold</th>
+              <th>Qty Sold</th>
+              <th>Total Amount</th>
+            </tr>
+          </thead>
+          <tbody id="sold-body"></tbody>
+        </table>
+
+        <!-- Table 3: Returned/Damaged -->
+        <h3>Returned / Damaged</h3>
+        <table class="detail-table">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Date Returned</th>
+              <th>Qty Returned</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody id="returned-body"></tbody>
+        </table>
+      </div>
+    </div>
 
     <footer class="footer">
       <div class="footer-content">

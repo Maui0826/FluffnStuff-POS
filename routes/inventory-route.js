@@ -6,6 +6,8 @@ import {
   deleteProduct,
   getAllProducts,
   getCategoriesController,
+  getInventoryDetails,
+  getInventorySummary,
   loadCategory,
   orderStock,
   updateCategory,
@@ -25,7 +27,7 @@ router.post(
 );
 router.patch('/:id/update', upload.single('image'), updateProduct);
 router.delete('/:id/delete', deleteProduct);
-router.post('/order/:productId', orderStock);
+router.post('/order', orderStock);
 
 router.post('/category', createCategory);
 
@@ -34,4 +36,7 @@ router.get('/load-category', loadCategory);
 router.get('/category', getCategoriesController);
 router.patch('/category/:id/update', updateCategory);
 router.delete('/category/:id/delete', deleteCategory);
+
+router.get('/details/:productId', getInventoryDetails);
+router.get('/summary', getInventorySummary);
 export default router;

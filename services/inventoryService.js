@@ -1,6 +1,9 @@
 import Inventory from '../models/inventoryModel.js';
 import Product from '../models/productModel.js';
 import Stock from '../models/stockModel.js';
+import transactionModel from '../models/transactionModel.js';
+import refund from '../models/refundModel.js';
+import transactionItem from '../models/transactionItem.js';
 
 const createInventory = async data => {
   const inventory = await Inventory.create({
@@ -117,6 +120,171 @@ const getOrderSummary = async () => {
   return result;
 };
 
+// ✅ Inventory Summary
+const getInventorySummary = async (startDate, endDate) => {
+  const dateFilter = {};
+  if (startDate || endDate) {
+    dateFilter.$and = [];
+    if (startDate)
+      dateFilter.$and.push({ dateRecorded: { $gte: new Date(startDate) } });
+    if (endDate)
+      dateFilter.$and.push({ dateRecorded: { $lte: new Date(endDate) } });
+  }
+
+  const products = await Product.find({ status: 'active' });
+
+  const summary = await Promise.all(
+    products.map(async p => {
+      // Total received
+      const receivedAgg = await Inventory.aggregate([
+        {
+          $match: {
+            productId: p._id,
+            ...(dateFilter.$and?.length
+              ? {
+                  dateRecorded: {
+                    $gte: new Date(startDate),
+                    $lte: new Date(endDate),
+                  },
+                }
+              : {}),
+          },
+        },
+        { $group: { _id: null, total: { $sum: '$quantity' } } },
+      ]);
+      const qtyReceived = receivedAgg[0]?.total || 0;
+
+      // Total sold
+      const soldAgg = await transactionItem.aggregate([
+        {
+          $match: {
+            productId: p._id,
+            isDeleted: false,
+            ...(dateFilter.$and?.length
+              ? {
+                  createdAt: {
+                    $gte: new Date(startDate),
+                    $lte: new Date(endDate),
+                  },
+                }
+              : {}),
+          },
+        },
+        { $group: { _id: null, total: { $sum: '$quantity' } } },
+      ]);
+      const qtySold = soldAgg[0]?.total || 0;
+
+      // Total damaged/refunded
+      const refundAgg = await refund.aggregate([
+        {
+          $match: {
+            productId: p._id,
+            isDeleted: false,
+            ...(dateFilter.$and?.length
+              ? {
+                  refundedAt: {
+                    $gte: new Date(startDate),
+                    $lte: new Date(endDate),
+                  },
+                }
+              : {}),
+          },
+        },
+        { $group: { _id: null, total: { $sum: '$quantity' } } },
+      ]);
+      const qtyDamaged = refundAgg[0]?.total || 0;
+
+      // On hand = current stock (real-time)
+      const inventory = await Inventory.findOne({ productId: p._id });
+      const qtyOnHand = inventory ? inventory.quantity : 0;
+
+      // Acquisition price from inventory
+      const acquisitionPrice = inventory ? inventory.acquisitionPrice || 0 : 0;
+
+      return {
+        productId: p._id,
+        productName: p.name,
+        qtyReceived,
+        qtySold,
+        qtyDamaged,
+        qtyOnHand,
+        acquisitionPrice, // <-- added here
+      };
+    })
+  );
+
+  return summary;
+};
+
+// DETAILS: full history for one product
+// ✅ Inventory Details
+const getInventoryDetails = async (productId, startDate, endDate) => {
+  const product = await Product.findById(productId);
+  if (!product) return null;
+
+  const dateFilter = {};
+  if (startDate || endDate) {
+    dateFilter.$and = [];
+    if (startDate)
+      dateFilter.$and.push({ dateRecorded: { $gte: new Date(startDate) } });
+    if (endDate)
+      dateFilter.$and.push({ dateRecorded: { $lte: new Date(endDate) } });
+  }
+
+  // Receives
+  const receives = await Inventory.find({
+    productId,
+    ...(dateFilter.$and?.length
+      ? { dateRecorded: { $gte: new Date(startDate), $lte: new Date(endDate) } }
+      : {}),
+  })
+    .sort({ dateRecorded: 1 })
+    .lean();
+
+  // Solds
+  const solds = await transactionItem
+    .find({
+      productId,
+      isDeleted: false,
+      ...(dateFilter.$and?.length
+        ? { createdAt: { $gte: new Date(startDate), $lte: new Date(endDate) } }
+        : {}),
+    })
+    .populate('transactionId', 'createdAt totalAmount')
+    .lean();
+
+  // Refunds
+  const refunds = await refund
+    .find({
+      productId,
+      isDeleted: false,
+      ...(dateFilter.$and?.length
+        ? { refundedAt: { $gte: new Date(startDate), $lte: new Date(endDate) } }
+        : {}),
+    })
+    .lean();
+
+  return {
+    productName: product.name,
+    receives: receives.map(r => ({
+      product: product.name,
+      dateReceived: r.dateRecorded,
+      qtyReceived: r.quantity,
+    })),
+    solds: solds.map(s => ({
+      dateSold: s.transactionId?.createdAt,
+      qtySold: s.quantity,
+      totalAmount: Number(s.totalAmount),
+    })),
+    refunds: refunds.map(r => ({
+      product: product.name,
+      dateReturned: r.refundedAt,
+      qtyReturned: r.quantity,
+      reason: r.reason,
+    })),
+  };
+};
+
 export default {
   createInventory,
   getInventoryById,
@@ -125,5 +293,7 @@ export default {
   getInventoryByProductId,
   updateInventory,
   stockStatus,
+  getInventoryDetails,
+  getInventorySummary,
   getOrderSummary,
 };

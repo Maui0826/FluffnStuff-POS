@@ -8,15 +8,19 @@ import catchAsync from '../utils/catchAsync.js';
 import path from 'path';
 import mongoose from 'mongoose';
 import LogService from '../services/actionLogService.js';
+import SupplierService from '../services/supplierService.js';
 
 /**
  * Get all products with populated product and category info
  */
 export const getAllProducts = catchAsync(async (req, res, next) => {
-  const { page = 1, limit = 10 } = req.query;
+  const { page = 1, limit = 10, search = '', supplier = '' } = req.query;
+
   const { products, totalCount } = await ProductService.getAllProducts({
     page: Number(page),
     limit: Number(limit),
+    search: search.trim(),
+    supplier: supplier.trim(),
   });
 
   res.status(200).json({
@@ -32,6 +36,7 @@ export const createProduct = catchAsync(async (req, res, next) => {
     sku,
     productName,
     categoryId,
+    supplierName,
     quantity,
     description,
     imageUrl,
@@ -42,7 +47,14 @@ export const createProduct = catchAsync(async (req, res, next) => {
   const uploadedFile = req.file;
 
   // Validate required fields
-  if (!sku || !productName || !categoryId || !quantity || !price) {
+  if (
+    !sku ||
+    !productName ||
+    !categoryId ||
+    !supplierName ||
+    !quantity ||
+    !price
+  ) {
     return next(new AppError('Missing required fields', 400));
   }
 
@@ -95,6 +107,14 @@ export const createProduct = catchAsync(async (req, res, next) => {
   const newProduct = await ProductService.createProduct(prod);
   if (!newProduct) return next(new AppError('Product creation failed.', 500));
 
+  const exist = await SupplierService.findSupplierByName(supplierName);
+  if (!exist) {
+    const newSupplier = await SupplierService.createSupplier(
+      newProduct._id,
+      supplierName
+    );
+  }
+
   // 5. Create inventory
   const inventoryData = {
     productId: newProduct._id,
@@ -108,6 +128,7 @@ export const createProduct = catchAsync(async (req, res, next) => {
   const descriptionLog = `Created Product "${productName}" (SKU: ${sku}), Initial Quantity: ${numericQuantity}, Price: ₱${numericPrice.toFixed(
     2
   )}`;
+
   await LogService.createActionLog({
     user: req.currentUser._id,
     action: 'Create Product',
@@ -319,63 +340,90 @@ export const deleteProduct = catchAsync(async (req, res, next) => {
 });
 
 export const orderStock = catchAsync(async (req, res, next) => {
-  const { productId } = req.params;
-  const { supplierName, deliveryDate, acquisitionPrice, orderQuantity } =
-    req.body;
+  const { products, supplierName, deliveryDate } = req.body;
 
   // 1. Validate required fields
-  if (
-    !productId ||
-    !supplierName ||
-    !deliveryDate ||
-    !acquisitionPrice ||
-    !orderQuantity
-  ) {
-    return next(new AppError('All fields are required.', 400));
+  if (!products || !Array.isArray(products) || products.length === 0) {
+    return next(new AppError('Products array is required.', 400));
+  }
+  if (!supplierName || !deliveryDate) {
+    return next(
+      new AppError('Supplier name and delivery date are required.', 400)
+    );
   }
 
-  // 2. Check if product exists
-  const product = await ProductService.getProductById(productId);
-  if (!product || product.status === 'deleted') {
-    return next(new AppError('Product not found or deleted.', 404));
+  // 2. Ensure supplier exists (only once)
+  let supplier = await SupplierService.findSupplierByName(supplierName.trim());
+  if (!supplier) {
+    supplier = await SupplierService.createSupplier(supplierName.trim());
   }
 
-  // 3. Parse numeric values safely
-  const parsedQuantity = parseInt(orderQuantity, 10);
-  const parsedPrice = parseFloat(acquisitionPrice);
+  const stockOrders = [];
 
-  if (isNaN(parsedQuantity) || isNaN(parsedPrice)) {
-    return next(new AppError('Quantity and price must be valid numbers.', 400));
+  // 3. Iterate products
+  for (const item of products) {
+    const { productId, orderQuantity, acquisitionPrice } = item;
+
+    if (!productId || orderQuantity == null || acquisitionPrice == null) {
+      return next(
+        new AppError(
+          'Each product must have productId, orderQuantity, and acquisitionPrice.',
+          400
+        )
+      );
+    }
+
+    const product = await ProductService.getProductById(productId);
+    if (!product || product.status === 'deleted') {
+      return next(
+        new AppError(`Product not found or deleted: ${productId}`, 404)
+      );
+    }
+
+    const parsedQuantity = parseInt(orderQuantity, 10);
+    const parsedPrice = parseFloat(acquisitionPrice);
+
+    if (isNaN(parsedQuantity) || isNaN(parsedPrice)) {
+      return next(
+        new AppError('Quantity and price must be valid numbers.', 400)
+      );
+    }
+
+    const stockData = {
+      productId,
+      supplierId: supplier._id,
+      supplierName: supplier.supplierName,
+      orderQuantity: parsedQuantity,
+      deliveryDate: new Date(deliveryDate),
+      acquisitionPrice: parsedPrice,
+      status: 'pending',
+    };
+
+    const stockOrder = await StockService.createStock(stockData);
+    stockOrders.push(stockOrder);
+
+    // Log each product order
+    await LogService.createActionLog({
+      user: req.currentUser?.id || 'system',
+      action: 'Order Stock',
+      target: 'Product',
+      description: `Ordered ${parsedQuantity} units of "${product.name}" from supplier "${supplier.name}" at price ${parsedPrice}`,
+    });
   }
 
-  const stockData = {
-    productId,
-    supplierName: supplierName.trim(),
-    orderQuantity: parsedQuantity,
-    deliveryDate: new Date(deliveryDate),
-    acquisitionPrice: parsedPrice,
-    status: 'pending',
-  };
-
-  // 4. Create stock order record
-  const stockOrder = await StockService.createStock(stockData);
-  if (!stockOrder) return next(new AppError('Restock operation failed', 500));
-
-  // 5. Create action log
-  await LogService.createActionLog({
-    user: req.currentUser?.id || 'system',
-    action: 'Order Stock',
-    target: 'Product',
-    description: `Ordered ${parsedQuantity} units of "${product.name}" from supplier "${supplierName}" at price ${parsedPrice}`,
-  });
-
-  // 5. Respond
+  // 4. Respond once
   res.status(201).json({
     status: 'success',
-    message: 'Stock order placed successfully.',
-    results: 1,
-    data: [stockOrder],
+    message: 'Stock orders placed successfully.',
+    results: stockOrders.length,
+    data: stockOrders,
   });
+});
+
+export const getProducts = catchAsync(async (req, res, next) => {
+  const products = await ProductService.getProducts();
+
+  res.status(200).json({ status: 'success', products });
 });
 
 export const updateCategory = catchAsync(async (req, res, next) => {
@@ -511,4 +559,24 @@ export const loadCategory = catchAsync(async (req, res, next) => {
   const category = await CategoryService.loadCategories();
 
   res.status(200).json({ status: 'success', data: category });
+});
+
+export const getInventorySummary = catchAsync(async (req, res, next) => {
+  const { startDate, endDate } = req.query; // ⬅️ accept query params
+  const summary = await InventoryService.getInventorySummary(
+    startDate,
+    endDate
+  );
+  res.status(200).json({ summary });
+});
+
+export const getInventoryDetails = catchAsync(async (req, res, next) => {
+  const { productId } = req.params;
+  const { startDate, endDate } = req.query; // ⬅️ accept query params
+  const details = await InventoryService.getInventoryDetails(
+    productId,
+    startDate,
+    endDate
+  );
+  res.status(200).json({ details });
 });
