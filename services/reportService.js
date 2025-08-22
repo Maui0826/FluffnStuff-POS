@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Transaction from '../models/transactionModel.js';
 import TransactionItem from '../models/transactionItem.js';
 import Product from '../models/productModel.js';
@@ -41,22 +42,19 @@ export const getSalesReportService = async (fromDate, toDate) => {
   ];
   const products = await Product.find({ _id: { $in: productIds } }).lean();
   const productMap = {};
-  products.forEach(p => {
-    productMap[p._id.toString()] = p;
-  });
+  products.forEach(p => (productMap[p._id.toString()] = p));
 
-  // 4️⃣ Map categories
+  // 4️⃣ Map categories properly
   const categoryIds = [
     ...new Set(products.map(p => p.categoryId).filter(Boolean)),
   ];
   const categories = await Category.find({
-    _id: { $in: categoryIds },
+    _id: { $in: categoryIds.map(id => new mongoose.Types.ObjectId(id)) },
     isDeleted: false,
   }).lean();
+
   const categoryMap = {};
-  categories.forEach(c => {
-    categoryMap[c._id.toString()] = c.name;
-  });
+  categories.forEach(c => (categoryMap[c._id.toString()] = c.name));
 
   // 5️⃣ Initialize totals
   let grossSales = 0;
@@ -90,8 +88,6 @@ export const getSalesReportService = async (fromDate, toDate) => {
       const profit = netAmount - acquisitionPrice * quantity;
 
       netProfit += profit;
-
-      // ✅ Compute total VAT from item
       totalVAT += Number(item.vatAmount || 0);
 
       // SKU stats
@@ -120,7 +116,12 @@ export const getSalesReportService = async (fromDate, toDate) => {
     .slice(0, 10);
 
   const topSellingByCategory = Object.entries(categoryStatMap)
-    .map(([category, data]) => ({ category, ...data }))
+    .map(([categoryKey, data]) => {
+      // Use the categoryKey directly, which should already be the name
+      // If somehow it's still an ID, fallback to 'Uncategorized'
+      const categoryName = categoryKey || 'Uncategorized';
+      return { category: categoryName, ...data };
+    })
     .sort((a, b) => b.quantity - a.quantity)
     .slice(0, 10);
 
@@ -129,7 +130,7 @@ export const getSalesReportService = async (fromDate, toDate) => {
     grossSales,
     netProfit,
     totalRevenue,
-    totalVAT, // correctly computed from transaction items
+    totalVAT,
     totalDiscount,
     topSellingBySKU,
     topSellingByCategory,

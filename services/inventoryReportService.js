@@ -2,6 +2,7 @@ import Inventory from '../models/inventoryModel.js';
 import Product from '../models/productModel.js';
 import Refund from '../models/refundModel.js';
 import StockAdjustment from '../models/stockAdjustment.js';
+import Category from '../models/categoryModel.js';
 
 export const getInventoryReport = async (fromDate, toDate) => {
   const from = new Date(fromDate);
@@ -21,9 +22,13 @@ export const getInventoryReport = async (fromDate, toDate) => {
 
   const topSellingBySKU = [];
   let totalQuantitySold = 0;
+  const productMap = {};
+
   for (const item of inventorySales) {
     const product = await Product.findById(item._id);
     if (!product) continue;
+    productMap[product._id.toString()] = product; // store for later category mapping
+
     topSellingBySKU.push({
       sku: product.sku,
       name: product.name,
@@ -35,19 +40,36 @@ export const getInventoryReport = async (fromDate, toDate) => {
 
   // --- Top Selling by Category ---
   const categorySales = {};
+  const categoryIds = [
+    ...new Set(Object.values(productMap).map(p => p.categoryId)),
+  ];
+
+  // Fetch categories once
+  const categories = await Category.find({
+    _id: { $in: categoryIds },
+    isDeleted: false,
+  }).lean();
+
+  const categoryMap = {};
+  categories.forEach(c => {
+    categoryMap[c._id.toString()] = c.name; // Map _id to name
+  });
+
   for (const item of topSellingBySKU) {
     const product = await Product.findOne({ sku: item.sku });
     if (!product) continue;
-    const category = product.categoryId || 'Uncategorized';
-    if (!categorySales[category])
-      categorySales[category] = { quantity: 0, cogs: 0 };
-    categorySales[category].quantity += item.quantity;
-    categorySales[category].cogs += item.cogs;
+
+    const categoryName = categoryMap[product.categoryId] || 'Uncategorized';
+    if (!categorySales[categoryName])
+      categorySales[categoryName] = { quantity: 0, cogs: 0 };
+
+    categorySales[categoryName].quantity += item.quantity;
+    categorySales[categoryName].cogs += item.cogs;
   }
 
   const topSellingByCategory = Object.entries(categorySales).map(
     ([category, data]) => ({
-      category,
+      category, // now this is the name
       quantity: data.quantity,
       cogs: data.cogs,
     })
