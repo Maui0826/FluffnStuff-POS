@@ -9,7 +9,7 @@ const stockSchema = new mongoose.Schema({
   },
   supplierId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Product',
+    ref: 'Supplier',
     required: true,
   },
   supplierName: { type: String, required: true },

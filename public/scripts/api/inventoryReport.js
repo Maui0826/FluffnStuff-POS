@@ -1,12 +1,20 @@
 // API service for inventory
+
+const BASE_URL = '/api/v1/inventory';
 export async function fetchInventorySummary(startDate, endDate) {
   const params = new URLSearchParams();
   if (startDate) params.append('startDate', startDate);
   if (endDate) params.append('endDate', endDate);
 
-  const res = await fetch(`/api/v1/inventory/summary?${params.toString()}`);
+  const res = await fetch(`${BASE_URL}/summary?${params.toString()}`);
   const data = await res.json();
   return data.summary || [];
+}
+
+export async function fetchInventoryReport(from, to) {
+  const res = await fetch(`${BASE_URL}/reports?from=${from}&to=${to}`);
+  if (!res.ok) throw new Error('Failed to fetch inventory report');
+  return res.json();
 }
 
 export async function fetchInventoryDetails(productId, startDate, endDate) {
@@ -15,7 +23,7 @@ export async function fetchInventoryDetails(productId, startDate, endDate) {
   if (endDate) params.append('endDate', endDate);
 
   const res = await fetch(
-    `/api/v1/inventory/details/${productId}?${params.toString()}`
+    `${BASE_URL}/details/${productId}?${params.toString()}`
   );
   const data = await res.json();
   return data.details || {};

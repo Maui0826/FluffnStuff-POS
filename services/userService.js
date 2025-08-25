@@ -69,13 +69,10 @@ const createUserWithCredentials = async userData => {
   // Generate random plain password
   const plainPassword = generateRandomPassword();
 
-  // Hash password before saving
-  const hashedPassword = await bcrypt.hash(plainPassword, 12);
-
   // Create user in DB
   const newUser = await User.create({
     ...userData,
-    password: hashedPassword, // store hashed password
+    password: plainPassword, // store hashed password
   });
 
   return { newUser, plainPassword }; // return plain password for email sending
@@ -114,15 +111,16 @@ const unbanUser = async userId => {
 };
 
 const updateUser = async (userId, updates) => {
-  const user = await usersModel.findById(userId);
+  const user = await User.findById(userId);
   if (!user) throw new Error('User not found');
 
   // If updating password, hash it
   let plainPassword = null;
+
   if (updates.password) {
-    plainPassword = updates.password;
-    user.password = await bcrypt.hash(updates.password, 12);
+    user.password = updates.password; // Assign plain password, hashing handled in model pre-save
     user.passwordChangedAt = new Date();
+    plainPassword = updates.password;
   }
 
   // Update other fields

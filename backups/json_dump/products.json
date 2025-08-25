@@ -1,0 +1,36 @@
+[
+  {
+    "_id": "68aaefb81757054a92b31b15",
+    "imageUrl": "Images\\1756032952409.png",
+    "name": "Green",
+    "sku": "FNS-G-001",
+    "categoryId": "68a9569bbd1c317a735a9bae",
+    "price": {
+      "$numberDecimal": "10"
+    },
+    "lowStockThreshold": 5,
+    "description": "testing",
+    "status": "active",
+    "supplierId": "68a96a9be9a57195d5edddbc",
+    "createdAt": "2025-08-24T10:55:52.565Z",
+    "updatedAt": "2025-08-24T12:43:35.983Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaefdb1757054a92b31b26",
+    "imageUrl": "Images\\1756032987627.png",
+    "name": "Purple ring",
+    "sku": "FNS-P-001",
+    "categoryId": "68a957b5bd1c317a735a9c0a",
+    "price": {
+      "$numberDecimal": "20"
+    },
+    "lowStockThreshold": 5,
+    "description": "testing",
+    "status": "active",
+    "supplierId": "68a96a9be9a57195d5edddbc",
+    "createdAt": "2025-08-24T10:56:27.766Z",
+    "updatedAt": "2025-08-25T03:39:41.989Z",
+    "__v": 0
+  }
+]

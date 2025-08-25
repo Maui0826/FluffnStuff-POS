@@ -22,16 +22,9 @@
   display: none !important;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-}
-main {
-  flex: 1;
-}
-
 .container {
-  width: 100%;
+  width: calc(100% - 80px);
+  transition: width 0.3s;
   margin: 0 auto;
   background-color: var(--sub-color);
   border-radius: 8px;
@@ -40,7 +33,7 @@ main {
 }
 
 .logs-section {
-  width: 100%;
+  width: calc(100% - 80px);
   background-color: var(--main-color);
   padding: 1.5rem;
   border-radius: 12px;

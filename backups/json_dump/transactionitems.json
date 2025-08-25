@@ -1,0 +1,146 @@
+[
+  {
+    "_id": "68aaf0021757054a92b31b49",
+    "transactionId": "68aaf0021757054a92b31b46",
+    "productId": "68aaefb81757054a92b31b15",
+    "quantity": 3,
+    "price": {
+      "$numberDecimal": "10.00"
+    },
+    "totalAmount": {
+      "$numberDecimal": "30.00"
+    },
+    "vatType": "vatable",
+    "vatAmount": {
+      "$numberDecimal": "3.21"
+    },
+    "netAmount": {
+      "$numberDecimal": "30.00"
+    },
+    "isDeleted": false,
+    "isRefunded": false,
+    "__v": 0,
+    "createdAt": "2025-08-24T10:57:06.339Z",
+    "updatedAt": "2025-08-24T10:57:06.339Z"
+  },
+  {
+    "_id": "68aaf0181757054a92b31b5c",
+    "transactionId": "68aaf0181757054a92b31b59",
+    "productId": "68aaefb81757054a92b31b15",
+    "quantity": 3,
+    "price": {
+      "$numberDecimal": "10.00"
+    },
+    "totalAmount": {
+      "$numberDecimal": "30.00"
+    },
+    "vatType": "exempt",
+    "vatAmount": {
+      "$numberDecimal": "0.00"
+    },
+    "netAmount": {
+      "$numberDecimal": "24.00"
+    },
+    "isDeleted": false,
+    "isRefunded": false,
+    "__v": 0,
+    "createdAt": "2025-08-24T10:57:28.562Z",
+    "updatedAt": "2025-08-24T10:57:28.562Z"
+  },
+  {
+    "_id": "68aafb71ab3f71b538c0a1c2",
+    "transactionId": "68aafb71ab3f71b538c0a1bf",
+    "productId": "68aaefdb1757054a92b31b26",
+    "quantity": 5,
+    "price": {
+      "$numberDecimal": "20.00"
+    },
+    "totalAmount": {
+      "$numberDecimal": "100.00"
+    },
+    "vatType": "exempt",
+    "vatAmount": {
+      "$numberDecimal": "0.00"
+    },
+    "netAmount": {
+      "$numberDecimal": "80.00"
+    },
+    "isDeleted": false,
+    "isRefunded": false,
+    "__v": 0,
+    "createdAt": "2025-08-24T11:45:53.513Z",
+    "updatedAt": "2025-08-24T11:45:53.513Z"
+  },
+  {
+    "_id": "68aafb82ab3f71b538c0a1d4",
+    "transactionId": "68aafb82ab3f71b538c0a1d1",
+    "productId": "68aaefdb1757054a92b31b26",
+    "quantity": 3,
+    "price": {
+      "$numberDecimal": "20.00"
+    },
+    "totalAmount": {
+      "$numberDecimal": "60.00"
+    },
+    "vatType": "vatable",
+    "vatAmount": {
+      "$numberDecimal": "6.43"
+    },
+    "netAmount": {
+      "$numberDecimal": "60.00"
+    },
+    "isDeleted": false,
+    "isRefunded": false,
+    "__v": 0,
+    "createdAt": "2025-08-24T11:46:10.619Z",
+    "updatedAt": "2025-08-24T11:46:10.619Z"
+  },
+  {
+    "_id": "68ab3092e73df1768dff3777",
+    "transactionId": "68ab3092e73df1768dff3774",
+    "productId": "68aaefdb1757054a92b31b26",
+    "quantity": 2,
+    "price": {
+      "$numberDecimal": "20.00"
+    },
+    "totalAmount": {
+      "$numberDecimal": "40.00"
+    },
+    "vatType": "vatable",
+    "vatAmount": {
+      "$numberDecimal": "4.29"
+    },
+    "netAmount": {
+      "$numberDecimal": "40.00"
+    },
+    "isDeleted": false,
+    "isRefunded": false,
+    "__v": 0,
+    "createdAt": "2025-08-24T15:32:34.923Z",
+    "updatedAt": "2025-08-24T15:37:35.155Z"
+  },
+  {
+    "_id": "68ac4b46f139126c3e91a274",
+    "transactionId": "68ac4b46f139126c3e91a271",
+    "productId": "68aaefb81757054a92b31b15",
+    "quantity": 2,
+    "price": {
+      "$numberDecimal": "10.00"
+    },
+    "totalAmount": {
+      "$numberDecimal": "20.00"
+    },
+    "vatType": "exempt",
+    "vatAmount": {
+      "$numberDecimal": "0.00"
+    },
+    "netAmount": {
+      "$numberDecimal": "16.00"
+    },
+    "isDeleted": false,
+    "isRefunded": false,
+    "__v": 0,
+    "createdAt": "2025-08-25T11:38:46.916Z",
+    "updatedAt": "2025-08-25T11:38:46.916Z"
+  }
+]

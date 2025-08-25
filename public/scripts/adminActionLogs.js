@@ -6,18 +6,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   const nameInput = document.getElementById('search-name');
   const roleSelect = document.getElementById('filter-role');
   const actionSelect = document.getElementById('filter-action');
-  const dateInput = document.getElementById('filter-date');
+  const fromDateInput = document.getElementById('from-date');
+  const toDateInput = document.getElementById('to-date');
   const filterBtn = document.getElementById('apply-filters');
+  const resetBtn = document.getElementById('reset-filters');
 
   let currentPage = 1;
-  const pageSize = 10; // ✅ logs per page
+  const pageSize = 10;
   let totalLogs = 0;
 
-  // ✅ Load and populate action filter
+  // Load Actions
   async function loadActions() {
     try {
       const response = await getAllActions();
-      const actions = response.data || []; // already array of strings
+      const actions = response.data || [];
 
       actionSelect.innerHTML = `<option value="">All Actions</option>`;
       actions.forEach(action => {
@@ -30,7 +32,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       console.error('Error fetching actions:', err);
     }
   }
-  // inside renderLogs()
+
+  // Render Logs
   async function renderLogs(filters = {}, page = 1) {
     const response = await getAllLogs(filters, page, pageSize);
     const logs = response.logs || [];
@@ -51,19 +54,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         : 'Unknown';
 
       row.innerHTML = `
-      <td>${new Date(log.timestamp).toLocaleString()}</td>
-      <td>${userName}</td>
-      <td>${log.user?.role || 'N/A'}</td>
-      <td>${log.action}</td>
-      <td>${log.description || ''}</td>
-    `;
+        <td>${new Date(log.timestamp).toLocaleString()}</td>
+        <td>${userName}</td>
+        <td>${log.user?.role || 'N/A'}</td>
+        <td>${log.action}</td>
+        <td>${log.description || ''}</td>
+      `;
       tbody.appendChild(row);
     });
 
     renderPagination();
   }
 
-  // ✅ Render pagination controls (with sliding window)
+  // Pagination
   function renderPagination() {
     const totalPages = Math.ceil(totalLogs / pageSize);
     if (totalPages <= 1) {
@@ -72,19 +75,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     paginationEl.innerHTML = '';
-
-    // Prev button
     const prevBtn = document.createElement('button');
     prevBtn.textContent = 'Prev';
     prevBtn.disabled = currentPage === 1;
     prevBtn.addEventListener('click', () => applyFilters(currentPage - 1));
     paginationEl.appendChild(prevBtn);
 
-    // ✅ Show only a window of pages (e.g. 5 at a time)
     const windowSize = 5;
     let start = Math.max(1, currentPage - Math.floor(windowSize / 2));
     let end = Math.min(totalPages, start + windowSize - 1);
-
     if (end - start < windowSize - 1) {
       start = Math.max(1, end - windowSize + 1);
     }
@@ -97,7 +96,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       paginationEl.appendChild(btn);
     }
 
-    // Next button
     const nextBtn = document.createElement('button');
     nextBtn.textContent = 'Next';
     nextBtn.disabled = currentPage === totalPages;
@@ -105,25 +103,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     paginationEl.appendChild(nextBtn);
   }
 
-  // Gather filters and re-render logs
+  // Filters
   function applyFilters(page = 1) {
     const filters = {
       search: nameInput.value.trim() || '',
       role: roleSelect.value || '',
       actions: actionSelect.value ? [actionSelect.value] : [],
-      startDate: dateInput.value || null,
+      startDate: fromDateInput.value || null,
+      endDate: toDateInput.value || null,
     };
     renderLogs(filters, page);
   }
 
-  // Event listeners
+  // Events
   filterBtn.addEventListener('click', () => applyFilters());
   nameInput.addEventListener('input', () => applyFilters());
   roleSelect.addEventListener('change', () => applyFilters());
   actionSelect.addEventListener('change', () => applyFilters());
-  dateInput.addEventListener('change', () => applyFilters());
+  fromDateInput.addEventListener('change', () => applyFilters());
+  toDateInput.addEventListener('change', () => applyFilters());
 
-  // Initial load
+  // Reset Filters
+  resetBtn.addEventListener('click', () => {
+    nameInput.value = '';
+    roleSelect.value = '';
+    actionSelect.value = '';
+    fromDateInput.value = '';
+    toDateInput.value = '';
+
+    renderLogs({}, 1); // show all logs again
+  });
+  // Init
   await loadActions();
   renderLogs();
 });

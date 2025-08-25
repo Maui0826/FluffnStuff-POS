@@ -41,6 +41,7 @@ body {
   justify-content: center;
   padding-top: 4rem;
   padding-left: 4rem;
+  flex-direction: column;
 }
 
 main {
@@ -53,4 +54,5 @@ main {
   height: 100vh;
   text-align: center;
   display: flex;
+  flex: 1;
 }

@@ -4,6 +4,7 @@ import Stock from '../models/stockModel.js';
 import transactionModel from '../models/transactionModel.js';
 import refund from '../models/refundModel.js';
 import transactionItem from '../models/transactionItem.js';
+import stockAdjustment from '../models/stockAdjustment.js';
 
 const createInventory = async data => {
   const inventory = await Inventory.create({
@@ -121,50 +122,133 @@ const getOrderSummary = async () => {
 };
 
 // ✅ Inventory Summary
+// const getInventorySummary = async (startDate, endDate) => {
+//   const dateFilter = {};
+//   if (startDate || endDate) {
+//     dateFilter.$and = [];
+//     if (startDate)
+//       dateFilter.$and.push({ createdAt: { $gte: new Date(startDate) } });
+//     if (endDate)
+//       dateFilter.$and.push({ createdAt: { $lte: new Date(endDate) } });
+//   }
+
+//   const products = await Product.find({ status: 'active' });
+
+//   const summary = await Promise.all(
+//     products.map(async p => {
+//       // ✅ Total received (Orders / deliveries)
+//       const receivedAgg = await Stock.aggregate([
+//         {
+//           $match: {
+//             productId: p._id,
+//             ...(dateFilter.$and?.length ? { $and: dateFilter.$and } : {}),
+//           },
+//         },
+//         { $group: { _id: null, total: { $sum: '$deliveredQuantity' } } },
+//       ]);
+//       const qtyReceived = receivedAgg[0]?.total || 0;
+
+//       // ✅ Total sold
+//       const soldAgg = await transactionItem.aggregate([
+//         {
+//           $match: {
+//             productId: p._id,
+//             isDeleted: false,
+//             ...(dateFilter.$and?.length ? { $and: dateFilter.$and } : {}),
+//           },
+//         },
+//         { $group: { _id: null, total: { $sum: '$quantity' } } },
+//       ]);
+//       const qtySold = soldAgg[0]?.total || 0;
+
+//       // ✅ Total refunded
+//       const refundAgg = await refund.aggregate([
+//         {
+//           $match: {
+//             productId: p._id,
+//             isDeleted: false,
+//             ...(dateFilter.$and?.length ? { $and: dateFilter.$and } : {}),
+//           },
+//         },
+//         { $group: { _id: null, total: { $sum: '$quantity' } } },
+//       ]);
+//       const qtyRefunded = refundAgg[0]?.total || 0;
+
+//       // ✅ Total damaged/adjusted
+//       const adjustmentAgg = await stockAdjustment.aggregate([
+//         {
+//           $match: {
+//             productId: p._id,
+//             type: { $in: ['damaged', 'expired', 'shrinkage'] },
+//             ...(dateFilter.$and?.length ? { $and: dateFilter.$and } : {}),
+//           },
+//         },
+//         { $group: { _id: null, total: { $sum: '$quantity' } } },
+//       ]);
+//       const qtyDamaged = adjustmentAgg[0]?.total || 0;
+
+//       // ✅ On hand = Inventory (real-time)
+//       const inventory = await Inventory.findOne({ productId: p._id });
+//       const qtyOnHand = inventory ? inventory.quantity : 0;
+
+//       return {
+//         productId: p._id,
+//         productName: p.name,
+//         qtyReceived,
+//         qtySold,
+//         qtyRefunded,
+//         qtyDamaged,
+//         qtyOnHand,
+//         acquisitionPrice: inventory?.acquisitionPrice || 0,
+//       };
+//     })
+//   );
+
+//   return summary;
+// };
+
 const getInventorySummary = async (startDate, endDate) => {
   const dateFilter = {};
   if (startDate || endDate) {
     dateFilter.$and = [];
     if (startDate)
-      dateFilter.$and.push({ dateRecorded: { $gte: new Date(startDate) } });
+      dateFilter.$and.push({ deliveredDate: { $gte: new Date(startDate) } });
     if (endDate)
-      dateFilter.$and.push({ dateRecorded: { $lte: new Date(endDate) } });
+      dateFilter.$and.push({ deliveredDate: { $lte: new Date(endDate) } });
   }
 
   const products = await Product.find({ status: 'active' });
 
   const summary = await Promise.all(
     products.map(async p => {
-      // Total received
-      const receivedAgg = await Inventory.aggregate([
+      // ✅ Total received (aggregate by deliveredDate)
+      const receivedAgg = await Stock.aggregate([
         {
           $match: {
             productId: p._id,
-            ...(dateFilter.$and?.length
-              ? {
-                  dateRecorded: {
-                    $gte: new Date(startDate),
-                    $lte: new Date(endDate),
-                  },
-                }
-              : {}),
+            status: 'delivered',
+            isDeleted: false,
+            ...(dateFilter.$and?.length ? { $and: dateFilter.$and } : {}),
           },
         },
-        { $group: { _id: null, total: { $sum: '$quantity' } } },
+        {
+          $group: { _id: null, total: { $sum: '$deliveredQuantity' } },
+        },
       ]);
       const qtyReceived = receivedAgg[0]?.total || 0;
 
-      // Total sold
+      // ✅ Total sold
       const soldAgg = await transactionItem.aggregate([
         {
           $match: {
             productId: p._id,
             isDeleted: false,
-            ...(dateFilter.$and?.length
+            isRefunded: false,
+            ...(startDate || endDate
               ? {
                   createdAt: {
-                    $gte: new Date(startDate),
-                    $lte: new Date(endDate),
+                    ...(startDate ? { $gte: new Date(startDate) } : {}),
+                    ...(endDate ? { $lte: new Date(endDate) } : {}),
                   },
                 }
               : {}),
@@ -174,41 +258,43 @@ const getInventorySummary = async (startDate, endDate) => {
       ]);
       const qtySold = soldAgg[0]?.total || 0;
 
-      // Total damaged/refunded
+      // ✅ Refunds total (unchanged)
       const refundAgg = await refund.aggregate([
         {
           $match: {
             productId: p._id,
             isDeleted: false,
-            ...(dateFilter.$and?.length
+            ...(startDate || endDate
               ? {
                   refundedAt: {
-                    $gte: new Date(startDate),
-                    $lte: new Date(endDate),
+                    ...(startDate ? { $gte: new Date(startDate) } : {}),
+                    ...(endDate ? { $lte: new Date(endDate) } : {}),
                   },
                 }
               : {}),
           },
         },
-        { $group: { _id: null, total: { $sum: '$quantity' } } },
+        {
+          $group: {
+            _id: null,
+            total: { $sum: '$quantity' },
+          },
+        },
       ]);
-      const qtyDamaged = refundAgg[0]?.total || 0;
+      const qtyRefunded = refundAgg[0]?.total || 0;
 
-      // On hand = current stock (real-time)
+      // ✅ On hand
       const inventory = await Inventory.findOne({ productId: p._id });
       const qtyOnHand = inventory ? inventory.quantity : 0;
-
-      // Acquisition price from inventory
-      const acquisitionPrice = inventory ? inventory.acquisitionPrice || 0 : 0;
 
       return {
         productId: p._id,
         productName: p.name,
         qtyReceived,
         qtySold,
-        qtyDamaged,
+        qtyRefunded,
         qtyOnHand,
-        acquisitionPrice, // <-- added here
+        acquisitionPrice: inventory?.acquisitionPrice || 0,
       };
     })
   );
@@ -222,44 +308,56 @@ const getInventoryDetails = async (productId, startDate, endDate) => {
   const product = await Product.findById(productId);
   if (!product) return null;
 
-  const dateFilter = {};
+  // 🔹 build date filter for Transactions
+  const txnDateFilter = {};
   if (startDate || endDate) {
-    dateFilter.$and = [];
-    if (startDate)
-      dateFilter.$and.push({ dateRecorded: { $gte: new Date(startDate) } });
-    if (endDate)
-      dateFilter.$and.push({ dateRecorded: { $lte: new Date(endDate) } });
+    txnDateFilter.createdAt = {};
+    if (startDate) txnDateFilter.createdAt.$gte = new Date(startDate);
+    if (endDate) txnDateFilter.createdAt.$lte = new Date(endDate);
   }
 
-  // Receives
-  const receives = await Inventory.find({
+  // 🔹 build date filter for Receives (deliveryDate)
+  const receiveDateFilter = {};
+  if (startDate || endDate) {
+    receiveDateFilter.deliveredDate = {};
+    if (startDate) receiveDateFilter.deliveredDate.$gte = new Date(startDate);
+    if (endDate) receiveDateFilter.deliveredDate.$lte = new Date(endDate);
+  }
+
+  // ✅ Receives (Orders / deliveries) — filter by deliveredDate
+  const receives = await Stock.find({
     productId,
-    ...(dateFilter.$and?.length
-      ? { dateRecorded: { $gte: new Date(startDate), $lte: new Date(endDate) } }
-      : {}),
+    deliveredDate: { $ne: null }, // only consider stocks that were actually delivered
+    ...receiveDateFilter,
   })
-    .sort({ dateRecorded: 1 })
+    .sort({ deliveredDate: 1 })
     .lean();
 
-  // Solds
+  // ✅ Solds (filter by Transaction date, not by item)
   const solds = await transactionItem
-    .find({
-      productId,
-      isDeleted: false,
-      ...(dateFilter.$and?.length
-        ? { createdAt: { $gte: new Date(startDate), $lte: new Date(endDate) } }
-        : {}),
+    .find({ productId, isDeleted: false })
+    .populate({
+      path: 'transactionId',
+      match: txnDateFilter, // filter by parent Transaction createdAt
+      select: 'createdAt receiptNum', // keep createdAt + optional receipt reference
     })
-    .populate('transactionId', 'createdAt totalAmount')
     .lean();
 
-  // Refunds
+  // remove transactionItems whose parent Transaction didn’t match date filter
+  const validSolds = solds.filter(s => s.transactionId);
+
+  // ✅ Refunds — only from Refund model, filter by refundedAt
   const refunds = await refund
     .find({
       productId,
       isDeleted: false,
-      ...(dateFilter.$and?.length
-        ? { refundedAt: { $gte: new Date(startDate), $lte: new Date(endDate) } }
+      ...(startDate || endDate
+        ? {
+            refundedAt: {
+              ...(startDate ? { $gte: new Date(startDate) } : {}),
+              ...(endDate ? { $lte: new Date(endDate) } : {}),
+            },
+          }
         : {}),
     })
     .lean();
@@ -268,11 +366,14 @@ const getInventoryDetails = async (productId, startDate, endDate) => {
     productName: product.name,
     receives: receives.map(r => ({
       product: product.name,
-      dateReceived: r.dateRecorded,
-      qtyReceived: r.quantity,
+      deliveryDate: r.deliveryDate,
+      dateReceived: r.deliveredDate,
+      qtyReceived: r.deliveredQuantity,
+      supplier: r.supplierName,
     })),
-    solds: solds.map(s => ({
+    solds: validSolds.map(s => ({
       dateSold: s.transactionId?.createdAt,
+      receiptNum: s.transactionId?.receiptNum || null,
       qtySold: s.quantity,
       totalAmount: Number(s.totalAmount),
     })),
@@ -280,7 +381,7 @@ const getInventoryDetails = async (productId, startDate, endDate) => {
       product: product.name,
       dateReturned: r.refundedAt,
       qtyReturned: r.quantity,
-      reason: r.reason,
+      reason: r.reason || 'Refund',
     })),
   };
 };

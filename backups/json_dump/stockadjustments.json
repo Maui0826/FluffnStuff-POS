@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "68abdafeea2bc42e8d3af8bc",
+    "product": "68aaefdb1757054a92b31b26",
+    "previousQuantity": 57,
+    "adjustedQuantity": 50,
+    "change": {
+      "$numberDecimal": "-7"
+    },
+    "reason": "damaged",
+    "note": "damaged testing",
+    "adjustedBy": "68a53f585ec633f48c7d3948",
+    "date": "2025-08-25T03:39:42.068Z",
+    "__v": 0
+  }
+]

@@ -34,7 +34,8 @@ main {
 }
 
 .container {
-  width: 100%;
+  width: calc(100% - 80px);
+  transition: width 0.3s;
   max-width: 600px;
   background-color: var(--sub-color);
   border-radius: var(--radius);

@@ -1,0 +1,17 @@
+[
+  {
+    "_id": "68ab31bf8c4c167283fb06f7",
+    "transactionItemId": "68ab3092e73df1768dff3777",
+    "productId": "68aaefdb1757054a92b31b26",
+    "quantity": 3,
+    "refundPrice": {
+      "$numberDecimal": "60"
+    },
+    "reason": "damaged",
+    "note": "test",
+    "isDeleted": false,
+    "isDiscounted": false,
+    "refundedAt": "2025-08-24T15:37:35.440Z",
+    "__v": 0
+  }
+]

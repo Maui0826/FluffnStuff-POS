@@ -4,6 +4,7 @@ import {
   createProduct,
   deleteCategory,
   deleteProduct,
+  fetchInventoryReport,
   getAllProducts,
   getCategoriesController,
   getInventoryDetails,
@@ -39,4 +40,5 @@ router.delete('/category/:id/delete', deleteCategory);
 
 router.get('/details/:productId', getInventoryDetails);
 router.get('/summary', getInventorySummary);
+router.get('/reports', fetchInventoryReport);
 export default router;

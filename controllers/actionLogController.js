@@ -3,13 +3,22 @@ import LogService from '../services/actionLogService.js';
 import catchAsync from '../utils/catchAsync.js';
 
 export const getAllLogs = catchAsync(async (req, res, next) => {
-  const { search, role, actions, startDate, page = 1, limit = 10 } = req.query; // ✅ use query for pagination
+  const {
+    search,
+    role,
+    actions,
+    startDate,
+    endDate,
+    page = 1,
+    limit = 10,
+  } = req.query;
 
   const filter = {
     search,
     role,
     actions: actions ? (Array.isArray(actions) ? actions : [actions]) : [],
     startDate,
+    endDate,
     page: parseInt(page, 10),
     limit: parseInt(limit, 10),
   };

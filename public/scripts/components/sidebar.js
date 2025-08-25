@@ -1,7 +1,13 @@
 const sidebar = document.querySelector('.sidebar');
-const navLabels = document.querySelectorAll('.nav-label');
-const navLists = sidebar.querySelectorAll('ul');
+const mainContent = document.querySelector('main');
+const container = document.querySelector('.container');
+const footer = document.querySelector('footer');
 
+// Only select nav items inside the sidebar
+const sidebarNavLabels = sidebar.querySelectorAll('.nav-label');
+const sidebarNavLists = sidebar.querySelectorAll('.nav-icons, .control-icons');
+
+// Toggle expand/collapse on sidebar expand button
 sidebar.addEventListener('click', async e => {
   const listItem = e.target.closest('li');
   if (!listItem) return;
@@ -9,8 +15,15 @@ sidebar.addEventListener('click', async e => {
   // Expand/collapse sidebar
   if (listItem.classList.contains('expand')) {
     sidebar.classList.toggle('expand-right');
-    navLabels.forEach(label => label.classList.toggle('hidden'));
-    navLists.forEach(list => list.classList.toggle('sidebar-expanded'));
+
+    // Toggle only sidebar labels
+    sidebarNavLabels.forEach(label => label.classList.toggle('hidden'));
+    sidebarNavLists.forEach(list => list.classList.toggle('sidebar-expanded'));
+
+    // Adjust main content and footer margin dynamically
+    const sidebarWidth = sidebar.classList.contains('expand-right') ? 400 : 80;
+    mainContent.style.marginLeft = `${sidebarWidth}px`;
+    footer.style.marginLeft = `${sidebarWidth}px`;
   }
 
   // SPA-style logout
@@ -18,12 +31,10 @@ sidebar.addEventListener('click', async e => {
     try {
       const response = await fetch('/api/v1/auth/logout', {
         method: 'GET',
-        credentials: 'include', // ensure cookies are sent
+        credentials: 'include',
       });
-
       if (response.ok) {
-        // Optionally show a toast or message here
-        window.location.href = '/login'; // redirect after logout
+        window.location.href = '/login';
       } else {
         const data = await response.json();
         console.error('Logout failed:', data.msg || data.message);
@@ -31,5 +42,24 @@ sidebar.addEventListener('click', async e => {
     } catch (err) {
       console.error('Logout error:', err);
     }
+  }
+});
+
+// Shrink sidebar if click outside
+document.addEventListener('click', e => {
+  const isClickInside = sidebar.contains(e.target);
+  const isExpandButton = e.target.closest('li.expand');
+
+  if (
+    sidebar.classList.contains('expand-right') &&
+    !isClickInside &&
+    !isExpandButton
+  ) {
+    sidebar.classList.remove('expand-right');
+    sidebarNavLabels.forEach(label => label.classList.add('hidden'));
+    sidebarNavLists.forEach(list => list.classList.remove('sidebar-expanded'));
+
+    mainContent.style.marginLeft = '80px';
+    footer.style.marginLeft = '80px';
   }
 });

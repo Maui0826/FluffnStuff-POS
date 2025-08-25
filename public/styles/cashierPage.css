@@ -22,29 +22,28 @@
   display: none !important;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-}
-main {
-  flex: 1;
-}
-
 .container {
   display: flex;
   gap: 1rem;
   padding: 1rem;
-  width: 100%;
+  margin-left: 80px; /* default collapsed sidebar */
   height: 100%;
   box-sizing: border-box;
   background-color: var(--sub-color);
   border-radius: var(--radius);
+  transition: margin-left 0.3s, width 0.3s; /* smooth resize */
   box-shadow: 0 4px 4px var(--border-color1);
+  width: calc(100% - 80px); /* fill more space */
+}
+
+.sidebar.expand-right ~ main .container {
+  margin-left: 250px; /* match expanded sidebar width */
+  width: calc(100% - 250px); /* adjust width */
 }
 
 .pos-inputs,
 .pos-cart {
-  flex: 1;
+  flex: 1 1 0;
   background: var(--main-color);
   padding: 1.5rem;
   border-radius: 12px;
@@ -53,6 +52,7 @@ main {
   flex-direction: column;
   gap: 1rem;
   height: 100%;
+  min-width: 350px; /* increase minimum width for wider look */
 }
 
 .pos-inputs h2,

@@ -23,12 +23,6 @@ export const downloadReportPDF = (type, fromDate, toDate, specificDate) => {
   window.open(url, '_blank'); // opens the PDF in a new tab
 };
 
-export async function fetchInventoryReport(from, to) {
-  const res = await fetch(`${BASE_URL}/inventory?from=${from}&to=${to}`);
-  if (!res.ok) throw new Error('Failed to fetch inventory report');
-  return res.json();
-}
-
 export async function getOrderReport(fromDate, toDate) {
   try {
     const response = await fetch(

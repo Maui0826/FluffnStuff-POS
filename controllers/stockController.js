@@ -4,6 +4,8 @@ import AppError from '../utils/AppError.js';
 import InventoryService from '../services/inventoryService.js';
 import ProductService from '../services/productService.js';
 import LogService from '../services/actionLogService.js';
+import CategoryService from '../services/categoryService.js';
+import supplierService from '../services/supplierService.js';
 
 export const getAllOrders = catchAsync(async (req, res) => {
   const {
@@ -17,11 +19,25 @@ export const getAllOrders = catchAsync(async (req, res) => {
     sortOrder,
   } = req.query;
 
-  const filters = {};
+  let filters = {};
+
   if (deliveryDate) filters.deliveryDate = new Date(deliveryDate);
   if (status) filters.status = status.toLowerCase();
   if (supplier) filters.supplierName = { $regex: supplier, $options: 'i' };
-  if (category) filters['productId.categoryId'] = category;
+  if (category) {
+    const cat = await CategoryService.categoryByName(category);
+    filters['productId.categoryId'] = cat?._id;
+  }
+
+  // ✅ If only one filter, keep just that filter
+  const filterKeys = Object.keys(filters);
+  if (filterKeys.length > 1) {
+    // allow multiple filters (AND logic)
+  } else if (filterKeys.length === 1) {
+    // enforce single filter
+    const singleKey = filterKeys[0];
+    filters = { [singleKey]: filters[singleKey] };
+  }
 
   const { orders, total } = await StockService.getAllStock({
     filters,
@@ -34,7 +50,7 @@ export const getAllOrders = catchAsync(async (req, res) => {
   res.status(200).json({
     status: 'success',
     count: orders.length,
-    total, // <-- total count for pagination
+    total,
     data: orders,
   });
 });
@@ -95,8 +111,17 @@ export const updateStatus = catchAsync(async (req, res, next) => {
       parseInt(deliveredQuantity)
     );
 
+    // ✅ Update the product’s supplierId from stock.supplierId
+    const updatedProduct = await ProductService.updateProduct(stock.productId, {
+      supplierId: stock.supplierId,
+    });
+
+    const supplier = await supplierService.findSupplierById(
+      updatedProduct.supplierId
+    );
+
     // Prepare action log description
-    description = `Stock delivered for Product Name: ${productName}. Delivered Quantity: ${deliveredQuantity}. Updated Inventory: ${updatedInventory.quantity}`;
+    description = `Stock delivered for Product Name: ${productName}. Delivered Quantity: ${deliveredQuantity}. Updated Inventory: ${updatedInventory.quantity}. Supplier: ${supplier.supplierName}`;
 
     // Create action log
     await LogService.createActionLog({
@@ -109,10 +134,11 @@ export const updateStatus = catchAsync(async (req, res, next) => {
     return res.status(200).json({
       status: 'success',
       message:
-        'Stock marked as delivered, inventory updated, and delivered date recorded',
+        'Stock marked as delivered, inventory and supplier updated, and delivered date recorded',
       data: {
         stock: updatedStock,
         inventory: updatedInventory,
+        product: updatedProduct,
       },
     });
   }

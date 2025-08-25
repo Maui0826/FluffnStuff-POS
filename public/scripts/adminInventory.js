@@ -3,6 +3,7 @@ import {
   getCategoriesAPI,
   loadCategoriesAPI,
 } from '../scripts/api/category.js';
+import { formatRecordString } from '../scripts/utils/formatString.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const inventoryBody = document.getElementById('inventory-body');
@@ -21,23 +22,62 @@ document.addEventListener('DOMContentLoaded', () => {
   const adjustmentFields = document.getElementById(
     'quantity-adjustment-fields'
   );
+  const quantityField = document.getElementById('adjusted-quantity');
+  const reasonField = document.getElementById('adjustment-reason');
 
   let currentPage = 1;
   const limit = 10;
   let totalPages = 1;
   const paginationContainer = document.getElementById('pagination');
+  // Handle "Select All" checkbox
+  const selectAllCheckbox = document.getElementById(
+    'select-all-order-products'
+  );
+  selectAllCheckbox.checked = false; // reset every time modal opens
 
   let products = [];
+  let categoryMap = {};
   let currentUpdateProduct = null;
   let sortField = null;
   let sortOrder = 'asc';
 
+  const REASONS_UP = ['restocked', 'correction'];
+  const REASONS_DOWN = ['correction', 'shrinkage', 'damaged', 'expired'];
+
+  function setReasonOptions(values, autoSelect = true) {
+    reasonField.innerHTML = '<option value="">Select Reason</option>';
+    values.forEach(r => {
+      reasonField.append(new Option(r.charAt(0).toUpperCase() + r.slice(1), r));
+    });
+    reasonField.disabled = values.length === 0;
+    if (autoSelect && values.length) reasonField.value = values[0];
+  }
   // ------------------- ORDER MODAL -------------------
   const orderModal = document.getElementById('order-product-modal');
   const orderForm = document.getElementById('order-product-form');
   const closeOrderModal = document.getElementById('close-order-product');
   const bulkOrderBtn = document.querySelector('.order-btn');
   let multiOrderProducts = [];
+
+  selectAllCheckbox.addEventListener('change', e => {
+    const checked = e.target.checked;
+
+    document.querySelectorAll('.order-product-checkbox').forEach(cb => {
+      cb.checked = checked;
+      const i = cb.dataset.index;
+      multiOrderProducts[i].selected = checked;
+
+      // Show/hide fields accordingly
+      const orderInput = document.querySelector(
+        `.order-quantity-input[data-index="${i}"]`
+      );
+      const acquisitionInput = document.querySelector(
+        `.acquisition-input[data-index="${i}"]`
+      );
+      orderInput.style.display = checked ? 'inline-block' : 'none';
+      acquisitionInput.style.display = checked ? 'inline-block' : 'none';
+    });
+  });
 
   // -------------------- LOAD SUPPLIERS FOR FILTER --------------------
   async function loadSuppliersFilter() {
@@ -205,6 +245,12 @@ document.addEventListener('DOMContentLoaded', () => {
   bulkOrderBtn.onclick = async () => {
     await loadProductsForOrder();
     await loadSuppliersForOrder(); // populate dropdown
+
+    // ✅ Set minimum delivery date to today
+    const deliveryInput = document.getElementById('order-expected-delivery');
+    const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd
+    deliveryInput.min = today;
+
     orderModal.style.display = 'flex';
   };
 
@@ -240,6 +286,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const deliveryDate = document.getElementById(
       'order-expected-delivery'
     ).value;
+
+    const today = new Date().toISOString().split('T')[0];
+
+    // ✅ Prevent past date selection
+    if (deliveryDate < today) {
+      return alert('Delivery date cannot be in the past.');
+    }
+
     const selectedProducts = multiOrderProducts.filter(p => p.selected);
 
     if (!supplierName || !deliveryDate || !selectedProducts.length) {
@@ -325,8 +379,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return (inventoryBody.innerHTML = `<tr><td colspan="9">No products available.</td></tr>`);
 
     let sortedProducts = [...products];
-    const field = sortField || 'quantity';
+    let field = sortField || 'quantity';
     const order = sortOrder || 'asc';
+
+    // 🔑 Fix mapping: map "category" → "categoryName"
+    if (field === 'category') field = 'categoryName';
+
     sortedProducts.sort((a, b) => {
       let aVal = a[field];
       let bVal = b[field];
@@ -359,16 +417,20 @@ document.addEventListener('DOMContentLoaded', () => {
         <td><img src="${product.imageUrl || '/assets/noimage.png'}" alt="${
         product.name || 'No Image'
       }" width="50"/></td>
-        <td>${product.sku}</td>
-        <td>${product.name}</td>
-        <td>${product.categoryName || ''}</td>
-        <td>₱${price.toFixed(2)}</td>
+       <td>${product.sku}</td>
+<td>${formatRecordString(product.name)}</td>
+        <td>${formatRecordString(product.categoryName || '')}</td>
+<td>₱${price.toFixed(2)}</td>
         <td>₱${acquisition.toFixed(2)}</td>
-        <td>${product.supplierName || ''}</td>
+        <td>${formatRecordString(product.supplierName || '')}</td>
         <td class="${
           product.quantity < (product.lowStockThreshold || 5) ? 'low-stock' : ''
         }">${product.quantity}</td>
-        <td>${product.description || ''}</td>
+        <td>${
+          product.description
+            ? formatRecordString(product.description)
+            : '<i>No description</i>'
+        }</td>
         <td class="action-btns">
           <button class="update-btn" data-id="${product._id}">Update</button>
           <button class="delete-btn" data-id="${product._id}">Delete</button>
@@ -390,6 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sortOrder = 'asc';
       }
       renderProducts();
+      updateSortIcons();
     });
   });
 
@@ -459,6 +522,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function updateSortIcons() {
+    headers.forEach(header => {
+      const icon = header.querySelector('.sort-icon');
+      const field = icon?.dataset.key;
+
+      if (!field) return;
+
+      if (field === sortField) {
+        // Show correct arrow
+        icon.textContent = sortOrder === 'asc' ? '▲' : '▼';
+      } else {
+        // Reset to neutral state
+        icon.textContent = '▲▼';
+      }
+    });
+  }
+
   // -------------------- LOAD CATEGORIES --------------------
   async function loadCategories() {
     try {
@@ -467,7 +547,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Fetch categories from API
       const categories = await loadCategoriesAPI();
-
+      categoryMap = {}; // reset each time
       // Reset select options
       addSelect.innerHTML = '<option value="">Select Category</option>';
       updateSelect.innerHTML = '<option value="">Select Category</option>';
@@ -478,6 +558,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       categories.forEach(cat => {
         const value = cat._id || cat.id;
+        categoryMap[value] = cat.name; // save reference
+
         addFragment.appendChild(new Option(cat.name, value));
         updateFragment.appendChild(new Option(cat.name, value));
       });
@@ -491,6 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function openUpdateModal(product) {
+    currentUpdateProduct = product;
     document.getElementById('update-sku').value = product.sku || '';
     document.getElementById('update-name').value = product.name || '';
     document.getElementById('update-price').value =
@@ -505,10 +588,56 @@ document.addEventListener('DOMContentLoaded', () => {
       product.description || '';
     document.getElementById('update-low-threshold').value =
       product.lowStockThreshold || 5;
-    document.getElementById('update-category').value = product.categoryId || '';
+    // document.getElementById('update-category').value = product.categoryId || '';
     document.getElementById('update-img-url').value = product.imageUrl || '';
+
+    // ✅ Ensure correct category is selected
+    const updateSelect = document.getElementById('update-category');
+    if (product.categoryId && categoryMap[product.categoryId]) {
+      // Use ID if present
+      updateSelect.value = product.categoryId;
+    } else if (product.categoryName) {
+      // Fallback: find option by name
+      const option = Array.from(updateSelect.options).find(
+        opt => opt.text.toLowerCase() === product.categoryName.toLowerCase()
+      );
+      if (option) updateSelect.value = option.value;
+      else updateSelect.value = '';
+    } else {
+      updateSelect.value = '';
+    }
+
+    // Save old qty, clear new qty, reset reasons
+    quantityField.value = '';
+    quantityField.dataset.oldQty = String(product.quantity ?? '');
+    setReasonOptions([], false);
     updateModal.style.display = 'flex';
   }
+
+  quantityField.addEventListener('input', () => {
+    const oldQty = parseFloat(quantityField.dataset.oldQty ?? '');
+    const newQty =
+      quantityField.value === '' ? NaN : parseFloat(quantityField.value);
+
+    if (Number.isNaN(oldQty) || Number.isNaN(newQty)) {
+      setReasonOptions([], false);
+      return;
+    }
+
+    if (newQty === oldQty) {
+      quantityField.value = ''; // clear invalid input
+      setReasonOptions([], false);
+      return;
+    }
+
+    if (newQty > oldQty) {
+      // ↑ increase → restocked, correction
+      setReasonOptions(REASONS_UP);
+    } else if (newQty < oldQty) {
+      // ↓ decrease → correction, shrinkage, damaged, expired
+      setReasonOptions(REASONS_DOWN);
+    }
+  });
 
   toggleBtn?.addEventListener('click', () =>
     adjustmentFields.classList.toggle('hidden')
@@ -516,13 +645,122 @@ document.addEventListener('DOMContentLoaded', () => {
   addProductBtn.onclick = () => (addProductModal.style.display = 'flex');
   closeAddProduct.onclick = () => (addProductModal.style.display = 'none');
   closeUpdateModal.onclick = () => (updateModal.style.display = 'none');
+
+  updateForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!currentUpdateProduct) return alert('No product selected.');
+
+    const formData = new FormData();
+
+    formData.append('sku', document.getElementById('update-sku').value.trim());
+    formData.append(
+      'productName',
+      document.getElementById('update-name').value.trim()
+    );
+    formData.append(
+      'categoryId',
+      document.getElementById('update-category').value
+    );
+    formData.append('price', document.getElementById('update-price').value);
+    formData.append(
+      'acquisition',
+      document.getElementById('update-acquisition').value
+    );
+    formData.append(
+      'lowStockThreshold',
+      document.getElementById('update-low-threshold').value
+    );
+
+    const desc = document.getElementById('update-description').value.trim();
+    if (desc) formData.append('description', desc);
+
+    // ✅ Handle image: file overrides URL if provided
+    const fileInput = document.getElementById('update-img-file');
+    if (fileInput.files.length > 0) {
+      formData.append('image', fileInput.files[0]);
+    } else {
+      formData.append(
+        'imageUrl',
+        document.getElementById('update-img-url').value.trim()
+      );
+    }
+
+    // ✅ Stock adjustment handling
+    const quantityField = document.getElementById('adjusted-quantity');
+    const reasonField = document.getElementById('adjustment-reason');
+    const noteField = document.getElementById('adjustment-note');
+
+    const oldQty = parseFloat(quantityField.dataset.oldQty ?? '');
+    const newQty = parseFloat(quantityField.value);
+
+    if (newQty === oldQty) {
+      alert('Adjusted quantity must be different from the current quantity.');
+      return; // block submit
+    }
+
+    // If quantity adjustment is shown & has a value
+    // Stock adjustment handling
+    if (
+      !adjustmentFields.classList.contains('hidden') &&
+      quantityField.value !== ''
+    ) {
+      const oldQty = parseFloat(quantityField.dataset.oldQty ?? '');
+      const newQty = parseFloat(quantityField.value);
+
+      if (isNaN(newQty)) {
+        alert('Please enter a valid New quantity.');
+        return;
+      }
+      if (newQty === oldQty) {
+        alert('Adjusted quantity must be different from the current quantity.');
+        return; // block submit
+      }
+
+      const allowed = newQty > oldQty ? REASONS_UP : REASONS_DOWN;
+
+      if (!allowed.includes(reasonField.value)) {
+        alert(
+          `Selected reason is not allowed for this change. Allowed: ${allowed.join(
+            ', '
+          )}`
+        );
+        return; // stop submit
+      }
+
+      formData.append('adjustedQuantity', quantityField.value);
+      if (reasonField.value)
+        formData.append('adjustmentReason', reasonField.value);
+      if (noteField.value.trim())
+        formData.append('adjustmentNote', noteField.value.trim());
+    }
+
+    try {
+      await productAPI.updateProductAPI(currentUpdateProduct.id, formData);
+      alert('Product updated successfully!');
+      updateModal.style.display = 'none';
+      updateForm.reset();
+      await loadProducts(currentPage);
+    } catch (err) {
+      console.error('Failed to update product:', err);
+      alert('Error updating product. Please try again.');
+    }
+  });
+
   window.onclick = e => {
     if (e.target === addProductModal) addProductModal.style.display = 'none';
     if (e.target === updateModal) updateModal.style.display = 'none';
   };
 
+  // Reset filters
+  const resetFiltersBtn = document.getElementById('reset-filters');
+  resetFiltersBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    supplierFilter.value = '';
+    loadProducts(1); // reload first page with no filters
+  });
+
   // ------------------- INITIAL LOAD -------------------
   loadCategories();
   loadSuppliersFilter();
-  loadProducts(currentPage);
+  loadProducts(currentPage).then(updateSortIcons);
 });

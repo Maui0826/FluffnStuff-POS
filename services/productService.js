@@ -12,10 +12,10 @@ const getAllProducts = async ({
 } = {}) => {
   const skip = (page - 1) * limit;
 
-  // Build base query
+  // Base query
   const query = { status: 'active' };
 
-  // Add search filter (name or SKU)
+  // Search filter (name or SKU)
   if (search) {
     query.$or = [
       { name: { $regex: search, $options: 'i' } },
@@ -23,7 +23,7 @@ const getAllProducts = async ({
     ];
   }
 
-  // Fetch products with category info
+  // Fetch products with category & supplier populated
   const products = await Product.find(query)
     .populate({
       path: 'categoryId',
@@ -31,27 +31,20 @@ const getAllProducts = async ({
       match: { isDeleted: false },
       select: 'name',
     })
+    .populate({
+      path: 'supplierId',
+      model: Supplier,
+      select: 'supplierName',
+    })
     .skip(skip)
     .limit(limit)
     .lean();
 
-  // Fetch total count for pagination
+  // Count for pagination
   const totalCount = await Product.countDocuments(query);
 
-  // Fetch inventory and supplier data
+  // Fetch inventory separately
   const productIds = products.map(p => p._id);
-
-  let suppliers = await Supplier.find({
-    productId: { $in: productIds },
-  }).lean();
-
-  // Apply supplier filter if provided
-  if (supplier) {
-    suppliers = suppliers.filter(
-      s => s.supplierName.toLowerCase() === supplier.toLowerCase()
-    );
-  }
-
   const inventories = await Inventory.find({
     productId: { $in: productIds },
   }).lean();
@@ -62,18 +55,9 @@ const getAllProducts = async ({
     inventoryMap[inv.productId.toString()] = inv;
   });
 
-  // Map suppliers to product
-  const supplierMap = {};
-  suppliers.forEach(sup => {
-    const pid = sup.productId.toString();
-    if (!supplierMap[pid]) supplierMap[pid] = [];
-    supplierMap[pid].push(sup.supplierName);
-  });
-
-  // Merge product, inventory, and supplier data
-  const result = products.map(p => {
+  // Merge product + inventory + supplier
+  let result = products.map(p => {
     const inv = inventoryMap[p._id.toString()] || {};
-    const supplierNames = supplierMap[p._id.toString()] || [];
     return {
       _id: p._id,
       imageUrl: p.imageUrl || '',
@@ -86,10 +70,17 @@ const getAllProducts = async ({
         : 0,
       quantity: inv.quantity || 0,
       description: p.description || '',
-      supplierName: supplierNames.join(', '),
+      supplierName: p.supplierId ? p.supplierId.supplierName : '',
       actions: '',
     };
   });
+
+  // ✅ Apply supplier filter directly
+  if (supplier) {
+    result = result.filter(p =>
+      p.supplierName.toLowerCase().includes(supplier.toLowerCase())
+    );
+  }
 
   return { products: result, totalCount };
 };
@@ -157,6 +148,7 @@ const createProduct = async data => {
     imageUrl: data.imageUrl,
     description: data.description,
     status: data.status,
+    supplierId: data.supplierId,
   });
 
   return newProduct;

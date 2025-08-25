@@ -1,0 +1,103 @@
+@import './style.css';
+@import './components/footer.css';
+@import './components/header.css';
+@import './components/sidebar.css';
+
+:root {
+  --main-color: #fefefe;
+  --sub-color: #fff7fb;
+  --border-color: #ffe0ec;
+  --border-color1: #ddd;
+  --header-color: #f8f9fa;
+  --primary-color: #4a90e2;
+  --secondary-color: #eba2e5;
+  --danger-color: #e74c3c;
+  --success-color: #2ecc71;
+  --light-gray: #f7f7f7;
+  --text-dark: #333;
+  --radius: 10px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+main {
+  justify-content: center;
+}
+
+.container {
+  background: var(--sub-color);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px var(--border-color1);
+  text-align: center;
+  width: 380px;
+}
+
+h1 {
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1.5rem;
+}
+
+button,
+a.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease, transform 0.2s;
+  text-decoration: none;
+}
+
+button:hover,
+a.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ✅ JSON Backup Button */
+#json-backup {
+  background: var(--primary-color);
+  color: var(--main-color);
+}
+#json-backup:hover {
+  background: #357ab8; /* darker shade of primary */
+}
+
+/* ✅ ZIP Backup Button */
+#zip-backup {
+  background: var(--success-color);
+  color: var(--main-color);
+}
+#zip-backup:hover {
+  background: #27ae60; /* darker shade of success */
+}
+
+/* ✅ Restore Link Button */
+a.btn {
+  background: var(--secondary-color);
+  color: var(--main-color);
+  display: inline-block;
+}
+a.btn:hover {
+  background: #d179ce; /* darker shade of secondary */
+}
+
+#status {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--text-dark);
+}

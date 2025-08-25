@@ -14,8 +14,10 @@
 
 .sidebar {
   width: 4rem;
-  height: 100%;
-  padding-top: 4rem;
+  position: fixed;
+  top: 4rem; /* start below the 4rem header */
+  left: 0;
+  height: calc(100vh - 4rem); /* fill the remaining viewport below header */
 
   display: flex;
   flex-direction: column;
@@ -25,12 +27,10 @@
 
   box-shadow: 4px 0px 4px 0px var(--border-color);
 
-  position: fixed;
-  top: 0;
-  left: 0;
   z-index: 500;
 
   overflow-x: hidden;
+  overflow-y: auto; /* allow scroll if content exceeds viewport */
 }
 
 .nav-icons,
@@ -81,7 +81,8 @@
 /*sidebar utils*/
 .expand-right {
   width: 300px;
-  align-items: start;
+  align-items: flex-start;
+  height: calc(100vh - 4rem); /* same logic */
 }
 
 .sidebar-expanded {

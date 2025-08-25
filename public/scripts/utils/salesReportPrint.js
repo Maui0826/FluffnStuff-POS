@@ -161,6 +161,66 @@ export const generateSalesReportPDF = async (reportData, fromDate, toDate) => {
     },
   });
 
+  // --- Daily Breakdown with Transactions ---
+  if (reportData.dailyBreakdown?.length) {
+    doc.addPage();
+    doc.setFont('times', 'bold');
+    doc.setFontSize(12);
+    doc.text('Daily Breakdown (Summary)', margin, 40);
+
+    // Daily Summary Table
+    doc.autoTable({
+      startY: 60,
+      head: [
+        [
+          'Date',
+          'Transactions',
+          'Gross Sales',
+          'Total Revenue',
+          'VAT',
+          'Discounts',
+        ],
+      ],
+      body: reportData.dailyBreakdown.map(d => [
+        d.date,
+        d.transactions,
+        `₱${Number(d.grossSales).toLocaleString()}`,
+        `₱${Number(d.totalRevenue).toLocaleString()}`,
+        `₱${Number(d.totalVAT).toLocaleString()}`,
+        `₱${Number(d.totalDiscount).toLocaleString()}`,
+      ]),
+      theme: 'grid',
+    });
+
+    // --- Transaction Breakdown for each day ---
+    reportData.transactionBreakdown.forEach(day => {
+      doc.addPage();
+      doc.setFont('times', 'bold');
+      doc.setFontSize(12);
+      doc.text(`Transactions on ${day.date}`, margin, 40);
+
+      doc.autoTable({
+        startY: 60,
+        head: [['Receipt Number', 'Gross', 'Total', 'VAT', 'Discount']],
+        body: day.transactions.map(t => [
+          t.id,
+          `₱${Number(t.grossAmount).toLocaleString()}`,
+          `₱${Number(t.totalAmount).toLocaleString()}`,
+          `₱${Number(t.vatAmount).toLocaleString()}`,
+          `₱${Number(t.discount).toLocaleString()}`,
+        ]),
+        theme: 'grid',
+        headStyles: {
+          fillColor: [54, 162, 235],
+          textColor: 255,
+          fontStyle: 'bold',
+        },
+        bodyStyles: { font: 'times', fontStyle: 'normal', fontSize: 10 },
+        alternateRowStyles: { fillColor: [245, 245, 245] },
+      });
+    });
+  }
+
   // --- Save PDF ---
   doc.save(`Sales_Report_${fromDate}_to_${toDate}.pdf`);
 };

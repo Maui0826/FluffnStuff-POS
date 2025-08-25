@@ -29,13 +29,12 @@ const refundSchema = new mongoose.Schema({
     enum: [
       'damaged',
       'wrong item',
-      'defective',
+      'shrinkage',
       'customer request',
       'expired',
       'overcharge',
-      'others',
     ],
-    default: 'others',
+    default: 'customer request',
   },
   note: {
     type: String,

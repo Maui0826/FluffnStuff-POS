@@ -1,5 +1,4 @@
-// adminPOS.js
-import { searchProduct, createTransaction } from './api/posAPI.js';
+import { searchProduct, createTransaction } from '../scripts/api/posAPI.js';
 import { calculateReceipt } from './utils/calculations.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -47,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //refund button
   refundButton.addEventListener('click', () => {
     // Redirect to the refunds page
-    window.location.href = '/refunds/refund-login';
+    window.location.href = '/refunds';
   });
 
   //void toggle
@@ -180,17 +179,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     confirmPaymentBtn.style.display = 'none';
     const cash = parseFloat(paymentAmountInput.value) || 0;
-    const receipt = calculateReceipt(cart, cash);
+
+    // 🔥 First recalc cart totals so discount applies
+    updateCartTotals();
+
+    // Build receipt using discounted totalDue
+    const receipt = {
+      totalQty: receiptFields.totalQty.textContent,
+      grossAmount: receiptFields.grossAmount.textContent,
+      vatableAmount: receiptFields.vatableAmount.textContent,
+      vatExemptSales: receiptFields.vatExempt.textContent,
+      vatZeroRatedSales: receiptFields.vatZero.textContent,
+      vat: receiptFields.vat.textContent,
+      billAmount: totalDue, // <-- use discounted totalDue
+      change: Math.max(cash - totalDue, 0).toFixed(2),
+      totalDiscount: displayDiscount.textContent,
+    };
 
     totalDue = Number(receipt.billAmount);
-
     updateReceiptUI(receipt);
-
-    // displayDiscount.textContent = (Number(receipt.totalDiscount) || 0).toFixed(
-    //   2
-    // );
-
-    // displayTotal.textContent = Number(receipt.billAmount).toFixed(2);
 
     displayDiscount.textContent = (Number(receipt.totalDiscount) || 0).toFixed(
       2
@@ -202,6 +209,30 @@ document.addEventListener('DOMContentLoaded', () => {
     paymentAmountInput.value = '';
     finalizePaymentBtn.disabled = true;
   });
+
+  function applyDiscountToUI() {
+    const discount = discountSelect.value;
+    const total = cart.reduce((sum, item) => sum + item.total, 0);
+    let discountAmount = 0;
+
+    if (discount === 'senior') {
+      discountAmount = total * 0.2; // 20% senior discount
+    } else if (discount === 'pwd') {
+      discountAmount = total * 0.2; // 20% PWD discount
+    }
+
+    displayDiscount.textContent = discountAmount.toFixed(2);
+
+    // 🔥 Update totalDue here
+    totalDue = total - discountAmount;
+    displayTotal.textContent = (total - discountAmount).toFixed(2);
+
+    // 🔥 Recompute change immediately
+    const paid = parseFloat(paymentAmountInput.value) || 0;
+    const change = paid - totalDue > 0 ? paid - totalDue : 0;
+    changeAmount1.textContent = change.toFixed(2);
+    finalizePaymentBtn.disabled = paid < totalDue;
+  }
 
   // Enable Finalize Payment
   paymentAmountInput.addEventListener('input', () => {
@@ -231,24 +262,8 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('pwd-id').value = '';
     }
 
-    // Apply discount immediately to display
-    applyDiscountToUI();
+    updateCartTotals();
   });
-
-  function applyDiscountToUI() {
-    const discount = discountSelect.value;
-    const total = cart.reduce((sum, item) => sum + item.total, 0);
-    let discountAmount = 0;
-
-    if (discount === 'senior') {
-      discountAmount = total * 0.2; // example 20% senior discount
-    } else if (discount === 'pwd') {
-      discountAmount = total * 0.2; // example 20% PWD discount
-    }
-
-    displayDiscount.textContent = discountAmount.toFixed(2);
-    displayTotal.textContent = (total - discountAmount).toFixed(2);
-  }
 
   // Cancel Payment
   cancelPaymentBtn.addEventListener('click', () => {
@@ -301,6 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const result = await createTransaction(transactionData);
 
     if (result && result.status === 'success') {
+      const receiptNum = result.data.transaction.receiptNum; // <-- get receiptNum from response
       alert('Transaction successful!');
 
       // Generate receipt content
@@ -309,9 +325,20 @@ document.addEventListener('DOMContentLoaded', () => {
       // Receipt calculations
       const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
       const grossAmount = cart.reduce((sum, item) => sum + item.total, 0);
-      const vatableAmount = (grossAmount / 1.12).toFixed(2); // 12% VAT
-      const vat = (grossAmount - vatableAmount).toFixed(2);
-      const change = (paid - grossAmount).toFixed(2);
+
+      const billAmount = totalDue;
+      let vatableAmount = 0;
+      let vat = 0;
+      let vatExemptSales = 0;
+
+      if (discountSelect.value === 'senior' || discountSelect.value === 'pwd') {
+        vatExemptSales = billAmount.toFixed(2);
+      } else {
+        vatableAmount = (grossAmount / 1.12).toFixed(2);
+        vat = (grossAmount - vatableAmount).toFixed(2);
+      }
+
+      const change = (paid - billAmount).toFixed(2);
 
       // Format items nicely
       let itemsHTML = '';
@@ -340,11 +367,10 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="center bold">
       DA Constance Fluff 'N Stuff<br>
       Pet Supplies Store<br>
-      Address: 123 Sample St., City, Province<br>
-      Contact: 0917-XXX-XXXX<br>
-      TIN: 123-456-789<br>
-      Transaction #: ${Math.floor(Math.random() * 1000000)}<br>
-      Cashier: __________<br>
+      Address: Pasig City, Metro Manilae<br>
+      Business Email: srjdee@gmail.com<br>
+      Transaction #: ${receiptNum}<br>
+
       DATE: ${new Date().toLocaleString()}
     </div>
 
@@ -362,16 +388,17 @@ document.addEventListener('DOMContentLoaded', () => {
     <div>Total Qty:       ${totalQty}</div>
     <div>Gross Amount:    ₱${grossAmount.toFixed(2)}</div>
     <div>Vatable Amount:  ₱${vatableAmount}</div>
-    <div>VAT-Exempt Sales:₱0.00</div>
+    <div>VAT-Exempt Sales:₱${vatExemptSales}</div>
     <div>VAT Zero-Rate Sales:₱0.00</div>
     <div>12% VAT:         ₱${vat}</div>
 
     <div class="line"></div>
 
     <!-- Payment -->
-    <div>Bill Amount:     ₱${grossAmount.toFixed(2)}</div>
+    <div>Bill Amount:     ₱${billAmount.toFixed(2)}</div>
     <div>Cash:            ₱${paid.toFixed(2)}</div>
     <div>Change:          ₱${change}</div>
+    <div>Discount:        ₱${displayDiscount.textContent}</div>
 
     <div class="line"></div>
 
@@ -393,8 +420,52 @@ document.addEventListener('DOMContentLoaded', () => {
       renderCart();
       paymentSection.classList.add('hidden');
       confirmPaymentBtn.style.display = 'inline-block';
+
+      resetPOS();
     }
   });
+
+  function resetPOS() {
+    // Clear cart
+    cart.length = 0;
+    renderCart();
+
+    // Reset totals & receipt fields
+    totalDue = 0;
+    displayDiscount.textContent = '0.00';
+    displayTotal.textContent = '0.00';
+    changeAmount1.textContent = '0.00';
+
+    for (let key in receiptFields) {
+      if (receiptFields[key]) receiptFields[key].textContent = '0.00';
+    }
+    receiptFields.totalQty.textContent = '0';
+
+    // Reset input fields
+    skuInput.value = '';
+    qtyInput.value = '';
+    paymentAmountInput.value = '';
+    document.getElementById('transaction-number').value = '';
+    document.getElementById('senior-id').value = '';
+    document.getElementById('pwd-id').value = '';
+
+    // Reset dropdowns
+    discountSelect.value = 'none';
+    paymentMethodSelect.value = 'cash';
+
+    // Hide extra fields
+    seniorField.classList.add('hidden');
+    pwdField.classList.add('hidden');
+    transactionNumberGroup.classList.add('hidden');
+
+    // Reset UI state
+    paymentSection.classList.add('hidden');
+    confirmPaymentBtn.style.display = 'inline-block';
+    finalizePaymentBtn.disabled = true;
+
+    // Focus back on SKU input
+    skuInput.focus();
+  }
 
   skuInput.focus();
 
@@ -434,40 +505,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const listContainer = document.createElement('div');
     listContainer.classList.add('preview-list');
 
-    // Limit to first 3 visible, scroll for more
     results.forEach(product => {
       const price = parseFloat(product.price.$numberDecimal || product.price);
-
       const itemDiv = document.createElement('div');
       itemDiv.classList.add('preview-item');
+
+      // Add sold-out style if quantity is 0
+      if (product.quantity === 0) {
+        itemDiv.style.opacity = '0.5';
+        itemDiv.style.pointerEvents = 'none'; // prevent clicking
+      }
+
       const desc = product.description || '';
       const shortDesc = desc.length > 10 ? desc.slice(0, 10) + '...' : desc;
+
       itemDiv.innerHTML = `
       <img src="${product.imageUrl || './assets/default.png'}" />
-    <div>
-    <p style="font-weight:bold;">${product.name}</p>
-  <p style="font-size:1rem;color:#555;"><strong>SKU:</strong> ${product.sku}</p>
-  <p><strong>Price:</strong> ₱${price.toFixed(2)}</p>
-  <p style="font-size:1rem;color:#555;"><strong>Desc: </strong>${
-    shortDesc || ''
-  }</p>
-</div>
-   `;
+      <div>
+        <p style="font-weight:bold;">${product.name}</p>
+        <p style="font-size:1rem;color:#555;"><strong>SKU:</strong> ${
+          product.sku
+        }</p>
+        <p><strong>Price:</strong> ₱${price.toFixed(2)}</p>
+        <p style="font-size:1rem;color:#555;"><strong>Desc: </strong>${shortDesc}</p>
+        <p style="color:green;font-weight:bold;">${
+          product.quantity === 0 ? 'Sold Out' : `Qty: ${product.quantity}`
+        }</p>
+      </div>
+    `;
 
-      // Click to fill input & add to cart
-      itemDiv.addEventListener('click', () => {
-        // Remove selection from all items
-        listContainer.querySelectorAll('.preview-item').forEach(el => {
-          el.classList.remove('selected');
+      // Click to fill input & add to cart (skip if sold out)
+      if (product.quantity > 0) {
+        itemDiv.addEventListener('click', () => {
+          listContainer.querySelectorAll('.preview-item').forEach(el => {
+            el.classList.remove('selected');
+          });
+          itemDiv.classList.add('selected');
+          skuInput.value = product.sku;
+          qtyInput.value = 1;
         });
-
-        // Highlight the clicked item
-        itemDiv.classList.add('selected');
-
-        // Fill the SKU and reset quantity
-        skuInput.value = product.sku;
-        qtyInput.value = 1;
-      });
+      }
 
       listContainer.appendChild(itemDiv);
     });
@@ -489,6 +566,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const price = parseFloat(product.price.$numberDecimal || product.price);
 
+    if (quantity > product.quantity) {
+      return alert(`Only ${product.quantity} pcs available in stock.`);
+    }
     const existingItem = cart.find(item => item.sku === product.sku);
     if (existingItem) {
       existingItem.quantity += quantity;
@@ -503,6 +583,7 @@ document.addEventListener('DOMContentLoaded', () => {
         total: quantity * price,
         vatType: product.vatType || 'vatable',
         img: product.imageUrl || './assets/default.png',
+        stock: product.quantity, // ✅ keep track of max stock
       });
     }
 
@@ -561,14 +642,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const action = e.target.dataset.action;
     const item = cart[index];
 
-    if (action === 'increase') item.quantity++;
-    else if (action === 'decrease' && item.quantity > 1) item.quantity--;
+    if (action === 'increase') {
+      if (item.quantity < item.stock) {
+        item.quantity++;
+      } else {
+        alert(`Cannot exceed available stock (${item.stock}).`);
+      }
+    } else if (action === 'decrease' && item.quantity > 1) {
+      item.quantity--;
+    }
 
     item.total = item.quantity * item.price;
 
     // Recalculate totals & update UI
     updateCartTotals();
-
     renderCart();
   }
 
@@ -596,11 +683,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update hidden receipt fields for calculations / print
     receiptFields.totalQty.textContent = totalQty;
     receiptFields.grossAmount.textContent = total.toFixed(2);
-    const vatable = total / 1.12;
-    receiptFields.vatableAmount.textContent = vatable.toFixed(2);
-    receiptFields.vat.textContent = (total - vatable).toFixed(2);
-    receiptFields.billAmount.textContent = totalDueAmount.toFixed(2);
 
+    if (discount === 'senior' || discount === 'pwd') {
+      // Senior/PWD: VAT-exempt
+      receiptFields.vatableAmount.textContent = (0).toFixed(2);
+      receiptFields.vat.textContent = (0).toFixed(2);
+      receiptFields.vatExempt.textContent = totalDueAmount.toFixed(2);
+    } else {
+      // Normal transaction: VATable
+      const vatable = total / 1.12;
+      const vat = total - vatable;
+
+      receiptFields.vatableAmount.textContent = vatable.toFixed(2);
+      receiptFields.vat.textContent = vat.toFixed(2);
+      receiptFields.vatExempt.textContent = (0).toFixed(2);
+    }
+
+    receiptFields.billAmount.textContent = totalDueAmount.toFixed(2);
     // Update change dynamically if payment amount entered
     const paid = parseFloat(paymentAmountInput.value) || 0;
     receiptFields.change.textContent = Math.max(

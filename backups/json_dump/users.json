@@ -1,0 +1,1015 @@
+[
+  {
+    "_id": "68a53f575ec633f48c7d3942",
+    "email": "cashier@gmail.com",
+    "name": {
+      "firstName": "Cashier",
+      "lastName": "User"
+    },
+    "role": "cashier",
+    "password": "$2b$12$MmtjZb2NhjJjfVZf/CEwF.P/iKbwoWtiw3ZZ32Bbs3DPd4kTEmXZu",
+    "status": "active",
+    "createdAt": "2025-08-20T03:21:59.689Z",
+    "updatedAt": "2025-08-20T03:21:59.689Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f585ec633f48c7d3945",
+    "email": "inventory@gmail.com",
+    "name": {
+      "firstName": "Inventory",
+      "lastName": "User"
+    },
+    "role": "inventory",
+    "password": "$2b$12$C9BIQ1y0WG7wSDsHrn6ErOkL4/RP8socX9zlcmsaPi695JbLxeox2",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:00.117Z",
+    "updatedAt": "2025-08-20T03:22:00.117Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f585ec633f48c7d3948",
+    "email": "admin@gmail.com",
+    "name": {
+      "firstName": "Master",
+      "middleName": "",
+      "lastName": "Admin"
+    },
+    "role": "admin",
+    "password": "$2b$12$DozvlZoDu7rsbOji7ni1S.t9mvIOKUJTMqVzbf69By3UA2RfeGw0W",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:00.511Z",
+    "updatedAt": "2025-08-25T12:22:23.323Z",
+    "__v": 0,
+    "suspendUntil": "2025-09-01T12:22:23.319Z"
+  },
+  {
+    "_id": "68a53f585ec633f48c7d394b",
+    "email": "owner@gmail.com",
+    "name": {
+      "firstName": "Owner",
+      "lastName": "User"
+    },
+    "role": "owner",
+    "password": "$2b$12$sLeu.u8h/q5qorg6MGQKGuyq.Vn87FGwxqE9QtjQll2DsE7093O4W",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:00.918Z",
+    "updatedAt": "2025-08-20T03:22:00.918Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f595ec633f48c7d394e",
+    "email": "ruby@fluffnstuff.com",
+    "name": {
+      "firstName": "Ruby",
+      "lastName": "Stone"
+    },
+    "role": "owner",
+    "password": "$2b$12$mPHvtAMdOFupWa6/kG315Ocq5CLCWsVqc.LyDdS00TfQCfW7aoFhq",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:01.312Z",
+    "updatedAt": "2025-08-20T03:22:01.312Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f595ec633f48c7d3951",
+    "email": "stan@fluffnstuff.com",
+    "name": {
+      "firstName": "Stan",
+      "lastName": "Marsh"
+    },
+    "role": "cashier",
+    "password": "$2b$12$4sOzC0Uv4zVPV73E4LqbT.78jkYZeDY.K9GoGLmzDB.qwGWdXsVKS",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:01.684Z",
+    "updatedAt": "2025-08-20T03:22:01.684Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5a5ec633f48c7d3954",
+    "email": "jeff@fluffnstuff.com",
+    "name": {
+      "firstName": "Jeff",
+      "lastName": "Wilson"
+    },
+    "role": "admin",
+    "password": "$2b$12$zkKxd8DaKMSFsw.8yT5Rzu84sHtYgpJlEExIgeZap/0628wWaGU6e",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:02.061Z",
+    "updatedAt": "2025-08-20T03:22:02.061Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5a5ec633f48c7d3957",
+    "email": "john.smith@dummy.com",
+    "name": {
+      "firstName": "John",
+      "middleName": "",
+      "lastName": "Smith"
+    },
+    "role": "cashier",
+    "password": "$2b$12$LYWcycwrKMusRaYJmvM9jOnJtARa.IqiXOPMpTLF.URSGCWiVOS46",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:02.435Z",
+    "updatedAt": "2025-08-20T03:22:02.435Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5a5ec633f48c7d395a",
+    "email": "jane.johnson@dummy.com",
+    "name": {
+      "firstName": "Jane",
+      "middleName": "",
+      "lastName": "Johnson"
+    },
+    "role": "inventory",
+    "password": "$2b$12$55WPlxUIG1DNi0itAYbh2Oo5de.Rd3F2yAMwsIQ/35Ei8xi1VnGeu",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:02.807Z",
+    "updatedAt": "2025-08-20T03:22:02.807Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5b5ec633f48c7d395d",
+    "email": "michael.brown@dummy.com",
+    "name": {
+      "firstName": "Michael",
+      "middleName": "",
+      "lastName": "Brown"
+    },
+    "role": "admin",
+    "password": "$2b$12$FiJu1qFcF7BZyDySo2fxv.Al6M5ZpE1.b/Uf3SsTEyrQ.RrPI.GQ.",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:03.181Z",
+    "updatedAt": "2025-08-20T03:22:03.181Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5b5ec633f48c7d3960",
+    "email": "emily.taylor@dummy.com",
+    "name": {
+      "firstName": "Emily",
+      "middleName": "",
+      "lastName": "Taylor"
+    },
+    "role": "owner",
+    "password": "$2b$12$pyP3.HoBtzdQq4xmWPSD9eRQV4t.TphF8qnBn9CRc0kTIRtEfli5y",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:03.557Z",
+    "updatedAt": "2025-08-20T03:22:03.557Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5b5ec633f48c7d3963",
+    "email": "david.anderson@dummy.com",
+    "name": {
+      "firstName": "David",
+      "middleName": "",
+      "lastName": "Anderson"
+    },
+    "role": "cashier",
+    "password": "$2b$12$dOEq7lgrDNJHIUBzXkDcMOjWdhTGogZuIJcXjbYF8sexDmNKSGu6y",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:03.929Z",
+    "updatedAt": "2025-08-20T03:22:03.929Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5c5ec633f48c7d3966",
+    "email": "sarah.thomas@dummy.com",
+    "name": {
+      "firstName": "Sarah",
+      "middleName": "",
+      "lastName": "Thomas"
+    },
+    "role": "inventory",
+    "password": "$2b$12$yPQYmWgFUwg4kjqLWHoMierde5P.euc1v/8gEuX9KpBI87z0gH6zO",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:04.302Z",
+    "updatedAt": "2025-08-20T03:22:04.302Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5c5ec633f48c7d3969",
+    "email": "chris.jackson@dummy.com",
+    "name": {
+      "firstName": "Chris",
+      "middleName": "",
+      "lastName": "Jackson"
+    },
+    "role": "admin",
+    "password": "$2b$12$cv7UB3UaedUIC3QAEeB6bOi07I.w/VgMA7bBVCaAe8DAAZdKX2pWK",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:04.677Z",
+    "updatedAt": "2025-08-20T03:22:04.677Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5d5ec633f48c7d396c",
+    "email": "laura.white@dummy.com",
+    "name": {
+      "firstName": "Laura",
+      "middleName": "",
+      "lastName": "White"
+    },
+    "role": "owner",
+    "password": "$2b$12$Ka3DBHQjwl4PPcKRNwK9ZupI/QWQDLvFtpTgATtsyPd8hZOGXd1CS",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:05.055Z",
+    "updatedAt": "2025-08-20T03:22:05.055Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5d5ec633f48c7d396f",
+    "email": "daniel.harris@dummy.com",
+    "name": {
+      "firstName": "Daniel",
+      "middleName": "",
+      "lastName": "Harris"
+    },
+    "role": "cashier",
+    "password": "$2b$12$BsElCwrv6.hoaGiWIy4B7e0ooVF0rU/E6WBOpzusGBLqKxBoSy.cC",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:05.434Z",
+    "updatedAt": "2025-08-20T03:22:05.434Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5d5ec633f48c7d3972",
+    "email": "olivia.martin@dummy.com",
+    "name": {
+      "firstName": "Olivia",
+      "middleName": "",
+      "lastName": "Martin"
+    },
+    "role": "inventory",
+    "password": "$2b$12$0VJOaXLceVMAvCa4l4P66uL39oxmuSVTYVOycJXokC62LxlRHUn4S",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:05.810Z",
+    "updatedAt": "2025-08-20T03:22:05.810Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5e5ec633f48c7d3975",
+    "email": "matthew.thompson@dummy.com",
+    "name": {
+      "firstName": "Matthew",
+      "middleName": "",
+      "lastName": "Thompson"
+    },
+    "role": "admin",
+    "password": "$2b$12$oNtIT4PJfQskc/OuIVL3hOVSecg/p36/2kLLedJreK/HjCEIDP8dO",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:06.193Z",
+    "updatedAt": "2025-08-20T03:22:06.193Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5e5ec633f48c7d3978",
+    "email": "sophia.garcia@dummy.com",
+    "name": {
+      "firstName": "Sophia",
+      "middleName": "",
+      "lastName": "Garcia"
+    },
+    "role": "owner",
+    "password": "$2b$12$CSb60Jovk1jqau8ie1PBoeKKk4EE7SHSn0U4n1rws4N8XZQHTWmrS",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:06.580Z",
+    "updatedAt": "2025-08-20T03:22:06.580Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5f5ec633f48c7d397b",
+    "email": "james.martinez@dummy.com",
+    "name": {
+      "firstName": "James",
+      "middleName": "",
+      "lastName": "Martinez"
+    },
+    "role": "cashier",
+    "password": "$2b$12$D16H39yJzG2ybb9jx39jue1YvDWHftMxK5kYOjYj4PhaN450teP/.",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:07.060Z",
+    "updatedAt": "2025-08-20T03:22:07.060Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5f5ec633f48c7d397e",
+    "email": "emma.robinson@dummy.com",
+    "name": {
+      "firstName": "Emma",
+      "middleName": "",
+      "lastName": "Robinson"
+    },
+    "role": "inventory",
+    "password": "$2b$12$mH1uxNQp4RtaWawA6xzzCOo0ck2XYfvN6SHJsAjZNnaUhgYPnu5wO",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:07.452Z",
+    "updatedAt": "2025-08-20T03:22:07.452Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f5f5ec633f48c7d3981",
+    "email": "robert.clark@dummy.com",
+    "name": {
+      "firstName": "Robert",
+      "middleName": "",
+      "lastName": "Clark"
+    },
+    "role": "admin",
+    "password": "$2b$12$WreVeGG2VGDE/4abYsMod.n2m7z0yjJogzaPsq/ArJL2Y.St2Gdfy",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:07.870Z",
+    "updatedAt": "2025-08-20T03:22:07.870Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f605ec633f48c7d3984",
+    "email": "isabella.rodriguez@dummy.com",
+    "name": {
+      "firstName": "Isabella",
+      "middleName": "",
+      "lastName": "Rodriguez"
+    },
+    "role": "owner",
+    "password": "$2b$12$kyhqL.r/2HbWdBPDE2Xa0.LtjJsJb9wcdecVh5.fzB.Z8D9kHKQfm",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:08.249Z",
+    "updatedAt": "2025-08-20T03:22:08.249Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f605ec633f48c7d3987",
+    "email": "william.lewis@dummy.com",
+    "name": {
+      "firstName": "William",
+      "middleName": "",
+      "lastName": "Lewis"
+    },
+    "role": "cashier",
+    "password": "$2b$12$q.ULKVK1vXZjBfZpUIxupuofWBY46F1W6OE0sLq2hAgKPk0i6wWJ6",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:08.645Z",
+    "updatedAt": "2025-08-20T03:22:08.645Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f615ec633f48c7d398a",
+    "email": "mia.lee@dummy.com",
+    "name": {
+      "firstName": "Mia",
+      "middleName": "",
+      "lastName": "Lee"
+    },
+    "role": "inventory",
+    "password": "$2b$12$XvuavH0cNnmtOojDw1c7K.9hV2Njn98SF4oN1YvZhPfPNWrbn6TEG",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:09.028Z",
+    "updatedAt": "2025-08-20T03:22:09.028Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f615ec633f48c7d398d",
+    "email": "joseph.walker@dummy.com",
+    "name": {
+      "firstName": "Joseph",
+      "middleName": "",
+      "lastName": "Walker"
+    },
+    "role": "admin",
+    "password": "$2b$12$7e0zTuXUJXzY6PRrVPrtZe0JqXuy9muwBuaaup3MRFnkXb0v8dMkG",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:09.472Z",
+    "updatedAt": "2025-08-20T03:22:09.472Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a53f615ec633f48c7d3990",
+    "email": "charlotte.hall@dummy.com",
+    "name": {
+      "firstName": "Charlotte",
+      "middleName": "",
+      "lastName": "Hall"
+    },
+    "role": "owner",
+    "password": "$2b$12$DpxD9tOMp3R8T90xreJTxOVD7Hbz6uM8wVrXMkxv.46WQWqhzhX2O",
+    "status": "active",
+    "createdAt": "2025-08-20T03:22:09.879Z",
+    "updatedAt": "2025-08-20T03:22:09.879Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a66909d345154266523ee2",
+    "email": "vnkfr.kzrdhph0@example.com",
+    "name": {
+      "firstName": "vnkfr",
+      "middleName": "auwofik",
+      "lastName": "kzrdhph"
+    },
+    "role": "owner",
+    "password": "$2b$12$DNl9DIqwvxBAms/YM9SqOeCRf.wb7uSroDmXBIEkAo8pnIWzEXlca",
+    "status": "banned",
+    "createdAt": "2025-08-21T00:32:09.277Z",
+    "updatedAt": "2025-08-21T00:32:09.277Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a66909d345154266523ee5",
+    "email": "snyqhz.ccaqlshvh1@example.com",
+    "name": {
+      "firstName": "snyqhz",
+      "middleName": "aktradz",
+      "lastName": "ccaqlshvh"
+    },
+    "role": "cashier",
+    "password": "$2b$12$pLNcEvQR2ewx3f8tBuTeUOLsTAuHETKtglm7N1qxBaKAlPt3fjew2",
+    "status": "suspended",
+    "createdAt": "2025-08-21T00:32:09.704Z",
+    "updatedAt": "2025-08-21T00:32:09.704Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690ad345154266523ee8",
+    "email": "ionuddg.mrgedvape2@example.com",
+    "name": {
+      "firstName": "ionuddg",
+      "middleName": "sykx",
+      "lastName": "mrgedvape"
+    },
+    "role": "inventory",
+    "password": "$2b$12$3M5ggaESyyGNkNnqxqWb3OfKf9Hz/x34.J5jJUvHRXNflHnCdKFGu",
+    "status": "suspended",
+    "createdAt": "2025-08-21T00:32:10.164Z",
+    "updatedAt": "2025-08-21T00:32:10.164Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690ad345154266523eeb",
+    "email": "odijp.tgrxig3@example.com",
+    "name": {
+      "firstName": "odijp",
+      "lastName": "tgrxig"
+    },
+    "role": "owner",
+    "password": "$2b$12$D38Th9eR1Xr549ZYoOd6TOgpn.zILZ2qyZsxnnjXiKfxqWlxHW/dC",
+    "status": "suspended",
+    "createdAt": "2025-08-21T00:32:10.580Z",
+    "updatedAt": "2025-08-21T00:32:10.580Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690bd345154266523eee",
+    "email": "jtjj.ctpgemdkqx4@example.com",
+    "name": {
+      "firstName": "jtjj",
+      "lastName": "ctpgemdkqx"
+    },
+    "role": "cashier",
+    "password": "$2b$12$MnF6Q5TfqYgmmTCCwHon0OIz0bNgvj65NeS/PY/UH8PwAIMTdsLry",
+    "status": "banned",
+    "createdAt": "2025-08-21T00:32:11.075Z",
+    "updatedAt": "2025-08-21T00:32:11.075Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690bd345154266523ef1",
+    "email": "iucei.mooejc5@example.com",
+    "name": {
+      "firstName": "iucei",
+      "middleName": "pcpyvw",
+      "lastName": "mooejc"
+    },
+    "role": "cashier",
+    "password": "$2b$12$RCkQ84K7LBc8Dfb.m3vI3uAg4BDpHytqjQD93g9ure/j43m4vMkfW",
+    "status": "banned",
+    "createdAt": "2025-08-21T00:32:11.515Z",
+    "updatedAt": "2025-08-21T00:32:11.515Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690bd345154266523ef4",
+    "email": "ppjwfl.gcodjbhdck6@example.com",
+    "name": {
+      "firstName": "ppjwfl",
+      "middleName": "plygfna",
+      "lastName": "gcodjbhdck"
+    },
+    "role": "cashier",
+    "password": "$2b$12$capHFsCG52PdHf6Lw9NafO7/OUYLPjCGZ22bSR.PrbdahIEwiIkbW",
+    "status": "active",
+    "createdAt": "2025-08-21T00:32:11.936Z",
+    "updatedAt": "2025-08-21T00:32:11.936Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690cd345154266523ef7",
+    "email": "copuje.fuigae7@example.com",
+    "name": {
+      "firstName": "copuje",
+      "middleName": "prjugqv",
+      "lastName": "fuigae"
+    },
+    "role": "owner",
+    "password": "$2b$12$lDy70qNvDcluDHvRZ9WlpOg8/aA8k4dwrOPeGr0P8hAmnGgJiAnEu",
+    "status": "banned",
+    "createdAt": "2025-08-21T00:32:12.345Z",
+    "updatedAt": "2025-08-21T00:32:12.345Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690cd345154266523efa",
+    "email": "eiosajs.rrokfe8@example.com",
+    "name": {
+      "firstName": "eiosajs",
+      "middleName": "ayvuqvho",
+      "lastName": "rrokfe"
+    },
+    "role": "owner",
+    "password": "$2b$12$0.xcW0K9pne198q8nFEhn.T6xQ2XyNf1mvaMKhr0LNgKeDLL4xnIC",
+    "status": "banned",
+    "createdAt": "2025-08-21T00:32:12.745Z",
+    "updatedAt": "2025-08-21T00:32:12.745Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690dd345154266523efd",
+    "email": "bcbozq.pumeo9@example.com",
+    "name": {
+      "firstName": "bcbozq",
+      "middleName": "femw",
+      "lastName": "pumeo"
+    },
+    "role": "cashier",
+    "password": "$2b$12$dr7MdpTjYeUPCpsQ7ik8xOe1uOiX0SpZf.8U/4PpL6/98.KcakiWu",
+    "status": "suspended",
+    "createdAt": "2025-08-21T00:32:13.145Z",
+    "updatedAt": "2025-08-21T00:32:13.145Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690dd345154266523f00",
+    "email": "wkpobv.hnni10@example.com",
+    "name": {
+      "firstName": "wkpobv",
+      "middleName": "yvprm",
+      "lastName": "hnni"
+    },
+    "role": "owner",
+    "password": "$2b$12$2EBl33kpjJ.dkH4BktR23Ogv8ewVU2ANEKAMyEdQohtexoYOx.SS6",
+    "status": "active",
+    "createdAt": "2025-08-21T00:32:13.608Z",
+    "updatedAt": "2025-08-21T00:32:13.608Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690ed345154266523f03",
+    "email": "zatfk.nbhy11@example.com",
+    "name": {
+      "firstName": "zatfk",
+      "middleName": "admdix",
+      "lastName": "nbhy"
+    },
+    "role": "owner",
+    "password": "$2b$12$jTUFkOkl/M76EenbfaBd1.UgiyupAWBsUtYRVDyIpryH6n0SMnm96",
+    "status": "banned",
+    "createdAt": "2025-08-21T00:32:14.020Z",
+    "updatedAt": "2025-08-21T00:32:14.020Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690ed345154266523f06",
+    "email": "hcx.iungke12@example.com",
+    "name": {
+      "firstName": "hcx",
+      "lastName": "iungke"
+    },
+    "role": "owner",
+    "password": "$2b$12$teNRqWse0HRdmoW8BTlFdOE.8PNwCddFQELq/KOSsYKTg00nCMZC2",
+    "status": "suspended",
+    "createdAt": "2025-08-21T00:32:14.414Z",
+    "updatedAt": "2025-08-21T00:32:14.414Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690ed345154266523f09",
+    "email": "tgfslc.jjtwdmz13@example.com",
+    "name": {
+      "firstName": "tgfslc",
+      "lastName": "jjtwdmz"
+    },
+    "role": "cashier",
+    "password": "$2b$12$yh70hhzm0PtsDKxN2qgSPuzexKrlvmk9PZjeDl3cYV5ZG14rOhjom",
+    "status": "banned",
+    "createdAt": "2025-08-21T00:32:14.821Z",
+    "updatedAt": "2025-08-21T00:32:14.821Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690fd345154266523f0c",
+    "email": "augvmw.rlqvacwxig14@example.com",
+    "name": {
+      "firstName": "augvmw",
+      "middleName": "erob",
+      "lastName": "rlqvacwxig"
+    },
+    "role": "inventory",
+    "password": "$2b$12$wsIBD/9kWJRkYq7ZTTUO6.cCcqCQKib2oTrLdyFOE/wDd6ZOADs9W",
+    "status": "banned",
+    "createdAt": "2025-08-21T00:32:15.221Z",
+    "updatedAt": "2025-08-21T00:32:15.221Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690fd345154266523f0f",
+    "email": "mxkbuj.ieizbniyh15@example.com",
+    "name": {
+      "firstName": "mxkbuj",
+      "lastName": "ieizbniyh"
+    },
+    "role": "admin",
+    "password": "$2b$12$WrFA.qwCRQWT/LGoQzx53uFmwWPzob2GCkQte7sXKlVXDqDSQmRle",
+    "status": "suspended",
+    "createdAt": "2025-08-21T00:32:15.610Z",
+    "updatedAt": "2025-08-21T00:32:15.610Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6690fd345154266523f12",
+    "email": "ydjgz.kqkqlj16@example.com",
+    "name": {
+      "firstName": "ydjgz",
+      "lastName": "kqkqlj"
+    },
+    "role": "cashier",
+    "password": "$2b$12$WNbmlnwsOqckvVGmk0af7OBjHTPhZYhByUE5VMoxu40Xaov9QBxz.",
+    "status": "banned",
+    "createdAt": "2025-08-21T00:32:15.994Z",
+    "updatedAt": "2025-08-21T00:32:15.994Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a66910d345154266523f15",
+    "email": "eta.svdfs17@example.com",
+    "name": {
+      "firstName": "eta",
+      "middleName": "rxvvtm",
+      "lastName": "svdfs"
+    },
+    "role": "admin",
+    "password": "$2b$12$EsZbp/HTApeT5zpQGo6HFuFzCKROzMjab7Bi9McJblPJAgIvR0i7m",
+    "status": "suspended",
+    "createdAt": "2025-08-21T00:32:16.500Z",
+    "updatedAt": "2025-08-21T00:32:16.500Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a66910d345154266523f18",
+    "email": "rrwhstwp.fyuwqusvsa18@example.com",
+    "name": {
+      "firstName": "rrwhstwp",
+      "lastName": "fyuwqusvsa"
+    },
+    "role": "owner",
+    "password": "$2b$12$VYSjvdOK21MbT8Uc8ia.E.Z4dlXM9xjF.W/5/AAWAq.d2Ww11q6jK",
+    "status": "banned",
+    "createdAt": "2025-08-21T00:32:16.899Z",
+    "updatedAt": "2025-08-21T00:32:16.899Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a66911d345154266523f1b",
+    "email": "rwhmtvh.eykkix19@example.com",
+    "name": {
+      "firstName": "rwhmtvh",
+      "lastName": "eykkix"
+    },
+    "role": "admin",
+    "password": "$2b$12$oBVNr8JVApQoVB3IWSpdmOirvILa.jdS8CIB4Id52D10A6cl6jEXi",
+    "status": "suspended",
+    "createdAt": "2025-08-21T00:32:17.286Z",
+    "updatedAt": "2025-08-21T00:32:17.286Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a67678dfce4d0d32cbf068",
+    "email": "iqzp.isfvdbb0@example.com",
+    "name": {
+      "firstName": "iqzp",
+      "middleName": "kfw",
+      "lastName": "isfvdbb"
+    },
+    "role": "inventory",
+    "password": "$2b$12$hg7m52CvlL4STM93o.h.hOtbb97KrhnxrJqZOBB5uxJ9UzLjYzT7W",
+    "status": "suspended",
+    "createdAt": "2025-08-21T01:29:28.513Z",
+    "updatedAt": "2025-08-21T01:29:28.513Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a67679dfce4d0d32cbf06b",
+    "email": "fdefzo.aspm1@example.com",
+    "name": {
+      "firstName": "fdefzo",
+      "middleName": "hgqprm",
+      "lastName": "aspm"
+    },
+    "role": "cashier",
+    "password": "$2b$12$IFZ9hs39kJHjb4ULJFDNZ.KTVLyqAeY12gXmAS7DgSFyENaCF32OS",
+    "status": "suspended",
+    "createdAt": "2025-08-21T01:29:29.395Z",
+    "updatedAt": "2025-08-21T01:29:29.395Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a67679dfce4d0d32cbf06e",
+    "email": "uurustzt.sjbsrqkfn2@example.com",
+    "name": {
+      "firstName": "uurustzt",
+      "lastName": "sjbsrqkfn"
+    },
+    "role": "admin",
+    "password": "$2b$12$G8BLdGYp3NSiqWzxX90gqOn6G3xRuYN/knQ3IHQSiyLxbCtXJ7J0m",
+    "status": "banned",
+    "createdAt": "2025-08-21T01:29:29.905Z",
+    "updatedAt": "2025-08-21T01:29:29.905Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6767adfce4d0d32cbf071",
+    "email": "yvxp.laafwoup3@example.com",
+    "name": {
+      "firstName": "yvxp",
+      "middleName": "lxaebk",
+      "lastName": "laafwoup"
+    },
+    "role": "admin",
+    "password": "$2b$12$GTYP7eD0fzSBz2Yq774eKu.bPsD01M9LjQuukBmqzaaV30GsgZXCu",
+    "status": "active",
+    "createdAt": "2025-08-21T01:29:30.469Z",
+    "updatedAt": "2025-08-21T01:29:30.469Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6767bdfce4d0d32cbf074",
+    "email": "gutum.rncgl4@example.com",
+    "name": {
+      "firstName": "gutum",
+      "middleName": "vynadmml",
+      "lastName": "rncgl"
+    },
+    "role": "cashier",
+    "password": "$2b$12$zXBWG0R5rlqCne6KGVNwGerc9OpC5c.aPols0BpSy5DxBqbTgFh9y",
+    "status": "active",
+    "createdAt": "2025-08-21T01:29:31.039Z",
+    "updatedAt": "2025-08-21T01:29:31.039Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6767bdfce4d0d32cbf077",
+    "email": "nehbh.rdlwbcqjm5@example.com",
+    "name": {
+      "firstName": "nehbh",
+      "middleName": "wpg",
+      "lastName": "rdlwbcqjm"
+    },
+    "role": "cashier",
+    "password": "$2b$12$VGzUVu9rspiSEl4M30iwruoJ/ajzbjxDu5CoB3OWn2i56t8BpCDh.",
+    "status": "suspended",
+    "createdAt": "2025-08-21T01:29:31.673Z",
+    "updatedAt": "2025-08-21T01:29:31.673Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6767cdfce4d0d32cbf07a",
+    "email": "bqrwmkbk.lews6@example.com",
+    "name": {
+      "firstName": "bqrwmkbk",
+      "middleName": "yxbi",
+      "lastName": "lews"
+    },
+    "role": "inventory",
+    "password": "$2b$12$Fg2VmnIwpZUFq.7URaBp9OPNFeetewgFZZOD4vYy7ber/zINq1lWy",
+    "status": "suspended",
+    "createdAt": "2025-08-21T01:29:32.163Z",
+    "updatedAt": "2025-08-21T01:29:32.163Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6767cdfce4d0d32cbf07d",
+    "email": "olvjmenv.sojuhholb7@example.com",
+    "name": {
+      "firstName": "olvjmenv",
+      "lastName": "sojuhholb"
+    },
+    "role": "inventory",
+    "password": "$2b$12$if5PWr2.tLOFUkjZ8BfoQ.8nlscg0bZvS8EUr3Qa3XrPHVPg75f.u",
+    "status": "banned",
+    "createdAt": "2025-08-21T01:29:32.636Z",
+    "updatedAt": "2025-08-21T01:29:32.636Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6767ddfce4d0d32cbf080",
+    "email": "rndtsou.mhztmxsxk8@example.com",
+    "name": {
+      "firstName": "rndtsou",
+      "lastName": "mhztmxsxk"
+    },
+    "role": "owner",
+    "password": "$2b$12$qngHfFTVTbvlTH5OiOYnsOk2AlE/42kRfJMPCuW2bzwfEKE/L95uC",
+    "status": "banned",
+    "createdAt": "2025-08-21T01:29:33.078Z",
+    "updatedAt": "2025-08-21T01:29:33.078Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6767ddfce4d0d32cbf083",
+    "email": "wbnxdyuz.brtsbmdd9@example.com",
+    "name": {
+      "firstName": "wbnxdyuz",
+      "middleName": "hgd",
+      "lastName": "brtsbmdd"
+    },
+    "role": "owner",
+    "password": "$2b$12$Dl39GcA2hwZPApNVLONhk.g422lHN0SUuOH1CgPE6xG6wiw3j0Z92",
+    "status": "banned",
+    "createdAt": "2025-08-21T01:29:33.493Z",
+    "updatedAt": "2025-08-21T01:29:33.493Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6767edfce4d0d32cbf086",
+    "email": "nvonuvo.poetq10@example.com",
+    "name": {
+      "firstName": "nvonuvo",
+      "lastName": "poetq"
+    },
+    "role": "inventory",
+    "password": "$2b$12$mYa2I2qslGSStf.5HUJSU.ve8J1KCrtb2S3IiwXwfN9KXOb0b7w0C",
+    "status": "banned",
+    "createdAt": "2025-08-21T01:29:34.012Z",
+    "updatedAt": "2025-08-21T01:29:34.012Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6767edfce4d0d32cbf089",
+    "email": "yfxyzb.reyhypks11@example.com",
+    "name": {
+      "firstName": "yfxyzb",
+      "lastName": "reyhypks"
+    },
+    "role": "owner",
+    "password": "$2b$12$69S1Pp7wg5IIS2q.nCApq.kzgBq57ZB5qyk1JUyrlR4e6RrajC6Uy",
+    "status": "active",
+    "createdAt": "2025-08-21T01:29:34.526Z",
+    "updatedAt": "2025-08-21T01:29:34.526Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6767edfce4d0d32cbf08c",
+    "email": "vyzjks.fforzucg12@example.com",
+    "name": {
+      "firstName": "vyzjks",
+      "middleName": "mvz",
+      "lastName": "fforzucg"
+    },
+    "role": "admin",
+    "password": "$2b$12$/k2.60CCWv/vMzwbkKPWRuTHwO8WP1.wR6iJPlTPyACBlpw3OdZha",
+    "status": "suspended",
+    "createdAt": "2025-08-21T01:29:34.990Z",
+    "updatedAt": "2025-08-21T01:29:34.990Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6767fdfce4d0d32cbf08f",
+    "email": "lubiv.fwwnm13@example.com",
+    "name": {
+      "firstName": "lubiv",
+      "lastName": "fwwnm"
+    },
+    "role": "admin",
+    "password": "$2b$12$TARI.SNFhWZFf8.oOe.Uee3pqAuCmTfA.scUnVKSqXChR38WoPF9e",
+    "status": "suspended",
+    "createdAt": "2025-08-21T01:29:35.440Z",
+    "updatedAt": "2025-08-21T01:29:35.440Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a6767fdfce4d0d32cbf092",
+    "email": "trhefjkc.myyqbgoj14@example.com",
+    "name": {
+      "firstName": "trhefjkc",
+      "lastName": "myyqbgoj"
+    },
+    "role": "owner",
+    "password": "$2b$12$7egiXta8lrWFMZLzdaA/0uh0BsOdDpJC3/1P0OqAUkh2lWHyeGNBG",
+    "status": "suspended",
+    "createdAt": "2025-08-21T01:29:35.900Z",
+    "updatedAt": "2025-08-21T01:29:35.900Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a67680dfce4d0d32cbf095",
+    "email": "smf.ceurnttiec15@example.com",
+    "name": {
+      "firstName": "smf",
+      "lastName": "ceurnttiec"
+    },
+    "role": "owner",
+    "password": "$2b$12$S9tcNblTAv19OqPSOCh/CeLL73MTjfB5AgRueAoWIJ3boJQndnKVe",
+    "status": "banned",
+    "createdAt": "2025-08-21T01:29:36.337Z",
+    "updatedAt": "2025-08-21T01:29:36.337Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a67680dfce4d0d32cbf098",
+    "email": "hgctcaax.ijrhbkk16@example.com",
+    "name": {
+      "firstName": "hgctcaax",
+      "lastName": "ijrhbkk"
+    },
+    "role": "owner",
+    "password": "$2b$12$Thct2UavK89r8SAMuwoemeflV/hyKdTT.dDsvpTlyejmM2A7joGe6",
+    "status": "active",
+    "createdAt": "2025-08-21T01:29:36.768Z",
+    "updatedAt": "2025-08-21T01:29:36.768Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a67681dfce4d0d32cbf09b",
+    "email": "yazczvks.yxhtf17@example.com",
+    "name": {
+      "firstName": "yazczvks",
+      "middleName": "akzcwb",
+      "lastName": "yxhtf"
+    },
+    "role": "owner",
+    "password": "$2b$12$QiXJraMKRQcDBEbCA1uoPuhpfK8hQpNr0e3VHLBHs.iLGQtG6s3W6",
+    "status": "active",
+    "createdAt": "2025-08-21T01:29:37.271Z",
+    "updatedAt": "2025-08-21T01:29:37.271Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a67681dfce4d0d32cbf09e",
+    "email": "fqvcwc.pefcy18@example.com",
+    "name": {
+      "firstName": "fqvcwc",
+      "middleName": "gub",
+      "lastName": "pefcy"
+    },
+    "role": "admin",
+    "password": "$2b$12$B0QCLAkBdU5.q65sdsWUf.tmtfNQF4rQM/zmrMDriK0rxCJOGXpN.",
+    "status": "active",
+    "createdAt": "2025-08-21T01:29:37.742Z",
+    "updatedAt": "2025-08-21T01:29:37.742Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a67682dfce4d0d32cbf0a1",
+    "email": "gkf.ibwbg19@example.com",
+    "name": {
+      "firstName": "gkf",
+      "middleName": "njujghll",
+      "lastName": "ibwbg"
+    },
+    "role": "admin",
+    "password": "$2b$12$pTzIKweUgoTjj4g/sxLVsOcB4xDIhkeJzeBe1EwS5gsiYH3J0nvCK",
+    "status": "suspended",
+    "createdAt": "2025-08-21T01:29:38.177Z",
+    "updatedAt": "2025-08-21T01:29:38.177Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a84cdcb8d2d74f3edf9915",
+    "email": "odiamareulamarie@gmail.com",
+    "name": {
+      "firstName": "yula",
+      "middleName": "alcantara",
+      "lastName": "esguerra"
+    },
+    "role": "admin",
+    "password": "$2b$12$y8lrSl5qw2MZsGAcvfwSx.FvwuKdeDO3uYqM8dD.WsfBOVtGPVcxy",
+    "status": "active",
+    "createdAt": "2025-08-22T10:56:28.916Z",
+    "updatedAt": "2025-08-22T10:56:28.916Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a850761b69aef1f710a292",
+    "email": "eulamarie.odiamar@cvsu.edu.ph",
+    "name": {
+      "firstName": "yula",
+      "middleName": "ewqudjw",
+      "lastName": "eterw"
+    },
+    "role": "cashier",
+    "password": "$2b$12$7UySp4kytNooN6peBYu/8eLlZQvNOF3LTOmNlrw2KtY3JeQoYXiBO",
+    "status": "active",
+    "createdAt": "2025-08-22T11:11:50.488Z",
+    "updatedAt": "2025-08-22T11:11:50.488Z",
+    "__v": 0
+  }
+]

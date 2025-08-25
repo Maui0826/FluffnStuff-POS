@@ -31,12 +31,14 @@ main {
 }
 
 .container {
-  width: 100%;
+  width: calc(100% - 80px);
+  transition: width 0.3s;
   margin: 0 auto;
   background-color: var(--sub-color);
   border-radius: 8px;
   padding: 2rem;
   box-shadow: 0 4px 4px var(--border-color1);
+  align-items: center;
 }
 
 .container h1 {
@@ -93,7 +95,7 @@ main {
 }
 
 .order-table {
-  width: 100%;
+  width: calc(100% - 80px);
   border-collapse: collapse;
   font-size: 0.95rem;
   background-color: var(--main-color);

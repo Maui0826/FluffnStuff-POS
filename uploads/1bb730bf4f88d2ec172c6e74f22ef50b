@@ -1,0 +1,2430 @@
+{
+  "meta": {
+    "generatedAt": "2025-08-25T15:15:53.018Z",
+    "collections": [
+      "users",
+      "products",
+      "categories",
+      "inventories",
+      "inventoryRecords",
+      "suppliers",
+      "stocks",
+      "stockAdjustments",
+      "transactions",
+      "transactionItems",
+      "refunds",
+      "actionLogs"
+    ]
+  },
+  "data": {
+    "users": [
+      {
+        "_id": "68a53f575ec633f48c7d3942",
+        "email": "cashier@gmail.com",
+        "name": {
+          "firstName": "Cashier",
+          "lastName": "User"
+        },
+        "role": "cashier",
+        "status": "active",
+        "createdAt": "2025-08-20T03:21:59.689Z",
+        "updatedAt": "2025-08-20T03:21:59.689Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f585ec633f48c7d3945",
+        "email": "inventory@gmail.com",
+        "name": {
+          "firstName": "Inventory",
+          "lastName": "User"
+        },
+        "role": "inventory",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:00.117Z",
+        "updatedAt": "2025-08-20T03:22:00.117Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f585ec633f48c7d3948",
+        "email": "admin@gmail.com",
+        "name": {
+          "firstName": "Master",
+          "middleName": "",
+          "lastName": "Admin"
+        },
+        "role": "admin",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:00.511Z",
+        "updatedAt": "2025-08-25T12:22:23.323Z",
+        "__v": 0,
+        "suspendUntil": "2025-09-01T12:22:23.319Z"
+      },
+      {
+        "_id": "68a53f585ec633f48c7d394b",
+        "email": "owner@gmail.com",
+        "name": {
+          "firstName": "Owner",
+          "lastName": "User"
+        },
+        "role": "owner",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:00.918Z",
+        "updatedAt": "2025-08-20T03:22:00.918Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f595ec633f48c7d394e",
+        "email": "ruby@fluffnstuff.com",
+        "name": {
+          "firstName": "Ruby",
+          "lastName": "Stone"
+        },
+        "role": "owner",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:01.312Z",
+        "updatedAt": "2025-08-20T03:22:01.312Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f595ec633f48c7d3951",
+        "email": "stan@fluffnstuff.com",
+        "name": {
+          "firstName": "Stan",
+          "lastName": "Marsh"
+        },
+        "role": "cashier",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:01.684Z",
+        "updatedAt": "2025-08-20T03:22:01.684Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5a5ec633f48c7d3954",
+        "email": "jeff@fluffnstuff.com",
+        "name": {
+          "firstName": "Jeff",
+          "lastName": "Wilson"
+        },
+        "role": "admin",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:02.061Z",
+        "updatedAt": "2025-08-20T03:22:02.061Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5a5ec633f48c7d3957",
+        "email": "john.smith@dummy.com",
+        "name": {
+          "firstName": "John",
+          "middleName": "",
+          "lastName": "Smith"
+        },
+        "role": "cashier",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:02.435Z",
+        "updatedAt": "2025-08-20T03:22:02.435Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5a5ec633f48c7d395a",
+        "email": "jane.johnson@dummy.com",
+        "name": {
+          "firstName": "Jane",
+          "middleName": "",
+          "lastName": "Johnson"
+        },
+        "role": "inventory",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:02.807Z",
+        "updatedAt": "2025-08-20T03:22:02.807Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5b5ec633f48c7d395d",
+        "email": "michael.brown@dummy.com",
+        "name": {
+          "firstName": "Michael",
+          "middleName": "",
+          "lastName": "Brown"
+        },
+        "role": "admin",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:03.181Z",
+        "updatedAt": "2025-08-20T03:22:03.181Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5b5ec633f48c7d3960",
+        "email": "emily.taylor@dummy.com",
+        "name": {
+          "firstName": "Emily",
+          "middleName": "",
+          "lastName": "Taylor"
+        },
+        "role": "owner",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:03.557Z",
+        "updatedAt": "2025-08-20T03:22:03.557Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5b5ec633f48c7d3963",
+        "email": "david.anderson@dummy.com",
+        "name": {
+          "firstName": "David",
+          "middleName": "",
+          "lastName": "Anderson"
+        },
+        "role": "cashier",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:03.929Z",
+        "updatedAt": "2025-08-20T03:22:03.929Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5c5ec633f48c7d3966",
+        "email": "sarah.thomas@dummy.com",
+        "name": {
+          "firstName": "Sarah",
+          "middleName": "",
+          "lastName": "Thomas"
+        },
+        "role": "inventory",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:04.302Z",
+        "updatedAt": "2025-08-20T03:22:04.302Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5c5ec633f48c7d3969",
+        "email": "chris.jackson@dummy.com",
+        "name": {
+          "firstName": "Chris",
+          "middleName": "",
+          "lastName": "Jackson"
+        },
+        "role": "admin",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:04.677Z",
+        "updatedAt": "2025-08-20T03:22:04.677Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5d5ec633f48c7d396c",
+        "email": "laura.white@dummy.com",
+        "name": {
+          "firstName": "Laura",
+          "middleName": "",
+          "lastName": "White"
+        },
+        "role": "owner",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:05.055Z",
+        "updatedAt": "2025-08-20T03:22:05.055Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5d5ec633f48c7d396f",
+        "email": "daniel.harris@dummy.com",
+        "name": {
+          "firstName": "Daniel",
+          "middleName": "",
+          "lastName": "Harris"
+        },
+        "role": "cashier",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:05.434Z",
+        "updatedAt": "2025-08-20T03:22:05.434Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5d5ec633f48c7d3972",
+        "email": "olivia.martin@dummy.com",
+        "name": {
+          "firstName": "Olivia",
+          "middleName": "",
+          "lastName": "Martin"
+        },
+        "role": "inventory",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:05.810Z",
+        "updatedAt": "2025-08-20T03:22:05.810Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5e5ec633f48c7d3975",
+        "email": "matthew.thompson@dummy.com",
+        "name": {
+          "firstName": "Matthew",
+          "middleName": "",
+          "lastName": "Thompson"
+        },
+        "role": "admin",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:06.193Z",
+        "updatedAt": "2025-08-20T03:22:06.193Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5e5ec633f48c7d3978",
+        "email": "sophia.garcia@dummy.com",
+        "name": {
+          "firstName": "Sophia",
+          "middleName": "",
+          "lastName": "Garcia"
+        },
+        "role": "owner",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:06.580Z",
+        "updatedAt": "2025-08-20T03:22:06.580Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5f5ec633f48c7d397b",
+        "email": "james.martinez@dummy.com",
+        "name": {
+          "firstName": "James",
+          "middleName": "",
+          "lastName": "Martinez"
+        },
+        "role": "cashier",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:07.060Z",
+        "updatedAt": "2025-08-20T03:22:07.060Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5f5ec633f48c7d397e",
+        "email": "emma.robinson@dummy.com",
+        "name": {
+          "firstName": "Emma",
+          "middleName": "",
+          "lastName": "Robinson"
+        },
+        "role": "inventory",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:07.452Z",
+        "updatedAt": "2025-08-20T03:22:07.452Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f5f5ec633f48c7d3981",
+        "email": "robert.clark@dummy.com",
+        "name": {
+          "firstName": "Robert",
+          "middleName": "",
+          "lastName": "Clark"
+        },
+        "role": "admin",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:07.870Z",
+        "updatedAt": "2025-08-20T03:22:07.870Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f605ec633f48c7d3984",
+        "email": "isabella.rodriguez@dummy.com",
+        "name": {
+          "firstName": "Isabella",
+          "middleName": "",
+          "lastName": "Rodriguez"
+        },
+        "role": "owner",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:08.249Z",
+        "updatedAt": "2025-08-20T03:22:08.249Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f605ec633f48c7d3987",
+        "email": "william.lewis@dummy.com",
+        "name": {
+          "firstName": "William",
+          "middleName": "",
+          "lastName": "Lewis"
+        },
+        "role": "cashier",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:08.645Z",
+        "updatedAt": "2025-08-20T03:22:08.645Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f615ec633f48c7d398a",
+        "email": "mia.lee@dummy.com",
+        "name": {
+          "firstName": "Mia",
+          "middleName": "",
+          "lastName": "Lee"
+        },
+        "role": "inventory",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:09.028Z",
+        "updatedAt": "2025-08-20T03:22:09.028Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f615ec633f48c7d398d",
+        "email": "joseph.walker@dummy.com",
+        "name": {
+          "firstName": "Joseph",
+          "middleName": "",
+          "lastName": "Walker"
+        },
+        "role": "admin",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:09.472Z",
+        "updatedAt": "2025-08-20T03:22:09.472Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a53f615ec633f48c7d3990",
+        "email": "charlotte.hall@dummy.com",
+        "name": {
+          "firstName": "Charlotte",
+          "middleName": "",
+          "lastName": "Hall"
+        },
+        "role": "owner",
+        "status": "active",
+        "createdAt": "2025-08-20T03:22:09.879Z",
+        "updatedAt": "2025-08-20T03:22:09.879Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a66909d345154266523ee2",
+        "email": "vnkfr.kzrdhph0@example.com",
+        "name": {
+          "firstName": "vnkfr",
+          "middleName": "auwofik",
+          "lastName": "kzrdhph"
+        },
+        "role": "owner",
+        "status": "banned",
+        "createdAt": "2025-08-21T00:32:09.277Z",
+        "updatedAt": "2025-08-21T00:32:09.277Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a66909d345154266523ee5",
+        "email": "snyqhz.ccaqlshvh1@example.com",
+        "name": {
+          "firstName": "snyqhz",
+          "middleName": "aktradz",
+          "lastName": "ccaqlshvh"
+        },
+        "role": "cashier",
+        "status": "suspended",
+        "createdAt": "2025-08-21T00:32:09.704Z",
+        "updatedAt": "2025-08-21T00:32:09.704Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690ad345154266523ee8",
+        "email": "ionuddg.mrgedvape2@example.com",
+        "name": {
+          "firstName": "ionuddg",
+          "middleName": "sykx",
+          "lastName": "mrgedvape"
+        },
+        "role": "inventory",
+        "status": "suspended",
+        "createdAt": "2025-08-21T00:32:10.164Z",
+        "updatedAt": "2025-08-21T00:32:10.164Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690ad345154266523eeb",
+        "email": "odijp.tgrxig3@example.com",
+        "name": {
+          "firstName": "odijp",
+          "lastName": "tgrxig"
+        },
+        "role": "owner",
+        "status": "suspended",
+        "createdAt": "2025-08-21T00:32:10.580Z",
+        "updatedAt": "2025-08-21T00:32:10.580Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690bd345154266523eee",
+        "email": "jtjj.ctpgemdkqx4@example.com",
+        "name": {
+          "firstName": "jtjj",
+          "lastName": "ctpgemdkqx"
+        },
+        "role": "cashier",
+        "status": "banned",
+        "createdAt": "2025-08-21T00:32:11.075Z",
+        "updatedAt": "2025-08-21T00:32:11.075Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690bd345154266523ef1",
+        "email": "iucei.mooejc5@example.com",
+        "name": {
+          "firstName": "iucei",
+          "middleName": "pcpyvw",
+          "lastName": "mooejc"
+        },
+        "role": "cashier",
+        "status": "banned",
+        "createdAt": "2025-08-21T00:32:11.515Z",
+        "updatedAt": "2025-08-21T00:32:11.515Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690bd345154266523ef4",
+        "email": "ppjwfl.gcodjbhdck6@example.com",
+        "name": {
+          "firstName": "ppjwfl",
+          "middleName": "plygfna",
+          "lastName": "gcodjbhdck"
+        },
+        "role": "cashier",
+        "status": "active",
+        "createdAt": "2025-08-21T00:32:11.936Z",
+        "updatedAt": "2025-08-21T00:32:11.936Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690cd345154266523ef7",
+        "email": "copuje.fuigae7@example.com",
+        "name": {
+          "firstName": "copuje",
+          "middleName": "prjugqv",
+          "lastName": "fuigae"
+        },
+        "role": "owner",
+        "status": "banned",
+        "createdAt": "2025-08-21T00:32:12.345Z",
+        "updatedAt": "2025-08-21T00:32:12.345Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690cd345154266523efa",
+        "email": "eiosajs.rrokfe8@example.com",
+        "name": {
+          "firstName": "eiosajs",
+          "middleName": "ayvuqvho",
+          "lastName": "rrokfe"
+        },
+        "role": "owner",
+        "status": "banned",
+        "createdAt": "2025-08-21T00:32:12.745Z",
+        "updatedAt": "2025-08-21T00:32:12.745Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690dd345154266523efd",
+        "email": "bcbozq.pumeo9@example.com",
+        "name": {
+          "firstName": "bcbozq",
+          "middleName": "femw",
+          "lastName": "pumeo"
+        },
+        "role": "cashier",
+        "status": "suspended",
+        "createdAt": "2025-08-21T00:32:13.145Z",
+        "updatedAt": "2025-08-21T00:32:13.145Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690dd345154266523f00",
+        "email": "wkpobv.hnni10@example.com",
+        "name": {
+          "firstName": "wkpobv",
+          "middleName": "yvprm",
+          "lastName": "hnni"
+        },
+        "role": "owner",
+        "status": "active",
+        "createdAt": "2025-08-21T00:32:13.608Z",
+        "updatedAt": "2025-08-21T00:32:13.608Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690ed345154266523f03",
+        "email": "zatfk.nbhy11@example.com",
+        "name": {
+          "firstName": "zatfk",
+          "middleName": "admdix",
+          "lastName": "nbhy"
+        },
+        "role": "owner",
+        "status": "banned",
+        "createdAt": "2025-08-21T00:32:14.020Z",
+        "updatedAt": "2025-08-21T00:32:14.020Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690ed345154266523f06",
+        "email": "hcx.iungke12@example.com",
+        "name": {
+          "firstName": "hcx",
+          "lastName": "iungke"
+        },
+        "role": "owner",
+        "status": "suspended",
+        "createdAt": "2025-08-21T00:32:14.414Z",
+        "updatedAt": "2025-08-21T00:32:14.414Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690ed345154266523f09",
+        "email": "tgfslc.jjtwdmz13@example.com",
+        "name": {
+          "firstName": "tgfslc",
+          "lastName": "jjtwdmz"
+        },
+        "role": "cashier",
+        "status": "banned",
+        "createdAt": "2025-08-21T00:32:14.821Z",
+        "updatedAt": "2025-08-21T00:32:14.821Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690fd345154266523f0c",
+        "email": "augvmw.rlqvacwxig14@example.com",
+        "name": {
+          "firstName": "augvmw",
+          "middleName": "erob",
+          "lastName": "rlqvacwxig"
+        },
+        "role": "inventory",
+        "status": "banned",
+        "createdAt": "2025-08-21T00:32:15.221Z",
+        "updatedAt": "2025-08-21T00:32:15.221Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690fd345154266523f0f",
+        "email": "mxkbuj.ieizbniyh15@example.com",
+        "name": {
+          "firstName": "mxkbuj",
+          "lastName": "ieizbniyh"
+        },
+        "role": "admin",
+        "status": "suspended",
+        "createdAt": "2025-08-21T00:32:15.610Z",
+        "updatedAt": "2025-08-21T00:32:15.610Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6690fd345154266523f12",
+        "email": "ydjgz.kqkqlj16@example.com",
+        "name": {
+          "firstName": "ydjgz",
+          "lastName": "kqkqlj"
+        },
+        "role": "cashier",
+        "status": "banned",
+        "createdAt": "2025-08-21T00:32:15.994Z",
+        "updatedAt": "2025-08-21T00:32:15.994Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a66910d345154266523f15",
+        "email": "eta.svdfs17@example.com",
+        "name": {
+          "firstName": "eta",
+          "middleName": "rxvvtm",
+          "lastName": "svdfs"
+        },
+        "role": "admin",
+        "status": "suspended",
+        "createdAt": "2025-08-21T00:32:16.500Z",
+        "updatedAt": "2025-08-21T00:32:16.500Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a66910d345154266523f18",
+        "email": "rrwhstwp.fyuwqusvsa18@example.com",
+        "name": {
+          "firstName": "rrwhstwp",
+          "lastName": "fyuwqusvsa"
+        },
+        "role": "owner",
+        "status": "banned",
+        "createdAt": "2025-08-21T00:32:16.899Z",
+        "updatedAt": "2025-08-21T00:32:16.899Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a66911d345154266523f1b",
+        "email": "rwhmtvh.eykkix19@example.com",
+        "name": {
+          "firstName": "rwhmtvh",
+          "lastName": "eykkix"
+        },
+        "role": "admin",
+        "status": "suspended",
+        "createdAt": "2025-08-21T00:32:17.286Z",
+        "updatedAt": "2025-08-21T00:32:17.286Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a67678dfce4d0d32cbf068",
+        "email": "iqzp.isfvdbb0@example.com",
+        "name": {
+          "firstName": "iqzp",
+          "middleName": "kfw",
+          "lastName": "isfvdbb"
+        },
+        "role": "inventory",
+        "status": "suspended",
+        "createdAt": "2025-08-21T01:29:28.513Z",
+        "updatedAt": "2025-08-21T01:29:28.513Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a67679dfce4d0d32cbf06b",
+        "email": "fdefzo.aspm1@example.com",
+        "name": {
+          "firstName": "fdefzo",
+          "middleName": "hgqprm",
+          "lastName": "aspm"
+        },
+        "role": "cashier",
+        "status": "suspended",
+        "createdAt": "2025-08-21T01:29:29.395Z",
+        "updatedAt": "2025-08-21T01:29:29.395Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a67679dfce4d0d32cbf06e",
+        "email": "uurustzt.sjbsrqkfn2@example.com",
+        "name": {
+          "firstName": "uurustzt",
+          "lastName": "sjbsrqkfn"
+        },
+        "role": "admin",
+        "status": "banned",
+        "createdAt": "2025-08-21T01:29:29.905Z",
+        "updatedAt": "2025-08-21T01:29:29.905Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6767adfce4d0d32cbf071",
+        "email": "yvxp.laafwoup3@example.com",
+        "name": {
+          "firstName": "yvxp",
+          "middleName": "lxaebk",
+          "lastName": "laafwoup"
+        },
+        "role": "admin",
+        "status": "active",
+        "createdAt": "2025-08-21T01:29:30.469Z",
+        "updatedAt": "2025-08-21T01:29:30.469Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6767bdfce4d0d32cbf074",
+        "email": "gutum.rncgl4@example.com",
+        "name": {
+          "firstName": "gutum",
+          "middleName": "vynadmml",
+          "lastName": "rncgl"
+        },
+        "role": "cashier",
+        "status": "active",
+        "createdAt": "2025-08-21T01:29:31.039Z",
+        "updatedAt": "2025-08-21T01:29:31.039Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6767bdfce4d0d32cbf077",
+        "email": "nehbh.rdlwbcqjm5@example.com",
+        "name": {
+          "firstName": "nehbh",
+          "middleName": "wpg",
+          "lastName": "rdlwbcqjm"
+        },
+        "role": "cashier",
+        "status": "suspended",
+        "createdAt": "2025-08-21T01:29:31.673Z",
+        "updatedAt": "2025-08-21T01:29:31.673Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6767cdfce4d0d32cbf07a",
+        "email": "bqrwmkbk.lews6@example.com",
+        "name": {
+          "firstName": "bqrwmkbk",
+          "middleName": "yxbi",
+          "lastName": "lews"
+        },
+        "role": "inventory",
+        "status": "suspended",
+        "createdAt": "2025-08-21T01:29:32.163Z",
+        "updatedAt": "2025-08-21T01:29:32.163Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6767cdfce4d0d32cbf07d",
+        "email": "olvjmenv.sojuhholb7@example.com",
+        "name": {
+          "firstName": "olvjmenv",
+          "lastName": "sojuhholb"
+        },
+        "role": "inventory",
+        "status": "banned",
+        "createdAt": "2025-08-21T01:29:32.636Z",
+        "updatedAt": "2025-08-21T01:29:32.636Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6767ddfce4d0d32cbf080",
+        "email": "rndtsou.mhztmxsxk8@example.com",
+        "name": {
+          "firstName": "rndtsou",
+          "lastName": "mhztmxsxk"
+        },
+        "role": "owner",
+        "status": "banned",
+        "createdAt": "2025-08-21T01:29:33.078Z",
+        "updatedAt": "2025-08-21T01:29:33.078Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6767ddfce4d0d32cbf083",
+        "email": "wbnxdyuz.brtsbmdd9@example.com",
+        "name": {
+          "firstName": "wbnxdyuz",
+          "middleName": "hgd",
+          "lastName": "brtsbmdd"
+        },
+        "role": "owner",
+        "status": "banned",
+        "createdAt": "2025-08-21T01:29:33.493Z",
+        "updatedAt": "2025-08-21T01:29:33.493Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6767edfce4d0d32cbf086",
+        "email": "nvonuvo.poetq10@example.com",
+        "name": {
+          "firstName": "nvonuvo",
+          "lastName": "poetq"
+        },
+        "role": "inventory",
+        "status": "banned",
+        "createdAt": "2025-08-21T01:29:34.012Z",
+        "updatedAt": "2025-08-21T01:29:34.012Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6767edfce4d0d32cbf089",
+        "email": "yfxyzb.reyhypks11@example.com",
+        "name": {
+          "firstName": "yfxyzb",
+          "lastName": "reyhypks"
+        },
+        "role": "owner",
+        "status": "active",
+        "createdAt": "2025-08-21T01:29:34.526Z",
+        "updatedAt": "2025-08-21T01:29:34.526Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6767edfce4d0d32cbf08c",
+        "email": "vyzjks.fforzucg12@example.com",
+        "name": {
+          "firstName": "vyzjks",
+          "middleName": "mvz",
+          "lastName": "fforzucg"
+        },
+        "role": "admin",
+        "status": "suspended",
+        "createdAt": "2025-08-21T01:29:34.990Z",
+        "updatedAt": "2025-08-21T01:29:34.990Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6767fdfce4d0d32cbf08f",
+        "email": "lubiv.fwwnm13@example.com",
+        "name": {
+          "firstName": "lubiv",
+          "lastName": "fwwnm"
+        },
+        "role": "admin",
+        "status": "suspended",
+        "createdAt": "2025-08-21T01:29:35.440Z",
+        "updatedAt": "2025-08-21T01:29:35.440Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a6767fdfce4d0d32cbf092",
+        "email": "trhefjkc.myyqbgoj14@example.com",
+        "name": {
+          "firstName": "trhefjkc",
+          "lastName": "myyqbgoj"
+        },
+        "role": "owner",
+        "status": "suspended",
+        "createdAt": "2025-08-21T01:29:35.900Z",
+        "updatedAt": "2025-08-21T01:29:35.900Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a67680dfce4d0d32cbf095",
+        "email": "smf.ceurnttiec15@example.com",
+        "name": {
+          "firstName": "smf",
+          "lastName": "ceurnttiec"
+        },
+        "role": "owner",
+        "status": "banned",
+        "createdAt": "2025-08-21T01:29:36.337Z",
+        "updatedAt": "2025-08-21T01:29:36.337Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a67680dfce4d0d32cbf098",
+        "email": "hgctcaax.ijrhbkk16@example.com",
+        "name": {
+          "firstName": "hgctcaax",
+          "lastName": "ijrhbkk"
+        },
+        "role": "owner",
+        "status": "active",
+        "createdAt": "2025-08-21T01:29:36.768Z",
+        "updatedAt": "2025-08-21T01:29:36.768Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a67681dfce4d0d32cbf09b",
+        "email": "yazczvks.yxhtf17@example.com",
+        "name": {
+          "firstName": "yazczvks",
+          "middleName": "akzcwb",
+          "lastName": "yxhtf"
+        },
+        "role": "owner",
+        "status": "active",
+        "createdAt": "2025-08-21T01:29:37.271Z",
+        "updatedAt": "2025-08-21T01:29:37.271Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a67681dfce4d0d32cbf09e",
+        "email": "fqvcwc.pefcy18@example.com",
+        "name": {
+          "firstName": "fqvcwc",
+          "middleName": "gub",
+          "lastName": "pefcy"
+        },
+        "role": "admin",
+        "status": "active",
+        "createdAt": "2025-08-21T01:29:37.742Z",
+        "updatedAt": "2025-08-21T01:29:37.742Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a67682dfce4d0d32cbf0a1",
+        "email": "gkf.ibwbg19@example.com",
+        "name": {
+          "firstName": "gkf",
+          "middleName": "njujghll",
+          "lastName": "ibwbg"
+        },
+        "role": "admin",
+        "status": "suspended",
+        "createdAt": "2025-08-21T01:29:38.177Z",
+        "updatedAt": "2025-08-21T01:29:38.177Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a84cdcb8d2d74f3edf9915",
+        "email": "odiamareulamarie@gmail.com",
+        "name": {
+          "firstName": "yula",
+          "middleName": "alcantara",
+          "lastName": "esguerra"
+        },
+        "role": "admin",
+        "status": "active",
+        "createdAt": "2025-08-22T10:56:28.916Z",
+        "updatedAt": "2025-08-22T10:56:28.916Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a850761b69aef1f710a292",
+        "email": "eulamarie.odiamar@cvsu.edu.ph",
+        "name": {
+          "firstName": "yula",
+          "middleName": "ewqudjw",
+          "lastName": "eterw"
+        },
+        "role": "cashier",
+        "status": "active",
+        "createdAt": "2025-08-22T11:11:50.488Z",
+        "updatedAt": "2025-08-22T11:11:50.488Z",
+        "__v": 0
+      }
+    ],
+    "products": [
+      {
+        "_id": "68aaefb81757054a92b31b15",
+        "imageUrl": "Images\\1756032952409.png",
+        "name": "Green",
+        "sku": "FNS-G-001",
+        "categoryId": "68a9569bbd1c317a735a9bae",
+        "price": {
+          "$numberDecimal": "10"
+        },
+        "lowStockThreshold": 5,
+        "description": "testing",
+        "status": "active",
+        "supplierId": "68a96a9be9a57195d5edddbc",
+        "createdAt": "2025-08-24T10:55:52.565Z",
+        "updatedAt": "2025-08-24T12:43:35.983Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaefdb1757054a92b31b26",
+        "imageUrl": "Images\\1756032987627.png",
+        "name": "Purple ring",
+        "sku": "FNS-P-001",
+        "categoryId": "68a957b5bd1c317a735a9c0a",
+        "price": {
+          "$numberDecimal": "20"
+        },
+        "lowStockThreshold": 5,
+        "description": "testing",
+        "status": "active",
+        "supplierId": "68a96a9be9a57195d5edddbc",
+        "createdAt": "2025-08-24T10:56:27.766Z",
+        "updatedAt": "2025-08-25T03:39:41.989Z",
+        "__v": 0
+      }
+    ],
+    "categories": [
+      {
+        "_id": "68a9569bbd1c317a735a9bae",
+        "name": "Necklace",
+        "description": "Glitzy Collection",
+        "isDeleted": false,
+        "__v": 0
+      },
+      {
+        "_id": "68a957b5bd1c317a735a9c0a",
+        "name": "Ring",
+        "description": "Ring",
+        "isDeleted": false,
+        "__v": 0
+      }
+    ],
+    "inventories": [
+      {
+        "_id": "68aaefb81757054a92b31b17",
+        "productId": "68aaefb81757054a92b31b15",
+        "quantity": 23,
+        "acquisitionPrice": {
+          "$numberDecimal": "5"
+        },
+        "status": "active",
+        "updatedAt": "2025-08-25T11:38:46.805Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaefdb1757054a92b31b28",
+        "productId": "68aaefdb1757054a92b31b26",
+        "quantity": 50,
+        "acquisitionPrice": {
+          "$numberDecimal": "10"
+        },
+        "status": "active",
+        "updatedAt": "2025-08-24T15:32:34.849Z",
+        "__v": 0
+      }
+    ],
+    "inventoryRecords": [
+      {
+        "_id": "68ab36c444c7ec9f17de52c4",
+        "productId": "68aaefb81757054a92b31b15",
+        "inventoryId": "68aaefb81757054a92b31b17",
+        "quantity": 25,
+        "acquisitionPrice": {
+          "$numberDecimal": "5"
+        },
+        "dateRecorded": "2025-08-24T15:59:00.083Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ab36c444c7ec9f17de52c5",
+        "productId": "68aaefdb1757054a92b31b26",
+        "inventoryId": "68aaefdb1757054a92b31b28",
+        "quantity": 37,
+        "acquisitionPrice": {
+          "$numberDecimal": "10"
+        },
+        "dateRecorded": "2025-08-24T15:59:00.083Z",
+        "__v": 0
+      }
+    ],
+    "suppliers": [
+      {
+        "_id": "68a96a9be9a57195d5edddbc",
+        "supplierName": "peter",
+        "status": "active",
+        "createdAt": "2025-08-23T07:15:39.190Z",
+        "updatedAt": "2025-08-23T07:15:39.190Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a9712880eb87518ec4d969",
+        "supplierName": "pablo",
+        "status": "active",
+        "createdAt": "2025-08-23T07:43:36.834Z",
+        "updatedAt": "2025-08-23T07:43:36.834Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a9719580eb87518ec4d9e2",
+        "supplierName": "juan",
+        "status": "active",
+        "createdAt": "2025-08-23T07:45:25.457Z",
+        "updatedAt": "2025-08-23T07:45:25.457Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aa86b20c1cf4e21c83b5ab",
+        "supplierName": "joel",
+        "status": "active",
+        "createdAt": "2025-08-24T03:27:46.140Z",
+        "updatedAt": "2025-08-24T03:27:46.140Z",
+        "__v": 0
+      }
+    ],
+    "stocks": [
+      {
+        "_id": "68ab08d430d647e7a80e33fb",
+        "productId": "68aaefb81757054a92b31b15",
+        "supplierId": "68a96a9be9a57195d5edddbc",
+        "supplierName": "peter",
+        "orderQuantity": 1,
+        "deliveredQuantity": 1,
+        "deliveryDate": "2025-08-24T00:00:00.000Z",
+        "acquisitionPrice": {
+          "$numberDecimal": "5"
+        },
+        "status": "delivered",
+        "isDeleted": false,
+        "createdAt": "2025-08-24T12:43:00.946Z",
+        "__v": 0,
+        "deliveredDate": "2025-08-24T12:43:35.930Z"
+      },
+      {
+        "_id": "68ab3e19aee197c2fac525c2",
+        "productId": "68aaefdb1757054a92b31b26",
+        "supplierId": "68a96a9be9a57195d5edddbc",
+        "supplierName": "peter",
+        "orderQuantity": 10,
+        "deliveredQuantity": 20,
+        "deliveryDate": "2025-08-27T00:00:00.000Z",
+        "acquisitionPrice": {
+          "$numberDecimal": "10"
+        },
+        "status": "delivered",
+        "isDeleted": false,
+        "createdAt": "2025-08-24T16:30:17.592Z",
+        "__v": 0,
+        "deliveredDate": "2025-08-24T16:30:33.660Z"
+      },
+      {
+        "_id": "68ac10120044ed11eb3ab122",
+        "productId": "68aaefb81757054a92b31b15",
+        "supplierId": "68a96a9be9a57195d5edddbc",
+        "supplierName": "peter",
+        "orderQuantity": 2,
+        "deliveredQuantity": 0,
+        "deliveryDate": "2025-08-26T00:00:00.000Z",
+        "acquisitionPrice": {
+          "$numberDecimal": "5"
+        },
+        "status": "pending",
+        "isDeleted": false,
+        "createdAt": "2025-08-25T07:26:10.096Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac10120044ed11eb3ab127",
+        "productId": "68aaefdb1757054a92b31b26",
+        "supplierId": "68a96a9be9a57195d5edddbc",
+        "supplierName": "peter",
+        "orderQuantity": 15,
+        "deliveredQuantity": 0,
+        "deliveryDate": "2025-08-26T00:00:00.000Z",
+        "acquisitionPrice": {
+          "$numberDecimal": "10"
+        },
+        "status": "pending",
+        "isDeleted": false,
+        "createdAt": "2025-08-25T07:26:10.257Z",
+        "__v": 0
+      }
+    ],
+    "stockAdjustments": [
+      {
+        "_id": "68abdafeea2bc42e8d3af8bc",
+        "product": "68aaefdb1757054a92b31b26",
+        "previousQuantity": 57,
+        "adjustedQuantity": 50,
+        "change": {
+          "$numberDecimal": "-7"
+        },
+        "reason": "damaged",
+        "note": "damaged testing",
+        "adjustedBy": "68a53f585ec633f48c7d3948",
+        "date": "2025-08-25T03:39:42.068Z",
+        "__v": 0
+      }
+    ],
+    "transactions": [
+      {
+        "_id": "68aaf0021757054a92b31b46",
+        "receiptNum": "FNS-1756033026203",
+        "totalQty": 3,
+        "grossAmount": {
+          "$numberDecimal": "30.00"
+        },
+        "vatableAmount": {
+          "$numberDecimal": "26.79"
+        },
+        "vatExemptSales": {
+          "$numberDecimal": "0.00"
+        },
+        "vatZeroRatedSales": {
+          "$numberDecimal": "0.00"
+        },
+        "vatAmount": {
+          "$numberDecimal": "3.21"
+        },
+        "totalAmount": {
+          "$numberDecimal": "30.00"
+        },
+        "totalDiscount": {
+          "$numberDecimal": "0.00"
+        },
+        "discountType": "none",
+        "paymentMethod": "cash",
+        "cash": {
+          "$numberDecimal": "30.00"
+        },
+        "referenceNumber": null,
+        "pwdId": null,
+        "seniorId": null,
+        "change": {
+          "$numberDecimal": "0.00"
+        },
+        "cashier": "68a53f585ec633f48c7d3948",
+        "isDeleted": false,
+        "createdAt": "2025-08-24T10:57:06.205Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaf0181757054a92b31b59",
+        "receiptNum": "FNS-1756033048470",
+        "totalQty": 3,
+        "grossAmount": {
+          "$numberDecimal": "30.00"
+        },
+        "vatableAmount": {
+          "$numberDecimal": "0.00"
+        },
+        "vatExemptSales": {
+          "$numberDecimal": "24.00"
+        },
+        "vatZeroRatedSales": {
+          "$numberDecimal": "0.00"
+        },
+        "vatAmount": {
+          "$numberDecimal": "0.00"
+        },
+        "totalAmount": {
+          "$numberDecimal": "24.00"
+        },
+        "totalDiscount": {
+          "$numberDecimal": "6.00"
+        },
+        "discountType": "senior",
+        "paymentMethod": "cash",
+        "cash": {
+          "$numberDecimal": "30.00"
+        },
+        "referenceNumber": null,
+        "pwdId": null,
+        "seniorId": "testing 1",
+        "change": {
+          "$numberDecimal": "6.00"
+        },
+        "cashier": "68a53f585ec633f48c7d3948",
+        "isDeleted": false,
+        "createdAt": "2025-08-24T10:57:28.471Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aafb71ab3f71b538c0a1bf",
+        "receiptNum": "FNS-1756035953396",
+        "totalQty": 5,
+        "grossAmount": {
+          "$numberDecimal": "100.00"
+        },
+        "vatableAmount": {
+          "$numberDecimal": "0.00"
+        },
+        "vatExemptSales": {
+          "$numberDecimal": "80.00"
+        },
+        "vatZeroRatedSales": {
+          "$numberDecimal": "0.00"
+        },
+        "vatAmount": {
+          "$numberDecimal": "0.00"
+        },
+        "totalAmount": {
+          "$numberDecimal": "80.00"
+        },
+        "totalDiscount": {
+          "$numberDecimal": "20.00"
+        },
+        "discountType": "pwd",
+        "paymentMethod": "cash",
+        "cash": {
+          "$numberDecimal": "200.00"
+        },
+        "referenceNumber": null,
+        "pwdId": "test",
+        "seniorId": null,
+        "change": {
+          "$numberDecimal": "120.00"
+        },
+        "cashier": "68a53f585ec633f48c7d3948",
+        "isDeleted": false,
+        "createdAt": "2025-08-24T11:45:53.403Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aafb82ab3f71b538c0a1d1",
+        "receiptNum": "FNS-1756035970522",
+        "totalQty": 3,
+        "grossAmount": {
+          "$numberDecimal": "60.00"
+        },
+        "vatableAmount": {
+          "$numberDecimal": "53.57"
+        },
+        "vatExemptSales": {
+          "$numberDecimal": "0.00"
+        },
+        "vatZeroRatedSales": {
+          "$numberDecimal": "0.00"
+        },
+        "vatAmount": {
+          "$numberDecimal": "6.43"
+        },
+        "totalAmount": {
+          "$numberDecimal": "60.00"
+        },
+        "totalDiscount": {
+          "$numberDecimal": "0.00"
+        },
+        "discountType": "none",
+        "paymentMethod": "cash",
+        "cash": {
+          "$numberDecimal": "100.00"
+        },
+        "referenceNumber": null,
+        "pwdId": null,
+        "seniorId": null,
+        "change": {
+          "$numberDecimal": "40.00"
+        },
+        "cashier": "68a53f585ec633f48c7d3948",
+        "isDeleted": false,
+        "createdAt": "2025-08-24T11:46:10.523Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ab3092e73df1768dff3774",
+        "receiptNum": "FNS-1756049554711",
+        "totalQty": 2,
+        "grossAmount": {
+          "$numberDecimal": "40.00"
+        },
+        "vatableAmount": {
+          "$numberDecimal": "35.71"
+        },
+        "vatExemptSales": {
+          "$numberDecimal": "0.00"
+        },
+        "vatZeroRatedSales": {
+          "$numberDecimal": "0.00"
+        },
+        "vatAmount": {
+          "$numberDecimal": "4.29"
+        },
+        "totalAmount": {
+          "$numberDecimal": "40.00"
+        },
+        "totalDiscount": {
+          "$numberDecimal": "0.00"
+        },
+        "discountType": "none",
+        "paymentMethod": "cash",
+        "cash": {
+          "$numberDecimal": "500.00"
+        },
+        "referenceNumber": null,
+        "pwdId": null,
+        "seniorId": null,
+        "change": {
+          "$numberDecimal": "460.00"
+        },
+        "cashier": "68a53f585ec633f48c7d3948",
+        "isDeleted": false,
+        "createdAt": "2025-08-24T15:32:34.767Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac4b46f139126c3e91a271",
+        "receiptNum": "FNS-1756121926697",
+        "totalQty": 2,
+        "grossAmount": {
+          "$numberDecimal": "20.00"
+        },
+        "vatableAmount": {
+          "$numberDecimal": "0.00"
+        },
+        "vatExemptSales": {
+          "$numberDecimal": "16.00"
+        },
+        "vatZeroRatedSales": {
+          "$numberDecimal": "0.00"
+        },
+        "vatAmount": {
+          "$numberDecimal": "0.00"
+        },
+        "totalAmount": {
+          "$numberDecimal": "16.00"
+        },
+        "totalDiscount": {
+          "$numberDecimal": "4.00"
+        },
+        "discountType": "senior",
+        "paymentMethod": "cash",
+        "cash": {
+          "$numberDecimal": "20.00"
+        },
+        "referenceNumber": null,
+        "pwdId": null,
+        "seniorId": "test",
+        "change": {
+          "$numberDecimal": "4.00"
+        },
+        "cashier": "68a53f585ec633f48c7d3948",
+        "isDeleted": false,
+        "createdAt": "2025-08-25T11:38:46.734Z",
+        "__v": 0
+      }
+    ],
+    "transactionItems": [
+      {
+        "_id": "68aaf0021757054a92b31b49",
+        "transactionId": "68aaf0021757054a92b31b46",
+        "productId": "68aaefb81757054a92b31b15",
+        "quantity": 3,
+        "price": {
+          "$numberDecimal": "10.00"
+        },
+        "totalAmount": {
+          "$numberDecimal": "30.00"
+        },
+        "vatType": "vatable",
+        "vatAmount": {
+          "$numberDecimal": "3.21"
+        },
+        "netAmount": {
+          "$numberDecimal": "30.00"
+        },
+        "isDeleted": false,
+        "isRefunded": false,
+        "__v": 0,
+        "createdAt": "2025-08-24T10:57:06.339Z",
+        "updatedAt": "2025-08-24T10:57:06.339Z"
+      },
+      {
+        "_id": "68aaf0181757054a92b31b5c",
+        "transactionId": "68aaf0181757054a92b31b59",
+        "productId": "68aaefb81757054a92b31b15",
+        "quantity": 3,
+        "price": {
+          "$numberDecimal": "10.00"
+        },
+        "totalAmount": {
+          "$numberDecimal": "30.00"
+        },
+        "vatType": "exempt",
+        "vatAmount": {
+          "$numberDecimal": "0.00"
+        },
+        "netAmount": {
+          "$numberDecimal": "24.00"
+        },
+        "isDeleted": false,
+        "isRefunded": false,
+        "__v": 0,
+        "createdAt": "2025-08-24T10:57:28.562Z",
+        "updatedAt": "2025-08-24T10:57:28.562Z"
+      },
+      {
+        "_id": "68aafb71ab3f71b538c0a1c2",
+        "transactionId": "68aafb71ab3f71b538c0a1bf",
+        "productId": "68aaefdb1757054a92b31b26",
+        "quantity": 5,
+        "price": {
+          "$numberDecimal": "20.00"
+        },
+        "totalAmount": {
+          "$numberDecimal": "100.00"
+        },
+        "vatType": "exempt",
+        "vatAmount": {
+          "$numberDecimal": "0.00"
+        },
+        "netAmount": {
+          "$numberDecimal": "80.00"
+        },
+        "isDeleted": false,
+        "isRefunded": false,
+        "__v": 0,
+        "createdAt": "2025-08-24T11:45:53.513Z",
+        "updatedAt": "2025-08-24T11:45:53.513Z"
+      },
+      {
+        "_id": "68aafb82ab3f71b538c0a1d4",
+        "transactionId": "68aafb82ab3f71b538c0a1d1",
+        "productId": "68aaefdb1757054a92b31b26",
+        "quantity": 3,
+        "price": {
+          "$numberDecimal": "20.00"
+        },
+        "totalAmount": {
+          "$numberDecimal": "60.00"
+        },
+        "vatType": "vatable",
+        "vatAmount": {
+          "$numberDecimal": "6.43"
+        },
+        "netAmount": {
+          "$numberDecimal": "60.00"
+        },
+        "isDeleted": false,
+        "isRefunded": false,
+        "__v": 0,
+        "createdAt": "2025-08-24T11:46:10.619Z",
+        "updatedAt": "2025-08-24T11:46:10.619Z"
+      },
+      {
+        "_id": "68ab3092e73df1768dff3777",
+        "transactionId": "68ab3092e73df1768dff3774",
+        "productId": "68aaefdb1757054a92b31b26",
+        "quantity": 2,
+        "price": {
+          "$numberDecimal": "20.00"
+        },
+        "totalAmount": {
+          "$numberDecimal": "40.00"
+        },
+        "vatType": "vatable",
+        "vatAmount": {
+          "$numberDecimal": "4.29"
+        },
+        "netAmount": {
+          "$numberDecimal": "40.00"
+        },
+        "isDeleted": false,
+        "isRefunded": false,
+        "__v": 0,
+        "createdAt": "2025-08-24T15:32:34.923Z",
+        "updatedAt": "2025-08-24T15:37:35.155Z"
+      },
+      {
+        "_id": "68ac4b46f139126c3e91a274",
+        "transactionId": "68ac4b46f139126c3e91a271",
+        "productId": "68aaefb81757054a92b31b15",
+        "quantity": 2,
+        "price": {
+          "$numberDecimal": "10.00"
+        },
+        "totalAmount": {
+          "$numberDecimal": "20.00"
+        },
+        "vatType": "exempt",
+        "vatAmount": {
+          "$numberDecimal": "0.00"
+        },
+        "netAmount": {
+          "$numberDecimal": "16.00"
+        },
+        "isDeleted": false,
+        "isRefunded": false,
+        "__v": 0,
+        "createdAt": "2025-08-25T11:38:46.916Z",
+        "updatedAt": "2025-08-25T11:38:46.916Z"
+      }
+    ],
+    "refunds": [
+      {
+        "_id": "68ab31bf8c4c167283fb06f7",
+        "transactionItemId": "68ab3092e73df1768dff3777",
+        "productId": "68aaefdb1757054a92b31b26",
+        "quantity": 3,
+        "refundPrice": {
+          "$numberDecimal": "60"
+        },
+        "reason": "damaged",
+        "note": "test",
+        "isDeleted": false,
+        "isDiscounted": false,
+        "refundedAt": "2025-08-24T15:37:35.440Z",
+        "__v": 0
+      }
+    ],
+    "actionLogs": [
+      {
+        "_id": "68a9569bbd1c317a735a9bb0",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Category",
+        "description": "Created category: Necklace. Description: Glitzy Collection",
+        "timestamp": "2025-08-23T05:50:19.629Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a9574dbd1c317a735a9bcf",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Product",
+        "description": "Created Product \"Purple Glitzy Necklace\" (SKU: FNS-P-001), Initial Quantity: 10, Price: ₱50.50",
+        "timestamp": "2025-08-23T05:53:17.897Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a957b5bd1c317a735a9c0c",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Category",
+        "description": "Created category: Ring. Description: Ring",
+        "timestamp": "2025-08-23T05:55:01.058Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a95814bd1c317a735a9c2e",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Product",
+        "description": "Created Product \"Product green\" (SKU: FNS-G-102), Initial Quantity: 10, Price: ₱52.00",
+        "timestamp": "2025-08-23T05:56:36.058Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a95a396eb18365e4142b88",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Order Stock",
+        "description": "Ordered 1 units of \"Purple Glitzy Necklace\" from supplier \"undefined\" at price 30",
+        "timestamp": "2025-08-23T06:05:45.528Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a95a396eb18365e4142b8d",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Order Stock",
+        "description": "Ordered 1 units of \"Product green\" from supplier \"undefined\" at price 50",
+        "timestamp": "2025-08-23T06:05:45.683Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a95a5b6eb18365e4142ba7",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Update Stock",
+        "description": "Stock delivered for Product Name: Purple Glitzy Necklace. Delivered Quantity: 50. Updated Inventory: 60",
+        "timestamp": "2025-08-23T06:06:19.610Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a95a736eb18365e4142bd4",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Update Stock",
+        "description": "Stock delivered for Product Name: Product green. Delivered Quantity: 50. Updated Inventory: 60",
+        "timestamp": "2025-08-23T06:06:43.598Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a96a9be9a57195d5edddc2",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Product",
+        "description": "Created Product \"Glitzy Purple\" (SKU: FNS-P-001), Initial Quantity: 50, Price: ₱50.12",
+        "timestamp": "2025-08-23T07:15:39.398Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a96c7b4491cffa23dfc349",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Product",
+        "description": "Created Product \"Purple Glitzy Necklace\" (SKU: FNS-P-001), Initial Quantity: 50, Price: ₱50.12",
+        "timestamp": "2025-08-23T07:23:39.749Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a9712980eb87518ec4d96f",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Product",
+        "description": "Created Product \"Green\" (SKU: FNS-G-001), Initial Quantity: 55, Price: ₱12.00",
+        "timestamp": "2025-08-23T07:43:37.009Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a9719580eb87518ec4d9e7",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Order Stock",
+        "description": "Ordered 4 units of \"Purple Glitzy Necklace\" from supplier \"undefined\" at price 15",
+        "timestamp": "2025-08-23T07:45:25.630Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a9719580eb87518ec4d9ec",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Order Stock",
+        "description": "Ordered 4 units of \"Green\" from supplier \"undefined\" at price 15",
+        "timestamp": "2025-08-23T07:45:25.778Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a971ac80eb87518ec4da07",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Update Stock",
+        "description": "Stock delivered for Product Name: Purple Glitzy Necklace. Delivered Quantity: 4. Updated Inventory: 54. Supplier linked: 68a9719580eb87518ec4d9e2",
+        "timestamp": "2025-08-23T07:45:48.148Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a971f380eb87518ec4da60",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Update Stock",
+        "description": "Stock delivered for Product Name: Green. Delivered Quantity: 4. Updated Inventory: 59. Supplier linked: 68a9719580eb87518ec4d9e2",
+        "timestamp": "2025-08-23T07:46:59.580Z",
+        "__v": 0
+      },
+      {
+        "_id": "68a9721880eb87518ec4da8b",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Order Stock",
+        "description": "Ordered 1 units of \"Green\" from supplier \"undefined\" at price 9",
+        "timestamp": "2025-08-23T07:47:36.819Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aa83dbd590ec9f5e4f481a",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Admin User (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-24T03:15:39.021Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aa83dbd590ec9f5e4f481e",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Admin User (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-24T03:15:39.952Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aa86b20c1cf4e21c83b5b1",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Product",
+        "description": "Created Product \"product\" (SKU: Testing), Initial Quantity: 10, Price: ₱20.00",
+        "timestamp": "2025-08-24T03:27:46.286Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aa8848cb95366d091ebe91",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Update Stock",
+        "description": "Stock delivered for Product Name: Green. Delivered Quantity: 30. Updated Inventory: 89. Supplier linked: 68a9719580eb87518ec4d9e2",
+        "timestamp": "2025-08-24T03:34:32.385Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aa981c0371c6d77e920c0f",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Update Product",
+        "description": "Updated Product \"product\" (SKU: Testing): Quantity: 10 → 15",
+        "timestamp": "2025-08-24T04:42:04.095Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaa3020371c6d77e920c1e",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Update Product",
+        "description": "Updated Product \"product\" (SKU: Testing): Quantity: 15 → 14",
+        "timestamp": "2025-08-24T05:28:34.541Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaa3630371c6d77e920c52",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Update Product",
+        "description": "Updated Product \"product\" (SKU: Testing): Quantity: 14 → 12",
+        "timestamp": "2025-08-24T05:30:11.609Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaa94651dc68f7a345a26a",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Order Stock",
+        "description": "Ordered 3 units of \"product\" from supplier \"undefined\" at price 10",
+        "timestamp": "2025-08-24T05:55:18.877Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaa99451dc68f7a345a292",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Update Stock",
+        "description": "Stock delivered for Product Name: product. Delivered Quantity: 40. Updated Inventory: 52. Supplier linked: 68aa86b20c1cf4e21c83b5ab",
+        "timestamp": "2025-08-24T05:56:36.215Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaada424d53a7f9c3cfd5d",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 2, Price: ₱20",
+        "timestamp": "2025-08-24T06:13:56.506Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aab01fbc2d2c4ae1522e0c",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 2, Price: ₱20",
+        "timestamp": "2025-08-24T06:24:31.245Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aab0b6ecf8837927f4600e",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T06:27:02.662Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aab179f6bfc67eb273fadf",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T06:30:17.231Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aab2298031144afbc40da0",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T06:33:13.802Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aab3c54e1b566d4d50fcb9",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: ewallet, Discount: senior. Items: 1. product - Qty: 3, Price: ₱20",
+        "timestamp": "2025-08-24T06:40:05.614Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aab438e2922bb3531f7a24",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T06:42:00.354Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aab488ab79ab0e0837429b",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T06:43:20.191Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aab4f9ab79ab0e083742b1",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T06:45:13.438Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaba9ad7e63e647996a3ab",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T07:09:14.652Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aabdce1ecc72d408be6154",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T07:22:54.972Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aabe821ecc72d408be6181",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T07:25:54.480Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aabed179f548f3c1b32708",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T07:27:13.301Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aac07d79f548f3c1b3271e",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T07:34:21.659Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aac22879f548f3c1b32743",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: none. Items: 1. Purple Glitzy Necklace - Qty: 2, Price: ₱50.12",
+        "timestamp": "2025-08-24T07:41:28.997Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aac2bf79f548f3c1b32758",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: Purple Glitzy Necklace, Quantity: 1, Reason: defective, Note: te",
+        "timestamp": "2025-08-24T07:43:59.242Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aac34479f548f3c1b3277a",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 2, Price: ₱20",
+        "timestamp": "2025-08-24T07:46:12.378Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aac39379f548f3c1b3278f",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: testing",
+        "timestamp": "2025-08-24T07:47:31.267Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aac4baa41d2eb3f04c51f8",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T07:52:26.751Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aac67e4b94e3b06e3656bd",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T07:59:58.630Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aac960bcd4ba17b88a365f",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T08:12:16.182Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aac9c7bcd4ba17b88a367e",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T08:13:59.168Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaca08bcd4ba17b88a3694",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test",
+        "timestamp": "2025-08-24T08:15:04.716Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaca57bcd4ba17b88a36b5",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 2, Price: ₱20",
+        "timestamp": "2025-08-24T08:16:23.162Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaca83bcd4ba17b88a36cb",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test",
+        "timestamp": "2025-08-24T08:17:07.429Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aacaf6bcd4ba17b88a36e3",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 2, Price: ₱20",
+        "timestamp": "2025-08-24T08:19:02.370Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aacb4bbcd4ba17b88a36fa",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: wrong item, Note: testing refund discount",
+        "timestamp": "2025-08-24T08:20:27.647Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aad786bd2c51ce9c53dba4",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 3, Price: ₱20",
+        "timestamp": "2025-08-24T09:12:38.884Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aad7bbbd2c51ce9c53dbba",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test 1 with discount",
+        "timestamp": "2025-08-24T09:13:31.582Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aad8bd7bcb71f66483f5ed",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 3, Price: ₱20",
+        "timestamp": "2025-08-24T09:17:49.638Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aad9173759291f00973e5f",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test",
+        "timestamp": "2025-08-24T09:19:19.394Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aad9f3ea1e4c3c0afba89a",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: wrong item, Note: test",
+        "timestamp": "2025-08-24T09:22:59.520Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aada53619070fc115cd416",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. product - Qty: 3, Price: ₱20",
+        "timestamp": "2025-08-24T09:24:35.656Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aadb7d619070fc115cd42c",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: testing pwd",
+        "timestamp": "2025-08-24T09:29:33.589Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aadcb50d1c39eab89092a4",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: testing 2 pwd",
+        "timestamp": "2025-08-24T09:34:45.742Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aadd669acb103d9164bac9",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 3, Price: ₱20",
+        "timestamp": "2025-08-24T09:37:42.323Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aadd879acb103d9164badf",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test",
+        "timestamp": "2025-08-24T09:38:15.655Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aadf04962b415a94e9a12c",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. product - Qty: 4, Price: ₱20",
+        "timestamp": "2025-08-24T09:44:36.890Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aadf2a962b415a94e9a142",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test pwd",
+        "timestamp": "2025-08-24T09:45:14.614Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aadfd7f655524b6be81cfd",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test",
+        "timestamp": "2025-08-24T09:48:07.784Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aae007f655524b6be81d16",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 6, Price: ₱20",
+        "timestamp": "2025-08-24T09:48:55.244Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aae02bf655524b6be81d2d",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: wrong item, Note: test",
+        "timestamp": "2025-08-24T09:49:31.021Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aae068f655524b6be81d5a",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: customer request, Note: customer",
+        "timestamp": "2025-08-24T09:50:32.786Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aae089f655524b6be81d6c",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test defective",
+        "timestamp": "2025-08-24T09:51:05.329Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aae1b45ca3f9aa87ff56b5",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T09:56:04.981Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aae1cb5ca3f9aa87ff56c7",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. product - Qty: 1, Price: ₱20",
+        "timestamp": "2025-08-24T09:56:27.301Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aae1ec5ca3f9aa87ff56e0",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: ewallet, Discount: senior. Items: 1. product - Qty: 3, Price: ₱20",
+        "timestamp": "2025-08-24T09:57:00.625Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaefb81757054a92b31b19",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Product",
+        "description": "Created Product \"Green\" (SKU: FNS-G-001), Initial Quantity: 30, Price: ₱10.00",
+        "timestamp": "2025-08-24T10:55:52.697Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaefdb1757054a92b31b2a",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Product",
+        "description": "Created Product \"Purple ring\" (SKU: FNS-P-001), Initial Quantity: 50, Price: ₱20.00",
+        "timestamp": "2025-08-24T10:56:27.866Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaf0021757054a92b31b4b",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: none. Items: 1. Green - Qty: 3, Price: ₱10",
+        "timestamp": "2025-08-24T10:57:06.453Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aaf0181757054a92b31b5e",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. Green - Qty: 3, Price: ₱10",
+        "timestamp": "2025-08-24T10:57:28.657Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aafb71ab3f71b538c0a1c4",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. Purple ring - Qty: 5, Price: ₱20",
+        "timestamp": "2025-08-24T11:45:53.612Z",
+        "__v": 0
+      },
+      {
+        "_id": "68aafb82ab3f71b538c0a1d6",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: none. Items: 1. Purple ring - Qty: 3, Price: ₱20",
+        "timestamp": "2025-08-24T11:46:10.713Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ab0301e72f21dbfb98cab6",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Admin User (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-24T12:18:09.236Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ab08d530d647e7a80e33fd",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Order Stock",
+        "description": "Ordered 1 units of \"Green\" from supplier \"undefined\" at price 5",
+        "timestamp": "2025-08-24T12:43:01.017Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ab08f830d647e7a80e343a",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Update Stock",
+        "description": "Stock delivered for Product Name: Green. Delivered Quantity: 1. Updated Inventory: 25. Supplier linked: 68a96a9be9a57195d5edddbc",
+        "timestamp": "2025-08-24T12:43:36.043Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ab1cee13b8cde7452b60f0",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Admin User (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-24T14:08:46.299Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ab3093e73df1768dff3779",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: none. Items: 1. Purple ring - Qty: 5, Price: ₱20",
+        "timestamp": "2025-08-24T15:32:35.044Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ab31bf8c4c167283fb06fc",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Refund Product",
+        "description": "Refund processed. Product: Purple ring, Quantity: 3, Reason: defective, Note: test",
+        "timestamp": "2025-08-24T15:37:35.821Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ab3e19aee197c2fac525c4",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Order Stock",
+        "description": "Ordered 10 units of \"Purple ring\" from supplier \"undefined\" at price 10",
+        "timestamp": "2025-08-24T16:30:17.650Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ab3e29aee197c2fac525e6",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Update Stock",
+        "description": "Stock delivered for Product Name: Purple ring. Delivered Quantity: 20. Updated Inventory: 57. Supplier linked: 68a96a9be9a57195d5edddbc",
+        "timestamp": "2025-08-24T16:30:33.850Z",
+        "__v": 0
+      },
+      {
+        "_id": "68abd7d62588ed5732200bc6",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Admin User (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-25T03:26:14.901Z",
+        "__v": 0
+      },
+      {
+        "_id": "68abd7f299327ff9e3eab0c8",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Admin User (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-25T03:26:42.654Z",
+        "__v": 0
+      },
+      {
+        "_id": "68abdafeea2bc42e8d3af8bf",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Update Product",
+        "description": "Updated Product \"Purple ring\" (SKU: FNS-P-001): Quantity: 57 → 50",
+        "timestamp": "2025-08-25T03:39:42.180Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac10120044ed11eb3ab124",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Order Stock",
+        "description": "Ordered 2 units of \"Green\" from supplier \"undefined\" at price 5",
+        "timestamp": "2025-08-25T07:26:10.159Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac10120044ed11eb3ab129",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Order Stock",
+        "description": "Ordered 15 units of \"Purple ring\" from supplier \"undefined\" at price 10",
+        "timestamp": "2025-08-25T07:26:10.310Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac4b28f139126c3e91a24a",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Admin User (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-25T11:38:16.341Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac4b2af139126c3e91a24e",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Admin User (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-25T11:38:18.549Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac4b2df139126c3e91a257",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Admin User (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-25T11:38:21.114Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac4b47f139126c3e91a276",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Create Transaction",
+        "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. Green - Qty: 2, Price: ₱10",
+        "timestamp": "2025-08-25T11:38:47.064Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac5499c241d846b64c3b80",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Update User",
+        "description": "Updated user Master Admin (admin@gmail.com)",
+        "timestamp": "2025-08-25T12:18:33.438Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac54b5c241d846b64c3b8c",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Master Admin (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-25T12:19:01.723Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac54f6c241d846b64c3b8f",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Master Admin (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-25T12:20:06.423Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac5509a4bf44635b796451",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Master Admin (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-25T12:20:25.024Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac557f3e16528de722f99f",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Suspend User",
+        "description": "Suspended user Master Admin (admin@gmail.com) for 7 day(s)",
+        "timestamp": "2025-08-25T12:22:23.379Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac558f3e16528de722f9a3",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Master Admin (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-25T12:22:39.521Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac55b23e16528de722f9a7",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Master Admin (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-25T12:23:14.705Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac55e63e16528de722f9ac",
+        "user": "68a53f575ec633f48c7d3942",
+        "action": "Login",
+        "description": "User Cashier User (cashier@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-25T12:24:06.135Z",
+        "__v": 0
+      },
+      {
+        "_id": "68ac56503e16528de722f9d3",
+        "user": "68a53f585ec633f48c7d3948",
+        "action": "Login",
+        "description": "User Master Admin (admin@gmail.com) logged in successfully.",
+        "timestamp": "2025-08-25T12:25:52.996Z",
+        "__v": 0
+      }
+    ]
+  }
+}

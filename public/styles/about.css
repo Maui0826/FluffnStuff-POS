@@ -40,6 +40,8 @@ main {
   border-radius: var(--radius);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
+  width: calc(100% - 80px);
+  transition: width 0.3s;
 }
 
 main .container h2 {

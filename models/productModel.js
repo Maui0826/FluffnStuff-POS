@@ -11,6 +11,7 @@ const productSchema = new mongoose.Schema(
     lowStockThreshold: { type: Number, default: 5 },
     description: { type: String },
     status: { type: String, enum: ['active', 'deleted'], default: 'active' },
+    supplierId: { type: mongoose.Schema.Types.ObjectId, ref: 'Supplier' },
   },
   { timestamps: true }
 );

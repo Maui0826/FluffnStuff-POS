@@ -22,9 +22,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('.profile-role').textContent =
       user.role.toUpperCase();
     document.querySelector('.profile-email').textContent = user.email;
-    document.querySelector('.profile-status').textContent = new Date(
-      user.status
-    );
+    document.querySelector('.profile-status').textContent =
+      user.status.toUpperCase();
 
     document
       .querySelector('#changePasswordBtn')

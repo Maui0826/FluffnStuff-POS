@@ -52,6 +52,20 @@ router // Admin
   });
 
 router // Admin
+  .route('/backup')
+  .get(protect, async (req, res, next) => {
+    if (req.currentUser.role === 'admin' || req.currentUser.role === 'owner') {
+      res.sendFile(join(__dirname, '..', 'public', 'backup.html'));
+    }
+  });
+router // Admin
+  .route('/restore')
+  .get(protect, async (req, res, next) => {
+    if (req.currentUser.role === 'admin' || req.currentUser.role === 'owner') {
+      res.sendFile(join(__dirname, '..', 'public', 'restore.html'));
+    }
+  });
+router // Admin
   .route('/reports')
   .get(protect, async (req, res, next) => {
     if (req.currentUser.role === 'admin' || req.currentUser.role === 'owner') {

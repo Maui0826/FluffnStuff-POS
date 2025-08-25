@@ -1,0 +1,834 @@
+[
+  {
+    "_id": "68a9569bbd1c317a735a9bb0",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Category",
+    "description": "Created category: Necklace. Description: Glitzy Collection",
+    "timestamp": "2025-08-23T05:50:19.629Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a9574dbd1c317a735a9bcf",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Product",
+    "description": "Created Product \"Purple Glitzy Necklace\" (SKU: FNS-P-001), Initial Quantity: 10, Price: ₱50.50",
+    "timestamp": "2025-08-23T05:53:17.897Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a957b5bd1c317a735a9c0c",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Category",
+    "description": "Created category: Ring. Description: Ring",
+    "timestamp": "2025-08-23T05:55:01.058Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a95814bd1c317a735a9c2e",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Product",
+    "description": "Created Product \"Product green\" (SKU: FNS-G-102), Initial Quantity: 10, Price: ₱52.00",
+    "timestamp": "2025-08-23T05:56:36.058Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a95a396eb18365e4142b88",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Order Stock",
+    "description": "Ordered 1 units of \"Purple Glitzy Necklace\" from supplier \"undefined\" at price 30",
+    "timestamp": "2025-08-23T06:05:45.528Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a95a396eb18365e4142b8d",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Order Stock",
+    "description": "Ordered 1 units of \"Product green\" from supplier \"undefined\" at price 50",
+    "timestamp": "2025-08-23T06:05:45.683Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a95a5b6eb18365e4142ba7",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Update Stock",
+    "description": "Stock delivered for Product Name: Purple Glitzy Necklace. Delivered Quantity: 50. Updated Inventory: 60",
+    "timestamp": "2025-08-23T06:06:19.610Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a95a736eb18365e4142bd4",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Update Stock",
+    "description": "Stock delivered for Product Name: Product green. Delivered Quantity: 50. Updated Inventory: 60",
+    "timestamp": "2025-08-23T06:06:43.598Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a96a9be9a57195d5edddc2",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Product",
+    "description": "Created Product \"Glitzy Purple\" (SKU: FNS-P-001), Initial Quantity: 50, Price: ₱50.12",
+    "timestamp": "2025-08-23T07:15:39.398Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a96c7b4491cffa23dfc349",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Product",
+    "description": "Created Product \"Purple Glitzy Necklace\" (SKU: FNS-P-001), Initial Quantity: 50, Price: ₱50.12",
+    "timestamp": "2025-08-23T07:23:39.749Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a9712980eb87518ec4d96f",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Product",
+    "description": "Created Product \"Green\" (SKU: FNS-G-001), Initial Quantity: 55, Price: ₱12.00",
+    "timestamp": "2025-08-23T07:43:37.009Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a9719580eb87518ec4d9e7",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Order Stock",
+    "description": "Ordered 4 units of \"Purple Glitzy Necklace\" from supplier \"undefined\" at price 15",
+    "timestamp": "2025-08-23T07:45:25.630Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a9719580eb87518ec4d9ec",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Order Stock",
+    "description": "Ordered 4 units of \"Green\" from supplier \"undefined\" at price 15",
+    "timestamp": "2025-08-23T07:45:25.778Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a971ac80eb87518ec4da07",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Update Stock",
+    "description": "Stock delivered for Product Name: Purple Glitzy Necklace. Delivered Quantity: 4. Updated Inventory: 54. Supplier linked: 68a9719580eb87518ec4d9e2",
+    "timestamp": "2025-08-23T07:45:48.148Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a971f380eb87518ec4da60",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Update Stock",
+    "description": "Stock delivered for Product Name: Green. Delivered Quantity: 4. Updated Inventory: 59. Supplier linked: 68a9719580eb87518ec4d9e2",
+    "timestamp": "2025-08-23T07:46:59.580Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a9721880eb87518ec4da8b",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Order Stock",
+    "description": "Ordered 1 units of \"Green\" from supplier \"undefined\" at price 9",
+    "timestamp": "2025-08-23T07:47:36.819Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aa83dbd590ec9f5e4f481a",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Admin User (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-24T03:15:39.021Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aa83dbd590ec9f5e4f481e",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Admin User (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-24T03:15:39.952Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aa86b20c1cf4e21c83b5b1",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Product",
+    "description": "Created Product \"product\" (SKU: Testing), Initial Quantity: 10, Price: ₱20.00",
+    "timestamp": "2025-08-24T03:27:46.286Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aa8848cb95366d091ebe91",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Update Stock",
+    "description": "Stock delivered for Product Name: Green. Delivered Quantity: 30. Updated Inventory: 89. Supplier linked: 68a9719580eb87518ec4d9e2",
+    "timestamp": "2025-08-24T03:34:32.385Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aa981c0371c6d77e920c0f",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Update Product",
+    "description": "Updated Product \"product\" (SKU: Testing): Quantity: 10 → 15",
+    "timestamp": "2025-08-24T04:42:04.095Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaa3020371c6d77e920c1e",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Update Product",
+    "description": "Updated Product \"product\" (SKU: Testing): Quantity: 15 → 14",
+    "timestamp": "2025-08-24T05:28:34.541Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaa3630371c6d77e920c52",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Update Product",
+    "description": "Updated Product \"product\" (SKU: Testing): Quantity: 14 → 12",
+    "timestamp": "2025-08-24T05:30:11.609Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaa94651dc68f7a345a26a",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Order Stock",
+    "description": "Ordered 3 units of \"product\" from supplier \"undefined\" at price 10",
+    "timestamp": "2025-08-24T05:55:18.877Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaa99451dc68f7a345a292",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Update Stock",
+    "description": "Stock delivered for Product Name: product. Delivered Quantity: 40. Updated Inventory: 52. Supplier linked: 68aa86b20c1cf4e21c83b5ab",
+    "timestamp": "2025-08-24T05:56:36.215Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaada424d53a7f9c3cfd5d",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 2, Price: ₱20",
+    "timestamp": "2025-08-24T06:13:56.506Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aab01fbc2d2c4ae1522e0c",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 2, Price: ₱20",
+    "timestamp": "2025-08-24T06:24:31.245Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aab0b6ecf8837927f4600e",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T06:27:02.662Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aab179f6bfc67eb273fadf",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T06:30:17.231Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aab2298031144afbc40da0",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T06:33:13.802Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aab3c54e1b566d4d50fcb9",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: ewallet, Discount: senior. Items: 1. product - Qty: 3, Price: ₱20",
+    "timestamp": "2025-08-24T06:40:05.614Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aab438e2922bb3531f7a24",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T06:42:00.354Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aab488ab79ab0e0837429b",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T06:43:20.191Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aab4f9ab79ab0e083742b1",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T06:45:13.438Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaba9ad7e63e647996a3ab",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T07:09:14.652Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aabdce1ecc72d408be6154",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T07:22:54.972Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aabe821ecc72d408be6181",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T07:25:54.480Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aabed179f548f3c1b32708",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T07:27:13.301Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aac07d79f548f3c1b3271e",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T07:34:21.659Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aac22879f548f3c1b32743",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: none. Items: 1. Purple Glitzy Necklace - Qty: 2, Price: ₱50.12",
+    "timestamp": "2025-08-24T07:41:28.997Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aac2bf79f548f3c1b32758",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: Purple Glitzy Necklace, Quantity: 1, Reason: defective, Note: te",
+    "timestamp": "2025-08-24T07:43:59.242Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aac34479f548f3c1b3277a",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 2, Price: ₱20",
+    "timestamp": "2025-08-24T07:46:12.378Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aac39379f548f3c1b3278f",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: testing",
+    "timestamp": "2025-08-24T07:47:31.267Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aac4baa41d2eb3f04c51f8",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T07:52:26.751Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aac67e4b94e3b06e3656bd",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T07:59:58.630Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aac960bcd4ba17b88a365f",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T08:12:16.182Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aac9c7bcd4ba17b88a367e",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T08:13:59.168Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaca08bcd4ba17b88a3694",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test",
+    "timestamp": "2025-08-24T08:15:04.716Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaca57bcd4ba17b88a36b5",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 2, Price: ₱20",
+    "timestamp": "2025-08-24T08:16:23.162Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaca83bcd4ba17b88a36cb",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test",
+    "timestamp": "2025-08-24T08:17:07.429Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aacaf6bcd4ba17b88a36e3",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 2, Price: ₱20",
+    "timestamp": "2025-08-24T08:19:02.370Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aacb4bbcd4ba17b88a36fa",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: wrong item, Note: testing refund discount",
+    "timestamp": "2025-08-24T08:20:27.647Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aad786bd2c51ce9c53dba4",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 3, Price: ₱20",
+    "timestamp": "2025-08-24T09:12:38.884Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aad7bbbd2c51ce9c53dbba",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test 1 with discount",
+    "timestamp": "2025-08-24T09:13:31.582Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aad8bd7bcb71f66483f5ed",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 3, Price: ₱20",
+    "timestamp": "2025-08-24T09:17:49.638Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aad9173759291f00973e5f",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test",
+    "timestamp": "2025-08-24T09:19:19.394Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aad9f3ea1e4c3c0afba89a",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: wrong item, Note: test",
+    "timestamp": "2025-08-24T09:22:59.520Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aada53619070fc115cd416",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. product - Qty: 3, Price: ₱20",
+    "timestamp": "2025-08-24T09:24:35.656Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aadb7d619070fc115cd42c",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: testing pwd",
+    "timestamp": "2025-08-24T09:29:33.589Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aadcb50d1c39eab89092a4",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: testing 2 pwd",
+    "timestamp": "2025-08-24T09:34:45.742Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aadd669acb103d9164bac9",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. product - Qty: 3, Price: ₱20",
+    "timestamp": "2025-08-24T09:37:42.323Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aadd879acb103d9164badf",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test",
+    "timestamp": "2025-08-24T09:38:15.655Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aadf04962b415a94e9a12c",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. product - Qty: 4, Price: ₱20",
+    "timestamp": "2025-08-24T09:44:36.890Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aadf2a962b415a94e9a142",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test pwd",
+    "timestamp": "2025-08-24T09:45:14.614Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aadfd7f655524b6be81cfd",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test",
+    "timestamp": "2025-08-24T09:48:07.784Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aae007f655524b6be81d16",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 6, Price: ₱20",
+    "timestamp": "2025-08-24T09:48:55.244Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aae02bf655524b6be81d2d",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: wrong item, Note: test",
+    "timestamp": "2025-08-24T09:49:31.021Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aae068f655524b6be81d5a",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: customer request, Note: customer",
+    "timestamp": "2025-08-24T09:50:32.786Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aae089f655524b6be81d6c",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: product, Quantity: 1, Reason: defective, Note: test defective",
+    "timestamp": "2025-08-24T09:51:05.329Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aae1b45ca3f9aa87ff56b5",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: none. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T09:56:04.981Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aae1cb5ca3f9aa87ff56c7",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. product - Qty: 1, Price: ₱20",
+    "timestamp": "2025-08-24T09:56:27.301Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aae1ec5ca3f9aa87ff56e0",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: ewallet, Discount: senior. Items: 1. product - Qty: 3, Price: ₱20",
+    "timestamp": "2025-08-24T09:57:00.625Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaefb81757054a92b31b19",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Product",
+    "description": "Created Product \"Green\" (SKU: FNS-G-001), Initial Quantity: 30, Price: ₱10.00",
+    "timestamp": "2025-08-24T10:55:52.697Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaefdb1757054a92b31b2a",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Product",
+    "description": "Created Product \"Purple ring\" (SKU: FNS-P-001), Initial Quantity: 50, Price: ₱20.00",
+    "timestamp": "2025-08-24T10:56:27.866Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaf0021757054a92b31b4b",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: none. Items: 1. Green - Qty: 3, Price: ₱10",
+    "timestamp": "2025-08-24T10:57:06.453Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaf0181757054a92b31b5e",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. Green - Qty: 3, Price: ₱10",
+    "timestamp": "2025-08-24T10:57:28.657Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aafb71ab3f71b538c0a1c4",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: pwd. Items: 1. Purple ring - Qty: 5, Price: ₱20",
+    "timestamp": "2025-08-24T11:45:53.612Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aafb82ab3f71b538c0a1d6",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: none. Items: 1. Purple ring - Qty: 3, Price: ₱20",
+    "timestamp": "2025-08-24T11:46:10.713Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ab0301e72f21dbfb98cab6",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Admin User (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-24T12:18:09.236Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ab08d530d647e7a80e33fd",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Order Stock",
+    "description": "Ordered 1 units of \"Green\" from supplier \"undefined\" at price 5",
+    "timestamp": "2025-08-24T12:43:01.017Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ab08f830d647e7a80e343a",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Update Stock",
+    "description": "Stock delivered for Product Name: Green. Delivered Quantity: 1. Updated Inventory: 25. Supplier linked: 68a96a9be9a57195d5edddbc",
+    "timestamp": "2025-08-24T12:43:36.043Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ab1cee13b8cde7452b60f0",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Admin User (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-24T14:08:46.299Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ab3093e73df1768dff3779",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: none. Items: 1. Purple ring - Qty: 5, Price: ₱20",
+    "timestamp": "2025-08-24T15:32:35.044Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ab31bf8c4c167283fb06fc",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Refund Product",
+    "description": "Refund processed. Product: Purple ring, Quantity: 3, Reason: defective, Note: test",
+    "timestamp": "2025-08-24T15:37:35.821Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ab3e19aee197c2fac525c4",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Order Stock",
+    "description": "Ordered 10 units of \"Purple ring\" from supplier \"undefined\" at price 10",
+    "timestamp": "2025-08-24T16:30:17.650Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ab3e29aee197c2fac525e6",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Update Stock",
+    "description": "Stock delivered for Product Name: Purple ring. Delivered Quantity: 20. Updated Inventory: 57. Supplier linked: 68a96a9be9a57195d5edddbc",
+    "timestamp": "2025-08-24T16:30:33.850Z",
+    "__v": 0
+  },
+  {
+    "_id": "68abd7d62588ed5732200bc6",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Admin User (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-25T03:26:14.901Z",
+    "__v": 0
+  },
+  {
+    "_id": "68abd7f299327ff9e3eab0c8",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Admin User (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-25T03:26:42.654Z",
+    "__v": 0
+  },
+  {
+    "_id": "68abdafeea2bc42e8d3af8bf",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Update Product",
+    "description": "Updated Product \"Purple ring\" (SKU: FNS-P-001): Quantity: 57 → 50",
+    "timestamp": "2025-08-25T03:39:42.180Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac10120044ed11eb3ab124",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Order Stock",
+    "description": "Ordered 2 units of \"Green\" from supplier \"undefined\" at price 5",
+    "timestamp": "2025-08-25T07:26:10.159Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac10120044ed11eb3ab129",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Order Stock",
+    "description": "Ordered 15 units of \"Purple ring\" from supplier \"undefined\" at price 10",
+    "timestamp": "2025-08-25T07:26:10.310Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac4b28f139126c3e91a24a",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Admin User (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-25T11:38:16.341Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac4b2af139126c3e91a24e",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Admin User (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-25T11:38:18.549Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac4b2df139126c3e91a257",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Admin User (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-25T11:38:21.114Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac4b47f139126c3e91a276",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Create Transaction",
+    "description": "Transaction created. Payment: cash, Discount: senior. Items: 1. Green - Qty: 2, Price: ₱10",
+    "timestamp": "2025-08-25T11:38:47.064Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac5499c241d846b64c3b80",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Update User",
+    "description": "Updated user Master Admin (admin@gmail.com)",
+    "timestamp": "2025-08-25T12:18:33.438Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac54b5c241d846b64c3b8c",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Master Admin (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-25T12:19:01.723Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac54f6c241d846b64c3b8f",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Master Admin (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-25T12:20:06.423Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac5509a4bf44635b796451",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Master Admin (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-25T12:20:25.024Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac557f3e16528de722f99f",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Suspend User",
+    "description": "Suspended user Master Admin (admin@gmail.com) for 7 day(s)",
+    "timestamp": "2025-08-25T12:22:23.379Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac558f3e16528de722f9a3",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Master Admin (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-25T12:22:39.521Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac55b23e16528de722f9a7",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Master Admin (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-25T12:23:14.705Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac55e63e16528de722f9ac",
+    "user": "68a53f575ec633f48c7d3942",
+    "action": "Login",
+    "description": "User Cashier User (cashier@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-25T12:24:06.135Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac56503e16528de722f9d3",
+    "user": "68a53f585ec633f48c7d3948",
+    "action": "Login",
+    "description": "User Master Admin (admin@gmail.com) logged in successfully.",
+    "timestamp": "2025-08-25T12:25:52.996Z",
+    "__v": 0
+  }
+]

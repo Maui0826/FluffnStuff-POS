@@ -63,15 +63,69 @@ function recalcAmounts(docOrUpdate, price, quantity, vatType = 'vatable') {
   );
 }
 
-// Pre-save hook
-transactionItemSchema.pre('save', function (next) {
-  if (
-    this.isModified('price') ||
-    this.isModified('quantity') ||
-    this.isModified('vatType')
-  ) {
-    recalcAmounts(this, this.price, this.quantity, this.vatType);
+// utils/discount.js
+export function computeLineAmounts({
+  price,
+  quantity,
+  vatType,
+  discountRatio,
+  discountType,
+}) {
+  const qtyNum = Number(quantity);
+  const priceNum = Number(price);
+  const lineGross = priceNum * qtyNum;
+
+  // apply discount scaling (ratio = totalNet / totalGross)
+  const lineNet = lineGross * discountRatio;
+
+  let vatAmount = 0;
+  let finalVatType = vatType || 'vatable';
+
+  if (discountType === 'senior' || discountType === 'pwd') {
+    // force VAT exempt
+    finalVatType = 'exempt';
+    vatAmount = 0;
+  } else if (finalVatType === 'vatable') {
+    vatAmount = lineNet - lineNet / 1.12;
   }
+
+  return {
+    totalAmount: lineGross.toFixed(2), // gross line
+    netAmount: lineNet.toFixed(2), // after discount
+    vatAmount: vatAmount.toFixed(2),
+    vatType: finalVatType,
+  };
+}
+
+// Pre-save hook
+// Pre-save hook with discount logic
+transactionItemSchema.pre('save', async function (next) {
+  const parentTx = await mongoose
+    .model('Transaction')
+    .findById(this.transactionId);
+
+  const discountType = parentTx?.discountType || 'none';
+  const gross = Number(this.price) * Number(this.quantity);
+
+  // compute ratio (transaction total / gross) only if discount applies
+  let discountRatio = 1;
+  if (discountType !== 'none' && Number(parentTx.grossAmount) > 0) {
+    discountRatio = Number(parentTx.totalAmount) / Number(parentTx.grossAmount);
+  }
+
+  const { totalAmount, netAmount, vatAmount, vatType } = computeLineAmounts({
+    price: this.price,
+    quantity: this.quantity,
+    vatType: this.vatType,
+    discountRatio,
+    discountType,
+  });
+
+  this.totalAmount = mongoose.Types.Decimal128.fromString(totalAmount);
+  this.netAmount = mongoose.Types.Decimal128.fromString(netAmount);
+  this.vatAmount = mongoose.Types.Decimal128.fromString(vatAmount);
+  this.vatType = vatType;
+
   next();
 });
 

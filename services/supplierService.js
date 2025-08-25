@@ -10,11 +10,14 @@ const findSupplierByName = async name => {
 
   return supplier; // returns null if not found
 };
+const findSupplierById = async id => {
+  const supplier = await Supplier.findById(id);
+  return supplier;
+};
 
-const createSupplier = async (id, name) => {
+const createSupplier = async name => {
   const supplier = await Supplier.create({
-    productId: id,
-    supplierName: name,
+    supplierName: name.toLowerCase().trim(),
   });
   return supplier;
 };
@@ -22,4 +25,5 @@ const createSupplier = async (id, name) => {
 export default {
   createSupplier,
   findSupplierByName,
+  findSupplierById,
 };

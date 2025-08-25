@@ -1,7 +1,7 @@
 import Stock from '../models/stockAdjustment.js';
 
 const createAdjustStock = async data => {
-  const adjusted = await StockAdjustment.create({
+  const adjusted = await Stock.create({
     product: data.product,
     previousQuantity: data.previousQuantity,
     adjustedQuantity: data.adjustedQuantity,

@@ -2,7 +2,7 @@ import categoryModel from '../models/categoryModel.js';
 
 const createCategory = async data => {
   const category = await categoryModel.create({
-    name: data.name,
+    name: data.name.toLowerCase().trim(),
     description: data.description,
   });
   return category;

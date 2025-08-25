@@ -58,6 +58,7 @@ generateBtn.addEventListener('click', async () => {
     alert('Sales report fetched successfully!');
     renderSalesOverview();
     renderTopItems();
+    renderDailyBreakdown(); // 👈 add this
   } catch (error) {
     console.error(error);
     alert('Failed to fetch sales report.');
@@ -80,6 +81,8 @@ downloadBtn.addEventListener('click', () => {
     totalDiscount: currentReportData.totalDiscount,
     topSellingBySKU: currentReportData.topSellingBySKU,
     topSellingByCategory: currentReportData.topSellingByCategory,
+    dailyBreakdown: currentReportData.dailyBreakdown,
+    transactionBreakdown: currentReportData.transactionBreakdown,
   };
 
   generateSalesReportPDF(
@@ -121,4 +124,42 @@ function renderTopItems() {
       : currentReportData.topSellingByCategory;
 
   renderTopItemsChart(topItemsChartEl, data, type);
+}
+
+function renderDailyBreakdown() {
+  const table = document.getElementById('report-table');
+  const thead = table.querySelector('thead');
+  const tbody = table.querySelector('tbody');
+
+  if (!currentReportData.dailyBreakdown?.length) {
+    thead.innerHTML = '';
+    tbody.innerHTML = '<tr><td colspan="6">No transactions found.</td></tr>';
+    return;
+  }
+
+  thead.innerHTML = `
+    <tr>
+      <th>Date</th>
+      <th>Transactions</th>
+      <th>Gross Sales</th>
+      <th>Total Revenue</th>
+      <th>VAT</th>
+      <th>Discounts</th>
+    </tr>
+  `;
+
+  tbody.innerHTML = currentReportData.dailyBreakdown
+    .map(
+      d => `
+      <tr>
+        <td>${d.date}</td>
+        <td>${d.transactions}</td>
+        <td>₱${Number(d.grossSales).toLocaleString()}</td>
+        <td>₱${Number(d.totalRevenue).toLocaleString()}</td>
+        <td>₱${Number(d.totalVAT).toLocaleString()}</td>
+        <td>₱${Number(d.totalDiscount).toLocaleString()}</td>
+      </tr>
+    `
+    )
+    .join('');
 }

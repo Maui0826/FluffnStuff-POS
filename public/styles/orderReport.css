@@ -33,7 +33,8 @@ main {
 }
 
 .container {
-  width: 100%;
+  width: calc(100% - 80px);
+  transition: width 0.3s;
   height: auto;
   display: flex;
   justify-content: space-between;

@@ -1,7 +1,7 @@
 import CategoryService from '../services/categoryService.js';
 import ProductService from '../services/productService.js';
 import InventoryService from '../services/inventoryService.js';
-import StockAdjustment from '../services/stockadjustmentService.js';
+import StockAdjustmentService from '../services/stockadjustmentService.js';
 import StockService from '../services/stockService.js';
 import AppError from '../utils/AppError.js';
 import catchAsync from '../utils/catchAsync.js';
@@ -9,6 +9,7 @@ import path from 'path';
 import mongoose from 'mongoose';
 import LogService from '../services/actionLogService.js';
 import SupplierService from '../services/supplierService.js';
+import { getInventoryReport } from '../services/inventoryReportService.js';
 
 /**
  * Get all products with populated product and category info
@@ -93,6 +94,12 @@ export const createProduct = catchAsync(async (req, res, next) => {
     ? path.join('Images', uploadedFile.filename)
     : imageUrl || '../Images/noimage.png';
 
+  let newSupplier;
+  const exist = await SupplierService.findSupplierByName(supplierName);
+  if (!exist) {
+    newSupplier = await SupplierService.createSupplier(supplierName);
+  }
+
   // 4. Create product
   const prod = {
     name: productName,
@@ -102,18 +109,11 @@ export const createProduct = catchAsync(async (req, res, next) => {
     lowStockThreshold: numericLowThreshold,
     imageUrl: finalImageUrl,
     description,
+    supplierId: exist ? exist._id : newSupplier._id,
   };
 
   const newProduct = await ProductService.createProduct(prod);
   if (!newProduct) return next(new AppError('Product creation failed.', 500));
-
-  const exist = await SupplierService.findSupplierByName(supplierName);
-  if (!exist) {
-    const newSupplier = await SupplierService.createSupplier(
-      newProduct._id,
-      supplierName
-    );
-  }
 
   // 5. Create inventory
   const inventoryData = {
@@ -160,10 +160,11 @@ export const updateProduct = catchAsync(async (req, res, next) => {
     sku,
     productName,
     price,
-    acquisitionPrice,
-    quantity,
-    reason,
-    note,
+    acquisition,
+    acquisitionPrice, // fallback support
+    adjustedQuantity, // ✅ from payload
+    adjustmentReason, // ✅ from payload
+    adjustmentNote, // ✅ from payload
     imageUrl,
     description,
     lowStockThreshold,
@@ -190,16 +191,23 @@ export const updateProduct = catchAsync(async (req, res, next) => {
   // Parse numeric fields
   const numericPrice =
     price !== undefined ? parseFloat(price) : parseFloat(product.price || 0);
+
   const numericAcquisition =
-    acquisitionPrice !== undefined
+    acquisition !== undefined
+      ? parseFloat(acquisition)
+      : acquisitionPrice !== undefined
       ? parseFloat(acquisitionPrice)
       : parseFloat(inventory.acquisitionPrice || 0);
+
   const numericLowThreshold =
     lowStockThreshold !== undefined
       ? parseInt(lowStockThreshold)
       : product.lowStockThreshold;
+
   const numericQuantity =
-    quantity !== undefined ? parseInt(quantity) : undefined;
+    adjustedQuantity !== undefined
+      ? parseInt(adjustedQuantity) // ✅ support adjustedQuantity
+      : undefined;
 
   // Validate numbers
   if (isNaN(numericPrice))
@@ -207,7 +215,7 @@ export const updateProduct = catchAsync(async (req, res, next) => {
   if (isNaN(numericAcquisition))
     return next(new AppError('Acquisition price must be a valid number', 400));
   if (numericQuantity !== undefined && isNaN(numericQuantity))
-    return next(new AppError('Quantity must be a valid number', 400));
+    return next(new AppError('Adjusted quantity must be a valid number', 400));
 
   // Build product update object
   const updateData = {};
@@ -223,30 +231,36 @@ export const updateProduct = catchAsync(async (req, res, next) => {
   // Update product
   const updatedProduct = await ProductService.updateProduct(id, updateData);
 
-  // Update inventory if quantity or acquisitionPrice changed
+  // Update inventory if adjusted quantity or acquisition changed
   if (
     (numericQuantity !== undefined && numericQuantity !== inventory.quantity) ||
     numericAcquisition !== parseFloat(inventory.acquisitionPrice || 0)
   ) {
-    if (numericQuantity !== undefined && !reason)
-      return next(new AppError('Stock adjustment reason is required', 400));
+    if (numericQuantity !== undefined && !adjustmentReason)
+      return next(
+        new AppError(
+          'Stock adjustment reason is required when adjusting qty',
+          400
+        )
+      );
 
     if (numericQuantity !== undefined) {
-      // Log the manual stock adjustment
-      await StockAdjustment.createAdjustStock({
+      // ✅ Log stock adjustment
+      const adjust = await StockAdjustmentService.createAdjustStock({
         product: updatedProduct._id,
         previousQuantity: inventory.quantity,
         adjustedQuantity: numericQuantity,
         previousAcquisition: parseFloat(inventory.acquisitionPrice || 0),
         newAcquisition: numericAcquisition,
         change: numericQuantity - inventory.quantity,
-        reason,
-        note,
+        reason: adjustmentReason,
+        note: adjustmentNote,
         adjustedBy: req.currentUser?.id || 'system',
       });
+      if (!adjust) return next(new AppError('Adjustment failed', 400));
     }
 
-    // Update inventory
+    // ✅ Update inventory
     await InventoryService.updateInventory({
       productId: updatedProduct._id,
       quantity: numericQuantity,
@@ -294,7 +308,7 @@ export const updateProduct = catchAsync(async (req, res, next) => {
     });
   }
 
-  // Format response to match GET structure
+  // Format response
   const responseProduct = {
     _id: updatedProduct._id,
     sku: updatedProduct.sku,
@@ -355,7 +369,7 @@ export const orderStock = catchAsync(async (req, res, next) => {
   // 2. Ensure supplier exists (only once)
   let supplier = await SupplierService.findSupplierByName(supplierName.trim());
   if (!supplier) {
-    supplier = await SupplierService.createSupplier(supplierName.trim());
+    supplier = await SupplierService.createSupplier(supplierName);
   }
 
   const stockOrders = [];
@@ -407,7 +421,7 @@ export const orderStock = catchAsync(async (req, res, next) => {
       user: req.currentUser?.id || 'system',
       action: 'Order Stock',
       target: 'Product',
-      description: `Ordered ${parsedQuantity} units of "${product.name}" from supplier "${supplier.name}" at price ${parsedPrice}`,
+      description: `Ordered ${parsedQuantity} units of "${product.name}" from supplier "${supplier.supplierName}" at price ${parsedPrice}`,
     });
   }
 
@@ -563,20 +577,48 @@ export const loadCategory = catchAsync(async (req, res, next) => {
 
 export const getInventorySummary = catchAsync(async (req, res, next) => {
   const { startDate, endDate } = req.query; // ⬅️ accept query params
-  const summary = await InventoryService.getInventorySummary(
-    startDate,
-    endDate
-  );
+  let start = startDate ? new Date(startDate) : null;
+  let end = endDate ? new Date(endDate) : null;
+
+  if (start) start.setHours(0, 0, 0, 0); // start of day
+  if (end) end.setHours(23, 59, 59, 999); // end of day
+  const summary = await InventoryService.getInventorySummary(start, end);
   res.status(200).json({ summary });
 });
 
 export const getInventoryDetails = catchAsync(async (req, res, next) => {
   const { productId } = req.params;
   const { startDate, endDate } = req.query; // ⬅️ accept query params
+  let start = startDate ? new Date(startDate) : null;
+  let end = endDate ? new Date(endDate) : null;
+
+  if (start) start.setHours(0, 0, 0, 0); // start of day
+  if (end) end.setHours(23, 59, 59, 999); // end of day
   const details = await InventoryService.getInventoryDetails(
     productId,
-    startDate,
-    endDate
+    start,
+    end
   );
   res.status(200).json({ details });
+});
+
+export const fetchInventoryReport = catchAsync(async (req, res, next) => {
+  const { from, to } = req.query;
+  if (!from || !to)
+    return next(new AppError('From and To dates are required', 404));
+
+  let start = new Date(from);
+  let end = new Date(to);
+
+  start.setHours(0, 0, 0, 0);
+  end.setHours(23, 59, 59, 999);
+
+  const report = await getInventoryReport(start, end);
+
+  res.status(200).json({
+    status: 'success',
+    from: start,
+    to: end,
+    data: report,
+  });
 });

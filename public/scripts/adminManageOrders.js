@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const filterSupplier = document.getElementById('filter-supplier');
   const filterCategory = document.getElementById('filter-category');
   const filterBtn = document.getElementById('filter-btn');
+  const filterReset = document.getElementById('filter-reset');
 
   const receiveModal = document.getElementById('receiveModal');
   const qtyInput = document.getElementById('receivedQty');
@@ -27,6 +28,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   let selectedOrderId = null;
   let sortField = null;
   let sortOrder = 'asc';
+
+  // -------------------- RESET FILTERS --------------------
+  filterReset.onclick = () => {
+    // Clear values
+    filterDate.value = '';
+    filterStatus.value = '';
+    filterSupplier.value = '';
+    filterCategory.value = '';
+
+    // Reload without filters
+    loadOrders({}, 1);
+  };
 
   // -------------------- LOAD CATEGORIES --------------------
   async function loadCategories() {
@@ -56,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       currentPage = page;
       totalPages = Math.ceil((response.total || list.length) / pageLimit);
 
-      renderOrders(orders);
+      renderOrders(sortOrders(orders));
       renderPagination(); // <-- must be called here
     } catch (err) {
       console.error(err);
@@ -94,6 +107,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     nextBtn.disabled = currentPage === totalPages;
     nextBtn.onclick = () => loadOrders(getFilters(), currentPage + 1);
     paginationContainer.appendChild(nextBtn);
+  }
+  // Update sort button UI
+  function updateSortUI(activeKey) {
+    document.querySelectorAll('.sort-btn').forEach(btn => {
+      btn.classList.remove('asc', 'desc', 'inactive');
+
+      if (btn.dataset.key === activeKey) {
+        btn.classList.add(sortOrder); // either "asc" or "desc"
+      } else {
+        btn.classList.add('inactive');
+      }
+    });
   }
 
   // -------------------- RENDER ORDERS --------------------
@@ -156,7 +181,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <td>${order.orderQuantity}</td>
       <td>${order.deliveredQuantity}</td>
       <td>₱${Number(
-        product.price?.$numberDecimal || product.price || 0
+        order.acquisitionPrice?.$numberDecimal || order.acquisitionPrice || 0
       ).toFixed(2)}</td>
       <td>${order.supplierName}</td>
       <td>${new Date(order.deliveryDate).toLocaleDateString()}</td>
@@ -203,6 +228,50 @@ document.addEventListener('DOMContentLoaded', async () => {
     receiveModal.classList.add('hidden');
     qtyInput.value = '';
   };
+
+  // -------------------- SORT HANDLING --------------------
+  function sortOrders(list) {
+    if (!sortField) return list;
+
+    return [...list].sort((a, b) => {
+      let valA, valB;
+
+      if (sortField === 'name') {
+        valA = (a.productId?.name || '').toLowerCase();
+        valB = (b.productId?.name || '').toLowerCase();
+      } else if (sortField === 'deliveryDate') {
+        valA = new Date(a.deliveryDate);
+        valB = new Date(b.deliveryDate);
+      } else {
+        return 0;
+      }
+
+      if (valA < valB) return sortOrder === 'asc' ? -1 : 1;
+      if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+  // Attach click handlers to sort buttons
+  document.querySelectorAll('.sort-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.key;
+
+      if (sortField === key) {
+        // toggle asc/desc
+        sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortField = key;
+        sortOrder = 'asc'; // reset to ascending
+      }
+
+      // ✅ update UI
+      updateSortUI(sortField);
+
+      // ✅ re-render
+      renderOrders(sortOrders(orders));
+    });
+  });
 
   // -------------------- ROW ACTIONS --------------------
   function attachRowActions() {

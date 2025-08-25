@@ -92,11 +92,20 @@ export async function unbanUserAPI(userId) {
 
 export const updateUserAPI = async (userId, data) => {
   try {
-    const res = await axios.put(`${API_BASE}/${userId}`, data, {
+    const res = await fetch(`${API_BASE}/${userId}`, {
+      method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
     });
-    return res.data.user;
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || 'Failed to update user');
+    }
+
+    const result = await res.json();
+    return result.user; // assuming backend returns { user: {...} }
   } catch (err) {
-    throw new Error(err.response?.data?.error || 'Failed to update user');
+    throw new Error(err.message || 'Failed to update user');
   }
 };

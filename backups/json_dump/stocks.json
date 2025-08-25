@@ -1,0 +1,68 @@
+[
+  {
+    "_id": "68ab08d430d647e7a80e33fb",
+    "productId": "68aaefb81757054a92b31b15",
+    "supplierId": "68a96a9be9a57195d5edddbc",
+    "supplierName": "peter",
+    "orderQuantity": 1,
+    "deliveredQuantity": 1,
+    "deliveryDate": "2025-08-24T00:00:00.000Z",
+    "acquisitionPrice": {
+      "$numberDecimal": "5"
+    },
+    "status": "delivered",
+    "isDeleted": false,
+    "createdAt": "2025-08-24T12:43:00.946Z",
+    "__v": 0,
+    "deliveredDate": "2025-08-24T12:43:35.930Z"
+  },
+  {
+    "_id": "68ab3e19aee197c2fac525c2",
+    "productId": "68aaefdb1757054a92b31b26",
+    "supplierId": "68a96a9be9a57195d5edddbc",
+    "supplierName": "peter",
+    "orderQuantity": 10,
+    "deliveredQuantity": 20,
+    "deliveryDate": "2025-08-27T00:00:00.000Z",
+    "acquisitionPrice": {
+      "$numberDecimal": "10"
+    },
+    "status": "delivered",
+    "isDeleted": false,
+    "createdAt": "2025-08-24T16:30:17.592Z",
+    "__v": 0,
+    "deliveredDate": "2025-08-24T16:30:33.660Z"
+  },
+  {
+    "_id": "68ac10120044ed11eb3ab122",
+    "productId": "68aaefb81757054a92b31b15",
+    "supplierId": "68a96a9be9a57195d5edddbc",
+    "supplierName": "peter",
+    "orderQuantity": 2,
+    "deliveredQuantity": 0,
+    "deliveryDate": "2025-08-26T00:00:00.000Z",
+    "acquisitionPrice": {
+      "$numberDecimal": "5"
+    },
+    "status": "pending",
+    "isDeleted": false,
+    "createdAt": "2025-08-25T07:26:10.096Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac10120044ed11eb3ab127",
+    "productId": "68aaefdb1757054a92b31b26",
+    "supplierId": "68a96a9be9a57195d5edddbc",
+    "supplierName": "peter",
+    "orderQuantity": 15,
+    "deliveredQuantity": 0,
+    "deliveryDate": "2025-08-26T00:00:00.000Z",
+    "acquisitionPrice": {
+      "$numberDecimal": "10"
+    },
+    "status": "pending",
+    "isDeleted": false,
+    "createdAt": "2025-08-25T07:26:10.257Z",
+    "__v": 0
+  }
+]

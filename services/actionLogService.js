@@ -17,27 +17,34 @@ const getAllLogs = async (filters = {}) => {
     role = '',
     actions = [],
     startDate = null,
+    endDate = null,
     page = 1,
     limit = 10,
   } = filters;
 
   const query = {};
 
-  // ✅ Filter by actions
+  // Actions
   if (Array.isArray(actions) && actions.length > 0) {
     query.action = { $in: actions };
   }
 
-  // ✅ Filter by date
-  if (startDate) {
-    const start = new Date(startDate);
-    start.setHours(0, 0, 0, 0);
-    const end = new Date(startDate);
-    end.setHours(23, 59, 59, 999);
-    query.timestamp = { $gte: start, $lte: end };
+  // Date range
+  if (startDate || endDate) {
+    query.timestamp = {};
+    if (startDate) {
+      const start = new Date(startDate);
+      start.setHours(0, 0, 0, 0);
+      query.timestamp.$gte = start;
+    }
+    if (endDate) {
+      const end = new Date(endDate);
+      end.setHours(23, 59, 59, 999);
+      query.timestamp.$lte = end;
+    }
   }
 
-  // ✅ Build user filter
+  // User filters
   const matchUser = {};
   if (search) {
     const regex = new RegExp(search, 'i');
@@ -48,13 +55,11 @@ const getAllLogs = async (filters = {}) => {
     ];
   }
   if (role) {
-    matchUser['user.role'] = role; // ✅ fixed role filter
+    matchUser['user.role'] = role;
   }
 
-  // ✅ Pagination params
   const skip = (page - 1) * limit;
 
-  // ✅ Build aggregation pipeline
   const pipeline = [
     { $match: query },
     {
@@ -72,12 +77,10 @@ const getAllLogs = async (filters = {}) => {
     pipeline.push({ $match: matchUser });
   }
 
-  // ✅ For total count
   const countPipeline = [...pipeline, { $count: 'total' }];
   const countResult = await Log.aggregate(countPipeline);
   const total = countResult.length > 0 ? countResult[0].total : 0;
 
-  // ✅ For paginated results
   pipeline.push({ $sort: { timestamp: -1 } });
   pipeline.push({ $skip: skip });
   pipeline.push({ $limit: limit });

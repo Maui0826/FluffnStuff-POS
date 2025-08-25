@@ -1,0 +1,34 @@
+[
+  {
+    "_id": "68a96a9be9a57195d5edddbc",
+    "supplierName": "peter",
+    "status": "active",
+    "createdAt": "2025-08-23T07:15:39.190Z",
+    "updatedAt": "2025-08-23T07:15:39.190Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a9712880eb87518ec4d969",
+    "supplierName": "pablo",
+    "status": "active",
+    "createdAt": "2025-08-23T07:43:36.834Z",
+    "updatedAt": "2025-08-23T07:43:36.834Z",
+    "__v": 0
+  },
+  {
+    "_id": "68a9719580eb87518ec4d9e2",
+    "supplierName": "juan",
+    "status": "active",
+    "createdAt": "2025-08-23T07:45:25.457Z",
+    "updatedAt": "2025-08-23T07:45:25.457Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aa86b20c1cf4e21c83b5ab",
+    "supplierName": "joel",
+    "status": "active",
+    "createdAt": "2025-08-24T03:27:46.140Z",
+    "updatedAt": "2025-08-24T03:27:46.140Z",
+    "__v": 0
+  }
+]

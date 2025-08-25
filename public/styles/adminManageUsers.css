@@ -20,20 +20,13 @@
   --transition: 0.3s ease;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-}
-main {
-  flex: 1;
-}
-
 .hidden {
   display: none;
 }
 
 .container {
-  width: 100%;
+  width: calc(100% - 80px);
+  transition: width 0.3s;
   margin: 0 auto;
   background-color: var(--sub-color);
   border-radius: 8px;
@@ -105,7 +98,7 @@ main {
 .grid-table {
   display: grid;
   grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1fr;
-  width: 100%;
+  width: calc(100% - 80px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
   overflow: hidden;

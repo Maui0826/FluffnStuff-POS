@@ -4,6 +4,23 @@ import TransactionService from '../services/transactionService.js';
 import TransactionItemService from '../services/transactItemService.js';
 import RefundService from '../services/refundService.js';
 
+export const fetchTransactionByIdController = catchAsync(
+  async (req, res, next) => {
+    const { id } = req.params;
+    const transact = await TransactionItemService.findTransactionByID(id);
+    if (!transact) return next(new AppError('Transaction not found', 404));
+    const transaction = await TransactionService.fetchTransactionId(
+      transact.transactionId
+    );
+
+    if (!transaction) {
+      return next(new AppError('Transaction not found', 404));
+    }
+
+    return res.status(200).json({ transaction });
+  }
+);
+
 export const getAllTransaction = catchAsync(async (req, res, next) => {
   const { date, search, user } = req.query;
 
@@ -66,11 +83,13 @@ export const deleteTransaction = catchAsync(async (req, res, next) => {
 });
 
 export const getTransactionHistory = catchAsync(async (req, res, next) => {
-  const { date, user } = req.query;
+  const { fromDate, toDate, user, receipt } = req.query;
 
   const history = await TransactionService.getTransactionHistory({
-    date,
+    fromDate,
+    toDate,
     user,
+    receipt,
   });
 
   res.status(200).json({
@@ -81,14 +100,21 @@ export const getTransactionHistory = catchAsync(async (req, res, next) => {
 });
 
 export const getUserHistory = catchAsync(async (req, res, next) => {
-  const { date } = req.query;
+  const { fromDate, toDate, receipt } = req.query;
 
   const user = req.currentUser;
-  const userId = user?._id; // extract only the ID
+  if (!user?._id) {
+    return res.status(401).json({
+      status: 'error',
+      message: 'Unauthorized or user not found',
+    });
+  }
 
   const history = await TransactionService.getTransactionHistory({
-    date,
-    userId, // pass userId instead of the whole object
+    fromDate,
+    toDate,
+    userId: user._id, // only return transactions for this cashier
+    receipt,
   });
 
   res.status(200).json({

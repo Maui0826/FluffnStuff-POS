@@ -96,6 +96,13 @@
             <span class="nav-label hidden">Action Logs</span>
           </a>
         </li>
+        <li class="backup-db">
+          <a href="/backup">
+            <i class="fa-solid fa-database"></i>
+            <i data-lucide="database" class="lucide-icon"></i>
+            <span class="nav-label hidden">Backup DB</span>
+          </a>
+        </li>
       </ul>
 
       <ul class="control-icons">
@@ -104,6 +111,7 @@
           <i data-lucide="arrow-left-right" class="lucide-icon"></i>
           <span class="nav-label hidden">Expand</span>
         </li>
+
         <li class="log-out">
           <a href="/logout">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -137,9 +145,10 @@
             <select id="filter-action">
               <option value="">All Actions</option>
             </select>
-
-            <input type="date" id="filter-date" />
-            <button id="apply-filters">Filter</button>
+            <input type="date" id="from-date" />
+            <input type="date" id="to-date" />
+            <button id="apply-filters">Filter</button
+            ><button id="reset-filters">Reset</button>
           </div>
 
           <div class="table-container">
@@ -190,7 +199,11 @@
             </li>
             <li>
               <i class="fa-solid fa-dog"></i> Pedigree Profile:
-              <em>IAGD Record</em>
+              <a
+                href="https://iagd-centralized.metaanimals.org/all-animal/dior-2/"
+                target="_blank"
+                ><em>IAGD Record</em></a
+              >
             </li>
           </ul>
         </div>

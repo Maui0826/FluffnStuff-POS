@@ -20,22 +20,24 @@
         <img id="logo" src="./assets/logo.png" alt="Logo" class="logo" />
         <p>DA Constance Fluff 'N Stuff Pet Supplies Store</p>
       </div>
-
-      <ul class="header-icons">
-        <li class="user-info">
-          <span id="header-name"></span>
-          <span id="header-role"></span>
-        </li>
-        <li class="profile">
-          <i class="fa-regular fa-user"></i>
-        </li>
-        <li class="about-us">
-          <a href="/about-us">
-            <span class="nav-label">About Us</span>
-          </a>
-        </li>
-      </ul>
+      <div>
+        <ul class="header-icons">
+          <li class="user-info">
+            <span id="header-name"></span>
+            <span id="header-role"></span>
+          </li>
+          <li class="profile">
+            <i class="fa-regular fa-user"></i>
+          </li>
+          <li class="about-us">
+            <a href="/about-us">
+              <span class="nav-label">About Us</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </header>
+
     <nav class="sidebar">
       <ul class="nav-icons">
         <li>
@@ -94,6 +96,13 @@
             <span class="nav-label hidden">Action Logs</span>
           </a>
         </li>
+        <li class="backup-db">
+          <a href="/backup">
+            <i class="fa-solid fa-database"></i>
+            <i data-lucide="database" class="lucide-icon"></i>
+            <span class="nav-label hidden">Backup DB</span>
+          </a>
+        </li>
       </ul>
 
       <ul class="control-icons">
@@ -102,6 +111,7 @@
           <i data-lucide="arrow-left-right" class="lucide-icon"></i>
           <span class="nav-label hidden">Expand</span>
         </li>
+
         <li class="log-out">
           <a href="/logout">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -275,7 +285,11 @@
             </li>
             <li>
               <i class="fa-solid fa-dog"></i> Pedigree Profile:
-              <em>IAGD Record</em>
+              <a
+                href="https://iagd-centralized.metaanimals.org/all-animal/dior-2/"
+                target="_blank"
+                ><em>IAGD Record</em></a
+              >
             </li>
           </ul>
         </div>

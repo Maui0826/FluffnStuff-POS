@@ -1,0 +1,248 @@
+[
+  {
+    "_id": "68aaf0021757054a92b31b46",
+    "receiptNum": "FNS-1756033026203",
+    "totalQty": 3,
+    "grossAmount": {
+      "$numberDecimal": "30.00"
+    },
+    "vatableAmount": {
+      "$numberDecimal": "26.79"
+    },
+    "vatExemptSales": {
+      "$numberDecimal": "0.00"
+    },
+    "vatZeroRatedSales": {
+      "$numberDecimal": "0.00"
+    },
+    "vatAmount": {
+      "$numberDecimal": "3.21"
+    },
+    "totalAmount": {
+      "$numberDecimal": "30.00"
+    },
+    "totalDiscount": {
+      "$numberDecimal": "0.00"
+    },
+    "discountType": "none",
+    "paymentMethod": "cash",
+    "cash": {
+      "$numberDecimal": "30.00"
+    },
+    "referenceNumber": null,
+    "pwdId": null,
+    "seniorId": null,
+    "change": {
+      "$numberDecimal": "0.00"
+    },
+    "cashier": "68a53f585ec633f48c7d3948",
+    "isDeleted": false,
+    "createdAt": "2025-08-24T10:57:06.205Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaf0181757054a92b31b59",
+    "receiptNum": "FNS-1756033048470",
+    "totalQty": 3,
+    "grossAmount": {
+      "$numberDecimal": "30.00"
+    },
+    "vatableAmount": {
+      "$numberDecimal": "0.00"
+    },
+    "vatExemptSales": {
+      "$numberDecimal": "24.00"
+    },
+    "vatZeroRatedSales": {
+      "$numberDecimal": "0.00"
+    },
+    "vatAmount": {
+      "$numberDecimal": "0.00"
+    },
+    "totalAmount": {
+      "$numberDecimal": "24.00"
+    },
+    "totalDiscount": {
+      "$numberDecimal": "6.00"
+    },
+    "discountType": "senior",
+    "paymentMethod": "cash",
+    "cash": {
+      "$numberDecimal": "30.00"
+    },
+    "referenceNumber": null,
+    "pwdId": null,
+    "seniorId": "testing 1",
+    "change": {
+      "$numberDecimal": "6.00"
+    },
+    "cashier": "68a53f585ec633f48c7d3948",
+    "isDeleted": false,
+    "createdAt": "2025-08-24T10:57:28.471Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aafb71ab3f71b538c0a1bf",
+    "receiptNum": "FNS-1756035953396",
+    "totalQty": 5,
+    "grossAmount": {
+      "$numberDecimal": "100.00"
+    },
+    "vatableAmount": {
+      "$numberDecimal": "0.00"
+    },
+    "vatExemptSales": {
+      "$numberDecimal": "80.00"
+    },
+    "vatZeroRatedSales": {
+      "$numberDecimal": "0.00"
+    },
+    "vatAmount": {
+      "$numberDecimal": "0.00"
+    },
+    "totalAmount": {
+      "$numberDecimal": "80.00"
+    },
+    "totalDiscount": {
+      "$numberDecimal": "20.00"
+    },
+    "discountType": "pwd",
+    "paymentMethod": "cash",
+    "cash": {
+      "$numberDecimal": "200.00"
+    },
+    "referenceNumber": null,
+    "pwdId": "test",
+    "seniorId": null,
+    "change": {
+      "$numberDecimal": "120.00"
+    },
+    "cashier": "68a53f585ec633f48c7d3948",
+    "isDeleted": false,
+    "createdAt": "2025-08-24T11:45:53.403Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aafb82ab3f71b538c0a1d1",
+    "receiptNum": "FNS-1756035970522",
+    "totalQty": 3,
+    "grossAmount": {
+      "$numberDecimal": "60.00"
+    },
+    "vatableAmount": {
+      "$numberDecimal": "53.57"
+    },
+    "vatExemptSales": {
+      "$numberDecimal": "0.00"
+    },
+    "vatZeroRatedSales": {
+      "$numberDecimal": "0.00"
+    },
+    "vatAmount": {
+      "$numberDecimal": "6.43"
+    },
+    "totalAmount": {
+      "$numberDecimal": "60.00"
+    },
+    "totalDiscount": {
+      "$numberDecimal": "0.00"
+    },
+    "discountType": "none",
+    "paymentMethod": "cash",
+    "cash": {
+      "$numberDecimal": "100.00"
+    },
+    "referenceNumber": null,
+    "pwdId": null,
+    "seniorId": null,
+    "change": {
+      "$numberDecimal": "40.00"
+    },
+    "cashier": "68a53f585ec633f48c7d3948",
+    "isDeleted": false,
+    "createdAt": "2025-08-24T11:46:10.523Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ab3092e73df1768dff3774",
+    "receiptNum": "FNS-1756049554711",
+    "totalQty": 2,
+    "grossAmount": {
+      "$numberDecimal": "40.00"
+    },
+    "vatableAmount": {
+      "$numberDecimal": "35.71"
+    },
+    "vatExemptSales": {
+      "$numberDecimal": "0.00"
+    },
+    "vatZeroRatedSales": {
+      "$numberDecimal": "0.00"
+    },
+    "vatAmount": {
+      "$numberDecimal": "4.29"
+    },
+    "totalAmount": {
+      "$numberDecimal": "40.00"
+    },
+    "totalDiscount": {
+      "$numberDecimal": "0.00"
+    },
+    "discountType": "none",
+    "paymentMethod": "cash",
+    "cash": {
+      "$numberDecimal": "500.00"
+    },
+    "referenceNumber": null,
+    "pwdId": null,
+    "seniorId": null,
+    "change": {
+      "$numberDecimal": "460.00"
+    },
+    "cashier": "68a53f585ec633f48c7d3948",
+    "isDeleted": false,
+    "createdAt": "2025-08-24T15:32:34.767Z",
+    "__v": 0
+  },
+  {
+    "_id": "68ac4b46f139126c3e91a271",
+    "receiptNum": "FNS-1756121926697",
+    "totalQty": 2,
+    "grossAmount": {
+      "$numberDecimal": "20.00"
+    },
+    "vatableAmount": {
+      "$numberDecimal": "0.00"
+    },
+    "vatExemptSales": {
+      "$numberDecimal": "16.00"
+    },
+    "vatZeroRatedSales": {
+      "$numberDecimal": "0.00"
+    },
+    "vatAmount": {
+      "$numberDecimal": "0.00"
+    },
+    "totalAmount": {
+      "$numberDecimal": "16.00"
+    },
+    "totalDiscount": {
+      "$numberDecimal": "4.00"
+    },
+    "discountType": "senior",
+    "paymentMethod": "cash",
+    "cash": {
+      "$numberDecimal": "20.00"
+    },
+    "referenceNumber": null,
+    "pwdId": null,
+    "seniorId": "test",
+    "change": {
+      "$numberDecimal": "4.00"
+    },
+    "cashier": "68a53f585ec633f48c7d3948",
+    "isDeleted": false,
+    "createdAt": "2025-08-25T11:38:46.734Z",
+    "__v": 0
+  }
+]

@@ -42,7 +42,8 @@ main {
 } */
 
 .container {
-  width: 100%;
+  width: calc(100% - 80px);
+  transition: width 0.3s;
   /* max-width: 1500px; prevents container from stretching too far */
   background-color: var(--sub-color);
   border-radius: 8px;

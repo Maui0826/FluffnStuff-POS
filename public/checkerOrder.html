@@ -95,7 +95,16 @@
             />
           </label>
 
+          <label>
+            Category:
+            <select id="filter-category">
+              <option value="">All</option>
+              <!-- Categories will be populated dynamically via JS -->
+            </select>
+          </label>
+
           <button id="filter-btn">Filter</button>
+          <button id="filter-reset">Reset</button>
         </div>
 
         <div class="table-wrapper">
@@ -105,15 +114,18 @@
                 <th>Image</th>
                 <th>
                   Product Name
-                  <button class="sort-btn" data-key="name">⇅</button>
+                  <button class="sort-btn inactive" data-key="name"></button>
                 </th>
                 <th>Quantity Ordered</th>
                 <th>Quantity Received</th>
-                <th>Price</th>
+                <th>Acquisitin Price</th>
                 <th>Supplier</th>
                 <th>
                   Delivery Date
-                  <button class="sort-btn" data-key="deliveryDate">⇅</button>
+                  <button
+                    class="sort-btn inactive"
+                    data-key="deliveryDate"
+                  ></button>
                 </th>
                 <th>Delivered Date</th>
                 <th>Status</th>
@@ -169,7 +181,11 @@
             </li>
             <li>
               <i class="fa-solid fa-dog"></i> Pedigree Profile:
-              <em>IAGD Record</em>
+              <a
+                href="https://iagd-centralized.metaanimals.org/all-animal/dior-2/"
+                target="_blank"
+                ><em>IAGD Record</em></a
+              >
             </li>
           </ul>
         </div>

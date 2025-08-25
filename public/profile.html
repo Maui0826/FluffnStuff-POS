@@ -41,63 +41,81 @@
     <nav class="sidebar">
       <ul class="nav-icons">
         <li>
-          <a href="/dashboard" class="dashboard"
-            ><i class="fa-solid fa-gauge-high"></i
-            ><span class="nav-label hidden">Dashboard</span></a
-          >
+          <a href="/dashboard" class="dashboard">
+            <i class="fa-solid fa-gauge-high"></i>
+            <i data-lucide="gauge" class="lucide-icon"></i>
+            <span class="nav-label hidden">Dashboard</span>
+          </a>
         </li>
         <li>
-          <a href="/point-of-sale" class="pos-system"
-            ><i class="fa-solid fa-dollar-sign"></i
-            ><span class="nav-label hidden">POS</span></a
-          >
-        </li>
-
-        <li>
-          <a href="/inventory" class="inventory"
-            ><i class="fa-solid fa-boxes-stacked"></i
-            ><span class="nav-label hidden">Inventory</span></a
-          >
+          <a href="/point-of-sale" class="pos-system">
+            <i class="fa-solid fa-dollar-sign"></i>
+            <i data-lucide="dollar-sign" class="lucide-icon"></i>
+            <span class="nav-label hidden">POS</span>
+          </a>
         </li>
         <li>
-          <a href="/supplies" class="order"
-            ><i class="fa-solid fa-truck"></i
-            ><span class="nav-label hidden">Manage Order</span></a
-          >
+          <a href="/inventory" class="inventory">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <i data-lucide="boxes" class="lucide-icon"></i>
+            <span class="nav-label hidden">Inventory</span>
+          </a>
         </li>
         <li>
-          <a href="/manage-users" class="manage-user"
-            ><i class="fa-solid fa-users-gear"></i
-            ><span class="nav-label hidden">Users</span></a
-          >
+          <a href="/supplies" class="order">
+            <i class="fa-solid fa-truck"></i>
+            <i data-lucide="truck" class="lucide-icon"></i>
+            <span class="nav-label hidden">Manage Order</span>
+          </a>
         </li>
         <li>
-          <a href="/reports" class="reports"
-            ><i class="fa-solid fa-chart-line"></i
-            ><span class="nav-label hidden">Reports</span></a
-          >
+          <a href="/manage-users" class="manage-user">
+            <i class="fa-solid fa-users-gear"></i>
+            <i data-lucide="users" class="lucide-icon"></i>
+            <span class="nav-label hidden">Users</span>
+          </a>
         </li>
         <li>
-          <a href="/transactions" class="transaction"
-            ><i class="fa-solid fa-receipt"></i
-            ><span class="nav-label hidden">Transaction History</span></a
-          >
+          <a href="/reports" class="reports">
+            <i class="fa-solid fa-chart-line"></i>
+            <i data-lucide="line-chart" class="lucide-icon"></i>
+            <span class="nav-label hidden">Reports</span>
+          </a>
         </li>
         <li>
-          <a href="/user-actions" class="logs"
-            ><i class="fa-solid fa-clipboard-list"></i
-            ><span class="nav-label hidden">Action Logs</span></a
-          >
+          <a href="/transactions" class="transaction">
+            <i class="fa-solid fa-receipt"></i>
+            <i data-lucide="receipt" class="lucide-icon"></i>
+            <span class="nav-label hidden">Transaction History</span>
+          </a>
+        </li>
+        <li>
+          <a href="/user-actions" class="logs">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <i data-lucide="clipboard-list" class="lucide-icon"></i>
+            <span class="nav-label hidden">Action Logs</span>
+          </a>
+        </li>
+        <li class="backup-db">
+          <a href="/backup">
+            <i class="fa-solid fa-database"></i>
+            <i data-lucide="database" class="lucide-icon"></i>
+            <span class="nav-label hidden">Backup DB</span>
+          </a>
         </li>
       </ul>
+
       <ul class="control-icons">
         <li class="expand">
-          <i class="fa-solid fa-left-right"></i
-          ><span class="nav-label hidden">Expand</span>
+          <i class="fa-solid fa-left-right"></i>
+          <i data-lucide="arrow-left-right" class="lucide-icon"></i>
+          <span class="nav-label hidden">Expand</span>
         </li>
+
         <li class="log-out">
           <a href="/logout">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <i data-lucide="log-out" class="lucide-icon"></i>
             <span class="nav-label hidden">Logout</span>
           </a>
         </li>
@@ -180,7 +198,11 @@
             </li>
             <li>
               <i class="fa-solid fa-dog"></i> Pedigree Profile:
-              <em>IAGD Record</em>
+              <a
+                href="https://iagd-centralized.metaanimals.org/all-animal/dior-2/"
+                target="_blank"
+                ><em>IAGD Record</em></a
+              >
             </li>
           </ul>
         </div>

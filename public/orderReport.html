@@ -98,6 +98,13 @@
             <span class="nav-label hidden">Action Logs</span>
           </a>
         </li>
+        <li class="backup-db">
+          <a href="/backup">
+            <i class="fa-solid fa-database"></i>
+            <i data-lucide="database" class="lucide-icon"></i>
+            <span class="nav-label hidden">Backup DB</span>
+          </a>
+        </li>
       </ul>
 
       <ul class="control-icons">
@@ -106,6 +113,7 @@
           <i data-lucide="arrow-left-right" class="lucide-icon"></i>
           <span class="nav-label hidden">Expand</span>
         </li>
+
         <li class="log-out">
           <a href="/logout">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -148,6 +156,7 @@
 
         <!-- Report table -->
         <section class="report-results">
+          <h3>Delivered</h3>
           <table id="order-report-table">
             <thead>
               <tr>
@@ -165,6 +174,34 @@
               </tr>
             </thead>
 
+            <tbody></tbody>
+          </table>
+
+          <h3>Pending Deliveries</h3>
+          <table id="pending-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>SKU</th>
+                <th>Supplier</th>
+                <th>Ordered Qty</th>
+                <th>Delivery Date</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+
+          <h3>Cancelled Deliveries</h3>
+          <table id="cancelled-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>SKU</th>
+                <th>Supplier</th>
+                <th>Ordered Qty</th>
+                <th>Delivery Date</th>
+              </tr>
+            </thead>
             <tbody></tbody>
           </table>
         </section>
@@ -194,7 +231,11 @@
             </li>
             <li>
               <i class="fa-solid fa-dog"></i> Pedigree Profile:
-              <em>IAGD Record</em>
+              <a
+                href="https://iagd-centralized.metaanimals.org/all-animal/dior-2/"
+                target="_blank"
+                ><em>IAGD Record</em></a
+              >
             </li>
           </ul>
         </div>

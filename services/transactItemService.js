@@ -62,7 +62,6 @@ const refundItem = async (data, reason) => {
       transactionId: data.transactionId,
       productId: data.productId,
       isDeleted: false,
-      isRefunded: false,
     }).session(session);
 
     if (!transItem)
@@ -100,9 +99,15 @@ const refundItem = async (data, reason) => {
   }
 };
 
+const findTransactionByID = async id => {
+  const transact = await TransactionItem.findById(id);
+  return transact;
+};
+
 export default {
   deleteTransactionItem,
   createTransItem,
   getItemsByTransaction,
   refundItem,
+  findTransactionByID,
 };

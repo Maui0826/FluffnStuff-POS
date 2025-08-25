@@ -32,13 +32,14 @@ export const refundProduct = catchAsync(async (req, res, next) => {
 
   if (!transItem)
     return next(new AppError('Transaction item refund failed.', 404));
-
+  const unitNet =
+    Number(transItem.netAmount.toString()) / Number(transItem.quantity);
   // 4. Create refund record
   const refundData = {
     transactionItemId: transItem._id,
     productId: prod._id,
     quantity: Number(quantity),
-    refundPrice: Number(transItem.price.toString()) * Number(quantity),
+    refundPrice: unitNet * Number(quantity),
     reason,
     note,
     isDiscounted: transact.discountType !== 'none',
@@ -68,6 +69,7 @@ export const refundProduct = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
+      totalRefundedPrice: refund.refundPrice,
       refundedItem: {
         _id: transItem._id,
         productId: prod._id,

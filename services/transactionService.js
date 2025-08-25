@@ -43,49 +43,60 @@ const toD128 = n =>
   mongoose.Types.Decimal128.fromString(Number(n || 0).toFixed(2));
 
 // Calculate totals
-const calculateTotals = (items = [], cash = 0, discountType = 'none') => {
-  let totalQty = 0;
-  let grossAmount = 0;
+function calculateTotals(items, cash = 0, discountType = 'none') {
+  const grossAmount = items.reduce(
+    (sum, item) =>
+      sum + (Number(item.price) || 0) * (Number(item.quantity) || 0),
+    0
+  );
+
+  let totalDiscount = 0;
+  let totalAmount = grossAmount;
   let vatableAmount = 0;
   let vatExemptSales = 0;
   let vatZeroRatedSales = 0;
-  let totalDiscount = 0;
+  let vatAmount = 0;
 
-  for (const item of items) {
-    const price = Number(item.price) || 0;
-    const qty = Number(item.quantity) || 0;
-    const lineTotal = price * qty;
+  // --- Apply discounts ---
+  if (discountType === 'senior' || discountType === 'pwd') {
+    // Senior/PWD: 20% discount, VAT-exempt
+    totalDiscount = grossAmount * 0.2;
+    totalAmount = grossAmount - totalDiscount;
 
-    totalQty += qty;
-    grossAmount += lineTotal;
-
-    const vatType = String(item.vatType || 'vatable').toLowerCase();
-    if (vatType === 'vatable') vatableAmount += lineTotal / 1.12;
-    else if (vatType === 'exempt') vatExemptSales += lineTotal;
-    else if (vatType === 'zero-rated') vatZeroRatedSales += lineTotal;
-
-    // 20% discount for senior/PWD
-    if (discountType === 'senior' || discountType === 'pwd') {
-      totalDiscount += lineTotal * 0.2;
-    }
+    vatExemptSales = totalAmount; // all goes to exempt
+    vatableAmount = 0;
+    vatAmount = 0;
+  } else {
+    // Normal transaction: compute VAT
+    vatableAmount = grossAmount / 1.12;
+    vatAmount = grossAmount - vatableAmount;
+    totalAmount = grossAmount; // no discount
+    vatExemptSales = 0;
   }
 
-  const vatAmount = grossAmount - vatableAmount;
-  const totalAmount = grossAmount - totalDiscount;
-  const change = Number(cash) - totalAmount;
+  const totalQty = items.reduce(
+    (sum, item) => sum + Number(item.quantity || 0),
+    0
+  );
+
+  const change = Math.max((Number(cash) || 0) - totalAmount, 0);
 
   return {
     totalQty,
-    grossAmount,
-    vatableAmount,
-    vatExemptSales,
-    vatZeroRatedSales,
-    vatAmount,
-    totalDiscount,
-    totalAmount,
-    change: change >= 0 ? change : 0,
+    grossAmount: round2(grossAmount),
+    vatableAmount: round2(vatableAmount),
+    vatExemptSales: round2(vatExemptSales),
+    vatZeroRatedSales: round2(vatZeroRatedSales),
+    vatAmount: round2(vatAmount),
+    totalDiscount: round2(totalDiscount),
+    totalAmount: round2(totalAmount),
+    change: round2(change),
   };
-};
+}
+
+function round2(num) {
+  return Math.round((num + Number.EPSILON) * 100) / 100;
+}
 
 const createTransaction = async ({
   items,
@@ -101,12 +112,12 @@ const createTransaction = async ({
   session.startTransaction();
 
   try {
-    // 1) compute totals
+    // 1) compute totals (gross, discount, net, vat, change, etc.)
     const totals = calculateTotals(items, cash, discountType);
 
     // 2) create transaction document
     const transactionData = {
-      receiptNum: `R-${Date.now()}`,
+      receiptNum: `FNS-${Date.now()}`,
       totalQty: totals.totalQty,
       grossAmount: toD128(totals.grossAmount),
       vatableAmount: toD128(totals.vatableAmount),
@@ -117,11 +128,11 @@ const createTransaction = async ({
       totalAmount: toD128(totals.totalAmount),
       cash: toD128(cash),
       change: toD128(totals.change),
-      discountType,
+      discountType: discountType || 'none',
       paymentMethod,
       referenceNumber: pmNeedsRef(paymentMethod) ? referenceNumber : null,
-      seniorId: seniorId || null,
-      pwdId: pwdId || null,
+      seniorId: discountType === 'senior' ? seniorId || null : null,
+      pwdId: discountType === 'pwd' ? pwdId || null : null,
       cashier,
     };
 
@@ -131,23 +142,43 @@ const createTransaction = async ({
 
     // 3) create transaction items
     const txItems = [];
+    let discountRatio = 1;
+    if (totals.grossAmount > 0) {
+      discountRatio = totals.totalAmount / totals.grossAmount; // scale factor
+    }
+
     for (const item of items) {
       const price = Number(item.price) || 0;
       const qty = Number(item.quantity) || 0;
       const lineTotal = price * qty;
-      const vatType = String(item.vatType || 'vatable').toLowerCase();
-      const vatAmount =
-        vatType === 'vatable' ? lineTotal - lineTotal / 1.12 : 0;
 
+      // --- gross per item ---
+      const grossLine = lineTotal;
+
+      // --- apply discount if any ---
+      const discountedLine =
+        discountType && discountType !== 'none'
+          ? grossLine * discountRatio
+          : grossLine;
+
+      let vatType = String(item.vatType || 'vatable').toLowerCase();
+      let vatAmount = 0;
+      // If senior or pwd -> force exempt (VAT 0)
+      if (discountType === 'senior' || discountType === 'pwd') {
+        vatType = 'exempt';
+        vatAmount = 0;
+      } else if (vatType === 'vatable') {
+        vatAmount = discountedLine - discountedLine / 1.12;
+      }
       txItems.push({
         transactionId: transaction._id,
         productId: item._id || item.productId,
         quantity: qty,
         price: toD128(price),
-        totalAmount: toD128(lineTotal),
+        totalAmount: toD128(grossLine), // original line amount
         vatType,
         vatAmount: toD128(vatAmount),
-        netAmount: toD128(lineTotal),
+        netAmount: toD128(discountedLine), // discounted (net) line amount
       });
 
       // --- Update inventory quantity ---
@@ -325,12 +356,21 @@ const getTransactById = async id => {
 const getTransactionHistory = async (filters = {}) => {
   const query = { isDeleted: false };
 
-  // Filter by specific date
-  if (filters.date) {
-    const selectedDate = new Date(filters.date);
-    const startOfDay = new Date(selectedDate.setHours(0, 0, 0, 0));
-    const endOfDay = new Date(selectedDate.setHours(23, 59, 59, 999));
-    query.createdAt = { $gte: startOfDay, $lte: endOfDay };
+  // Filter by date range
+  if (filters.fromDate || filters.toDate) {
+    const start = filters.fromDate
+      ? new Date(filters.fromDate)
+      : new Date('1970-01-01');
+    start.setHours(0, 0, 0, 0);
+
+    const end = filters.toDate ? new Date(filters.toDate) : new Date();
+    end.setHours(23, 59, 59, 999);
+
+    query.createdAt = { $gte: start, $lte: end };
+  }
+  // Filter by userId (for cashier endpoint)
+  if (filters.userId) {
+    query.cashier = filters.userId;
   }
 
   // Fetch transactions with populated cashier
@@ -350,6 +390,13 @@ const getTransactionHistory = async (filters = {}) => {
     });
   }
 
+  if (filters.receipt) {
+    const search = filters.receipt.toString().toLowerCase();
+    transactions = transactions.filter(tx =>
+      tx.receiptNum.toString().toLowerCase().includes(search)
+    );
+  }
+
   // Fetch transaction items and product info
   const result = [];
   for (const tx of transactions) {
@@ -363,9 +410,10 @@ const getTransactionHistory = async (filters = {}) => {
     items.forEach(item => {
       result.push({
         _id: item._id,
+        receiptNum: tx.receiptNum, // ✅ include receipt number
         dateTime: tx.createdAt,
         product: item.productId.name,
-        price: parseFloat(item.price.toString()),
+        price: parseFloat(item.netAmount.toString()),
         quantity: item.quantity,
         addedBy: `${tx.cashier.name.firstName} ${
           tx.cashier.name.middleName ? tx.cashier.name.middleName + ' ' : ''
@@ -377,11 +425,39 @@ const getTransactionHistory = async (filters = {}) => {
   return result;
 };
 
+const fetchTransactionId = async transactionId => {
+  // Fetch transaction
+  const transaction = await Transaction.findById(transactionId).lean();
+  if (!transaction) return null;
+
+  // Fetch transaction items
+  const items = await TransactionItem.find({ transactionId })
+    .populate('productId', 'name') // populate product name
+    .lean();
+
+  // Map items to include productName and formatted amounts
+  const formattedItems = items.map(item => ({
+    productName: item.productId.name,
+    quantity: item.quantity,
+    price: parseFloat(item.price.toString()),
+    totalAmount: parseFloat(item.totalAmount.toString()),
+    vatType: item.vatType,
+    vatAmount: parseFloat(item.vatAmount.toString()),
+    netAmount: parseFloat(item.netAmount.toString()),
+  }));
+
+  return {
+    ...transaction,
+    items: formattedItems,
+  };
+};
+
 export default {
   deleteTransaction,
   getFilteredTransactions,
   createTransaction,
   getTransactionById,
+  fetchTransactionId,
   refundUpdate,
   weeklySale,
   calculateTotals,

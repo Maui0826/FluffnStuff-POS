@@ -22,13 +22,7 @@
   display: none !important;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-}
-
 main {
-  flex: 1;
   padding: 1.5rem;
   display: flex;
   justify-content: center; /* centers the container horizontally */
@@ -36,7 +30,8 @@ main {
 }
 
 .container {
-  width: 100%;
+  width: calc(100% - 80px);
+  transition: width 0.3s;
   /* max-width: 1500px; prevents container from stretching too far */
   background-color: var(--sub-color);
   border-radius: 8px;
@@ -194,7 +189,7 @@ main {
 
 /* --- Inventory Table --- */
 #inventory-table {
-  width: 100%;
+  width: calc(80% - 80px);
   border-collapse: collapse;
   font-size: 0.9rem;
   margin-bottom: 2rem;
@@ -305,6 +300,142 @@ main {
   background-color: #f1f1f1;
 }
 
+/* --- Overview Tables Styling --- */
+#report-container table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  min-width: 700px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+#report-container th,
+#report-container td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color1);
+}
+
+#report-container th {
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#report-container tbody tr:nth-child(even) {
+  background-color: var(--light-gray);
+}
+
+#report-container tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background 0.2s ease-in-out;
+}
+
+/* --- Overview Summary Values --- */
+#overview-summary-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+#overview-summary-values p {
+  background-color: var(--sub-color);
+  padding: 10px 15px;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  font-weight: 500;
+  flex: 1 1 250px;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+/* --- Product Modal Improvements --- */
+#product-modal .modal-content {
+  background-color: #fff;
+  border-radius: var(--radius);
+  width: 95%;
+  max-width: 950px;
+  max-height: 95%;
+  overflow-y: auto;
+  padding: 2rem;
+  position: relative;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+#product-modal h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+#product-modal h3 {
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+#product-modal table.detail-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 1.5rem;
+  font-size: 0.88rem;
+}
+
+#product-modal table.detail-table th,
+#product-modal table.detail-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color1);
+}
+
+#product-modal table.detail-table th {
+  background-color: var(--secondary-color);
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#product-modal table.detail-table tbody tr:nth-child(even) {
+  background-color: var(--light-gray);
+}
+
+#product-modal table.detail-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* --- Modal Close Button --- */
+#product-modal .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--danger-color);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+#product-modal .close-btn:hover {
+  transform: scale(1.2);
+}
+
+/* --- Responsive Adjustments for Tables --- */
+@media (max-width: 1024px) {
+  #report-container table,
+  #product-modal table.detail-table {
+    font-size: 0.82rem;
+  }
+}
+
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
   .report-filters {
@@ -322,5 +453,14 @@ main {
 
   .table-wrapper table {
     font-size: 0.8rem;
+  }
+
+  #overview-summary-values {
+    flex-direction: column;
+  }
+  #report-container table,
+  #product-modal table.detail-table {
+    min-width: 100%;
+    font-size: 0.78rem;
   }
 }

@@ -22,6 +22,8 @@ import transaction from './routes/transaction-route.js';
 import userRoute from './routes/user-route.js';
 import refundRoute from './routes/refund-route.js';
 import report from './routes/report-route.js';
+import backupRoutes from './routes/backup-route.js';
+import restoreRoute from './routes/restore-route.js';
 
 import dailyInventoryCron from './cron/dailyInventoryCron.js';
 
@@ -58,6 +60,8 @@ app.use(protect);
 
 app.use('/Images', express.static('Images'));
 
+app.use('/api/v1/backup', backupRoutes);
+app.use('/api/v1/restore', restoreRoute);
 app.use('/api/v1/dashboard', dashboard);
 app.use('/api/v1/point-of-sale', posRoute);
 app.use('/api/v1/inventory', inventory);

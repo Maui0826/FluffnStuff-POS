@@ -57,6 +57,17 @@ export const fetchTransactionHistory = async (filters = {}) => {
   }
 };
 
+export async function fetchTransactionById(id) {
+  try {
+    const res = await fetch(`${API_URL}/transactions/${id}`);
+    if (!res.ok) throw new Error('Failed to fetch transaction');
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+
 export const fetchUserHistory = async (filters = {}) => {
   try {
     const params = new URLSearchParams(filters);

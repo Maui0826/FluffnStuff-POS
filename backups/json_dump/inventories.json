@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "68aaefb81757054a92b31b17",
+    "productId": "68aaefb81757054a92b31b15",
+    "quantity": 23,
+    "acquisitionPrice": {
+      "$numberDecimal": "5"
+    },
+    "status": "active",
+    "updatedAt": "2025-08-25T11:38:46.805Z",
+    "__v": 0
+  },
+  {
+    "_id": "68aaefdb1757054a92b31b28",
+    "productId": "68aaefdb1757054a92b31b26",
+    "quantity": 50,
+    "acquisitionPrice": {
+      "$numberDecimal": "10"
+    },
+    "status": "active",
+    "updatedAt": "2025-08-24T15:32:34.849Z",
+    "__v": 0
+  }
+]

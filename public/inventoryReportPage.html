@@ -10,8 +10,6 @@
     ></script>
 
     <link rel="stylesheet" href="../styles/inventoryReport.css" />
-    <!-- Chart.js (global) -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -105,6 +103,13 @@
             <span class="nav-label hidden">Action Logs</span>
           </a>
         </li>
+        <li class="backup-db">
+          <a href="/backup">
+            <i class="fa-solid fa-database"></i>
+            <i data-lucide="database" class="lucide-icon"></i>
+            <span class="nav-label hidden">Backup DB</span>
+          </a>
+        </li>
       </ul>
 
       <ul class="control-icons">
@@ -113,6 +118,7 @@
           <i data-lucide="arrow-left-right" class="lucide-icon"></i>
           <span class="nav-label hidden">Expand</span>
         </li>
+
         <li class="log-out">
           <a href="/logout">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -148,17 +154,14 @@
             <input type="date" id="to-date" />
           </label>
 
-          <button id="generate-report" class="btn">Generate</button>
-          <button id="overview-report" class="btn">Overview</button>
-          <button id="download-report" class="btn download-btn">
+          <!-- 🔹 Button roles clarified -->
+          <button id="generate-btn" class="btn">Generate</button>
+          <button id="overview-btn" class="btn btn-secondary">Overview</button>
+          <button id="download-btn" class="btn download-btn">
             Download / Print
           </button>
         </div>
 
-        <div class="charts">
-          <canvas id="top-moving-chart"></canvas>
-          <canvas id="low-stock-chart"></canvas>
-        </div>
         <!-- 📌 Inventory Summary Table -->
         <table id="inventory-table" class="report-table">
           <thead>
@@ -166,117 +169,37 @@
               <th>Product Name</th>
               <th>Qty Received</th>
               <th>Qty Sold</th>
-              <th>Qty Damaged</th>
+              <th>Qty Refunded</th>
               <th>Qty On Hand</th>
             </tr>
           </thead>
-          <tbody id="inventory-body">
-            <!-- Data inserted via JS -->
-          </tbody>
+          <tbody id="inventory-body"></tbody>
         </table>
-
-        <!-- 📌 Other tables for full report -->
-        <div class="tables">
-          <!-- Top SKU Table -->
-          <div class="table-wrapper">
-            <h2>Top Selling by SKU</h2>
-            <table id="top-sku-table" class="report-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>SKU</th>
-                  <th>Product Name</th>
-                  <th>Quantity Sold</th>
-                  <th>COGS</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-
-          <!-- Top Category Table -->
-          <div class="table-wrapper">
-            <h2>Top Selling by Category</h2>
-            <table id="top-category-table" class="report-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Category</th>
-                  <th>Quantity Sold</th>
-                  <th>COGS</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-
-          <!-- Refund Table -->
-          <div class="table-wrapper">
-            <h2>Refunds / Returns</h2>
-            <table id="refund-table" class="report-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Product Name</th>
-                  <th>Quantity Refunded</th>
-                  <th>Amount</th>
-                  <th>Reason</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-
-          <!-- Damaged Items Table -->
-          <div class="table-wrapper">
-            <h2>Damaged Items</h2>
-            <table id="damaged-table" class="report-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Product Name</th>
-                  <th>Quantity Damaged</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-
-          <!-- Low Stock Table -->
-          <div class="table-wrapper">
-            <h2>Low Stock Products</h2>
-            <table id="low-stock-table" class="report-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Product Name</th>
-                  <th>Days Below Threshold</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-
-          <!-- Refund Summary Table -->
-          <div class="table-wrapper">
-            <h2>Refund Summary</h2>
-            <table id="refund-summary-table" class="report-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Reason</th>
-                  <th>Quantity</th>
-                  <th>Total Amount</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        </div>
 
         <!-- 📌 Summary Section -->
         <div id="summary-values" class="summary-values">
           <!-- JS will populate summary here -->
+        </div>
+
+        <!-- 📌 All Reports Container -->
+        <div id="report-container" class="hidden">
+          <h2>Inventory Report</h2>
+          <table id="inventory-overview-table"></table>
+
+          <h2>Orders</h2>
+          <table id="orders-overview-table"></table>
+          <!-- ✅ fixed -->
+
+          <h2>Refund Summary</h2>
+          <table id="refundsummary-overview-table"></table>
+          <!-- ✅ fixed -->
+
+          <h2>Refund Breakdown</h2>
+          <table id="refunds-overview-table"></table>
+          <!-- ✅ fixed -->
+
+          <h2>Summary Values</h2>
+          <div id="overview-summary-values"></div>
         </div>
       </div>
     </main>
@@ -293,6 +216,7 @@
           <thead>
             <tr>
               <th>Product Name</th>
+              <th>Delivery Date</th>
               <th>Date Received</th>
               <th>Qty Received</th>
             </tr>
@@ -352,7 +276,11 @@
             </li>
             <li>
               <i class="fa-solid fa-dog"></i> Pedigree Profile:
-              <em>IAGD Record</em>
+              <a
+                href="https://iagd-centralized.metaanimals.org/all-animal/dior-2/"
+                target="_blank"
+                ><em>IAGD Record</em></a
+              >
             </li>
           </ul>
         </div>

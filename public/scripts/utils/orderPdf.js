@@ -1,4 +1,4 @@
-export function generateOrderPDF(fromDate, toDate, tableBody, summaryDiv) {
+export function generateOrderPDF(fromDate, toDate) {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: 'pt', format: 'a4', orientation: 'landscape' });
   const pageWidth = doc.internal.pageSize.getWidth();
@@ -50,6 +50,7 @@ export function generateOrderPDF(fromDate, toDate, tableBody, summaryDiv) {
   currentY += 30;
 
   // --- Summary Metrics ---
+  const summaryDiv = document.getElementById('summary-values');
   doc.setFont('times', 'bold');
   doc.setFontSize(12);
   doc.text('Summary', margin, currentY);
@@ -66,45 +67,68 @@ export function generateOrderPDF(fromDate, toDate, tableBody, summaryDiv) {
   });
   currentY += 10;
 
-  // --- Delivery Table ---
-  const table = document.getElementById('order-report-table');
-  doc.autoTable({
-    startY: currentY,
-    html: table,
-    theme: 'grid',
-    tableWidth: 'wrap',
-    headStyles: {
-      fillColor: [41, 128, 185],
-      textColor: 255,
-      fontStyle: 'bold',
-    },
-    bodyStyles: { font: 'times', fontStyle: 'normal', fontSize: 10 },
-    alternateRowStyles: { fillColor: [245, 245, 245] },
-    columnStyles: {
-      0: { cellWidth: 70 },
-      1: { cellWidth: 120 },
-      2: { cellWidth: 70 },
-      3: { cellWidth: 120 },
-      4: { cellWidth: 60 },
-      5: { cellWidth: 60 },
-      6: { cellWidth: 70 },
-      7: { cellWidth: 70 },
-      8: { cellWidth: 50 },
-      9: { cellWidth: 50 },
-      10: { cellWidth: 50 },
-    },
-    didDrawPage: data => {
-      const pageCount = doc.internal.getNumberOfPages();
+  // --- Helper function for page numbers ---
+  const addPageNumbers = () => {
+    const pageCount = doc.internal.getNumberOfPages();
+    doc.setFont('times', 'italic');
+    doc.setFontSize(9);
+    doc.text(
+      `Page ${doc.internal.getCurrentPageInfo().pageNumber} of ${pageCount}`,
+      pageWidth - margin,
+      pageHeight - 10,
+      { align: 'right' }
+    );
+  };
+
+  // --- Function to add table with label and empty text ---
+  const addTableWithLabel = (label, tableEl, headColor) => {
+    // Add table label
+    doc.setFont('times', 'bold');
+    doc.setFontSize(12);
+    doc.text(label, margin, currentY);
+    currentY += 15;
+
+    if (tableEl && tableEl.rows.length > 1) {
+      // Table has data
+      doc.autoTable({
+        startY: currentY,
+        html: tableEl,
+        theme: 'grid',
+        headStyles: { fillColor: headColor, textColor: 255, fontStyle: 'bold' },
+        bodyStyles: { font: 'times', fontStyle: 'normal', fontSize: 10 },
+        alternateRowStyles: { fillColor: [245, 245, 245] },
+        didDrawPage: addPageNumbers,
+      });
+      currentY = doc.lastAutoTable.finalY + 20;
+    } else {
+      // Table empty
       doc.setFont('times', 'italic');
-      doc.setFontSize(9);
-      doc.text(
-        `Page ${doc.internal.getCurrentPageInfo().pageNumber} of ${pageCount}`,
-        pageWidth - margin,
-        pageHeight - 10,
-        { align: 'right' }
-      );
-    },
-  });
+      doc.setFontSize(10);
+      doc.text('No records available', margin + 10, currentY);
+      currentY += 30;
+    }
+  };
+
+  // --- Delivered Table ---
+  addTableWithLabel(
+    'Delivered Items',
+    document.getElementById('order-report-table'),
+    [41, 128, 185]
+  );
+
+  // --- Pending Table ---
+  addTableWithLabel(
+    'Pending Deliveries',
+    document.getElementById('pending-table'),
+    [230, 126, 34]
+  );
+
+  // --- Cancelled Table ---
+  addTableWithLabel(
+    'Cancelled Deliveries',
+    document.getElementById('cancelled-table'),
+    [192, 57, 43]
+  );
 
   // --- Save PDF ---
   doc.save(`Delivery_Report_${fromDate}_to_${toDate}.pdf`);

@@ -100,10 +100,10 @@ refundForm.addEventListener('submit', async e => {
   try {
     const res = await refundProduct(payload);
 
-    // Compute total refund amount = price × quantity
-    const totalRefund = price * quantity;
+    // Ensure the value is treated as a number
+    const refundAmount = parseFloat(res.data.totalRefundedPrice.$numberDecimal);
 
-    messageDiv.textContent = `Refund successful! Refunded amount: ₱${totalRefund.toFixed(
+    messageDiv.textContent = `Refund successful! Refunded amount: ₱${refundAmount.toFixed(
       2
     )}`;
 
@@ -113,6 +113,8 @@ refundForm.addEventListener('submit', async e => {
     skuSelect.innerHTML = '<option value="">Select Product</option>';
     transactionItems = [];
     transactionId = null;
+    receiptInput.value = ''; // clear receipt input
+    receiptMessage.textContent = ''; // clear receipt message
   } catch (err) {
     messageDiv.textContent = `Error: ${err.message}`;
   }

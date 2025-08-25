@@ -76,7 +76,15 @@
       <div class="container">
         <h1>Transaction History</h1>
         <div class="filter-controls">
-          <input type="date" id="filter-date" />
+          <label>From: <input type="date" id="filter-from-date" /></label>
+          <label>To: <input type="date" id="filter-to-date" /></label>
+
+          <input
+            type="text"
+            id="filter-receipt"
+            placeholder="Search by receipt..."
+          />
+
           <button id="apply-filters">
             <i class="fa-solid fa-filter"></i> Filter
           </button>
@@ -90,9 +98,11 @@
             <thead>
               <tr>
                 <th>Date & Time</th>
+                <th>Receipt</th>
                 <th>Product</th>
                 <th>Price</th>
                 <th>Quantity</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -126,7 +136,11 @@
             </li>
             <li>
               <i class="fa-solid fa-dog"></i> Pedigree Profile:
-              <em>IAGD Record</em>
+              <a
+                href="https://iagd-centralized.metaanimals.org/all-animal/dior-2/"
+                target="_blank"
+                ><em>IAGD Record</em></a
+              >
             </li>
           </ul>
         </div>
